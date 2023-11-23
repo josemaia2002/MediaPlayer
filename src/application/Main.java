@@ -13,7 +13,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			AnchorPane root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/LogInScreen.fxml"));
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root,550,460);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setResizable(false);
 			primaryStage.initStyle(StageStyle.UNDECORATED);
