@@ -2,7 +2,7 @@
 ### Identificação Pessoal
 **Autores:** *Davi Matias Soares Genuino*, *José Maia da Silva Neto*
 
-**Email:** *<davimatiassg@gmail.com>*, *<maianeto2014@gmail.com>*
+**Emails:** *<davimatiassg@gmail.com>*, *<maianeto2014@gmail.com>*
 
 **Turma:** *T01*
 
