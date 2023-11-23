@@ -4,7 +4,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,14 +21,38 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="469.0" fitWidth="204.0" layoutX="174.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                     <image>	
-                        <Image url="@../../../../resources/images/logo.png" />
-                     </image>
-                     <effect>
-                        <Glow level="0.66" />
-                     </effect>
-                  </ImageView>
+                  <AnchorPane layoutX="172.0" layoutY="3.0">
+                     <children>
+                        <ImageView fx:id="pulseImage" blendMode="HARD_LIGHT" fitHeight="152.0" fitWidth="228.0" layoutX="28.0" layoutY="28.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                           <image>
+                              <Image url="@../../../../resources/images/boom.png" />
+                           </image>
+                           <effect>
+                              <Lighting bumpInput="$null" diffuseConstant="2.0" specularConstant="2.0" surfaceScale="0.0">
+                                 <light>
+                                    <Light.Distant azimuth="86.9" elevation="61.55" />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                        </ImageView>
+                        <ImageView fitHeight="208.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../resources/images/logoVine.png" />
+                           </image>
+                           <effect>
+                              <Bloom />
+                           </effect>
+                        </ImageView>
+                        <ImageView fx:id="pulseBorder" blendMode="ADD" fitHeight="469.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
+                           <image>	
+                              <Image url="@../../../../resources/images/logo.png" />
+                           </image>
+                           <effect>
+                              <Glow level="0.91" />
+                           </effect>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
                   <Button id="exit-button" fx:id="exitButton" blendMode="ADD" layoutX="520.0" mnemonicParsing="false" onAction="#logout" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button2" stylesheets="@../../../../resources/css/style.css" text="x" textAlignment="RIGHT" textFill="#403b3c">
                      <effect>
                         <Glow level="1.0" />
