@@ -16,3 +16,15 @@
 	-fx-text-fill: #1EFA98;
 }
 
+
+.clickable-button2 {
+  	-fx-text-fill: #403b3c;
+}
+
+.clickable-button2:hover {
+  	-fx-text-fill:white;
+}
+
+.clickable-button2:pressed {
+	-fx-text-fill: #FA1E38;
+}

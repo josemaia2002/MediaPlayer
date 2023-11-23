@@ -1,16 +1,18 @@
 package application;
 	
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+
+import java.awt.Button;
+
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 
 
 public class Main extends Application {
@@ -23,7 +25,7 @@ public class Main extends Application {
 		this.yOffset = 0;
 		try {
 			AnchorPane root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/LogInScreen.fxml"));
-			
+
 			root.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 				@Override
