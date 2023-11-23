@@ -4,7 +4,7 @@
 
 **Email:** *<davimatiassg@gmail.com>*, *<maianeto2014@gmail.com>*
 
-**Turma:** *<T01>*
+**Turma:** *T01*
 
 ## Implementação de um Media Player
 
