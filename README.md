@@ -1,4 +1,4 @@
-# Projeto de Linguagens de Programação II:
+# Projeto de Linguagens de Programação II
 ### Identificação Pessoal
 **Autores:** *Davi Matias Soares Genuino*, *José Maia da Silva Neto*
 
