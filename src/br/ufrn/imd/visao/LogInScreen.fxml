@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="460.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="460.0" prefWidth="550.0" style="-fx-background-color: #00000b; -fx-alignment: center;">
+      <VBox alignment="TOP_CENTER" prefHeight="469.0" prefWidth="550.0" style="-fx-background-color: #00000b; -fx-alignment: center;">
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -67,7 +67,7 @@
                   </TextField>
                </children>
             </AnchorPane>
-            <Button blendMode="ADD" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: black; -fx-text-fill: #FA1E38;" styleClass="clickable-button" stylesheets="@../../../../resources/css/style.css" text="▶ LOG IN" textFill="#ff1c35">
+            <Button blendMode="ADD" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button" stylesheets="@../../../../resources/css/style.css" text="▶ LOG IN" textFill="#ff1c35">
                <effect>
                   <Glow level="1.0" />
                </effect>
