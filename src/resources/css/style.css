@@ -1,0 +1,18 @@
+.input-field{
+	-fx-background-color: #00000b;
+	-fx-border-color: white;
+	-fx-border-width: 1 0 1 0;
+}
+
+.clickable-button {
+  	-fx-text-fill: #FA1E38;
+}
+
+.clickable-button:hover {
+  	-fx-text-fill:white;
+}
+
+.clickable-button:pressed {
+	-fx-text-fill: #1EFA98;
+}
+
