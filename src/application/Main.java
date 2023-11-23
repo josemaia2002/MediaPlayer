@@ -21,8 +21,9 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-		this.xOffset = 0;
-		this.yOffset = 0;
+		xOffset = 0;
+		yOffset = 0;
+		
 		try {
 			AnchorPane root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/LogInScreen.fxml"));
 
@@ -41,7 +42,10 @@ public class Main extends Application {
 	                primaryStage.setY(event.getScreenY() + yOffset);
 	            }
 	        });
+			
+			
 			Scene scene = new Scene(root,550,460);
+			
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setResizable(false);
 			primaryStage.initStyle(StageStyle.UNDECORATED);

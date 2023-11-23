@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="460.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainPane" prefHeight="460.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controller.loginMenuController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="469.0" prefWidth="550.0" style="-fx-background-color: #00000b; -fx-alignment: center;">
          <children>
@@ -26,12 +26,12 @@
                         <Glow level="0.66" />
                      </effect>
                   </ImageView>
-                  <Button id="signin-button" blendMode="ADD" layoutX="520.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button2" stylesheets="@../../../../resources/css/style.css" text="x" textAlignment="RIGHT" textFill="#403b3c">
+                  <Button id="exit-button" fx:id="exitButton" blendMode="ADD" layoutX="520.0" mnemonicParsing="false" onAction="#logout" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button2" stylesheets="@../../../../resources/css/style.css" text="x" textAlignment="RIGHT" textFill="#403b3c">
                      <effect>
                         <Glow level="1.0" />
                      </effect>
                      <font>
-                        <Font name="Microsoft JhengHei Bold" size="14.0" />
+                        <Font name="Forte" size="14.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -49,7 +49,7 @@
                         <Glow level="0.49" />
                      </effect>
                   </Text>
-                  <TextField id="username-field" layoutX="215.0" layoutY="7.0" pickOnBounds="false" prefHeight="12.0" prefWidth="271.0" promptText="Your username" style="-fx-text-fill: white; -fx-prompt-text-fill: gray;" styleClass="input-field" stylesheets="@../../../../resources/css/style.css">
+                  <TextField id="username-field" fx:id="usernameInput" layoutX="215.0" layoutY="7.0" pickOnBounds="false" prefHeight="12.0" prefWidth="271.0" promptText="Your username" style="-fx-text-fill: white; -fx-prompt-text-fill: gray;" styleClass="input-field" stylesheets="@../../../../resources/css/style.css">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -69,7 +69,7 @@
                         <Glow level="0.49" />
                      </effect>
                   </Text>
-                  <PasswordField id="password-field" layoutX="215.0" layoutY="8.0" pickOnBounds="false" prefHeight="12.0" prefWidth="271.0" promptText="Your password" style="-fx-text-fill: white; -fx-prompt-text-fill: gray;" styleClass="input-field" stylesheets="@../../../../resources/css/style.css">
+                  <PasswordField id="password-field" fx:id="passwordInput" layoutX="215.0" layoutY="8.0" pickOnBounds="false" prefHeight="12.0" prefWidth="271.0" promptText="Your password" style="-fx-text-fill: white; -fx-prompt-text-fill: gray;" styleClass="input-field" stylesheets="@../../../../resources/css/style.css">
                   	<font>
                         <Font size="18.0" />
                      </font>
@@ -82,7 +82,7 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <Button id="login-button" blendMode="ADD" layoutX="214.0" layoutY="23.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button" stylesheets="@../../../../resources/css/style.css" text="▶ LOG IN" textFill="#ff1c35">
+                  <Button id="login-button" fx:id="loginButton" blendMode="ADD" layoutX="214.0" layoutY="23.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button" stylesheets="@../../../../resources/css/style.css" text="▶ LOG IN" textFill="#ff1c35">
                      <effect>
                         <Glow level="1.0" />
                      </effect>
@@ -107,7 +107,7 @@
                               <Glow level="0.49" />
                            </effect>
                         </Text>
-                        <Button id="signin-button" blendMode="ADD" layoutX="142.0" layoutY="-5.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button" stylesheets="@../../../../resources/css/style.css" text="Sign in!" textAlignment="RIGHT" textFill="#ff1c35">
+                        <Button id="signup-button" fx:id="signupButton" blendMode="ADD" layoutX="142.0" layoutY="-5.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button" stylesheets="@../../../../resources/css/style.css" text="Sign up!" textAlignment="RIGHT" textFill="#ff1c35">
                            <effect>
                               <Glow level="1.0" />
                            </effect>
