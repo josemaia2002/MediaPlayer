@@ -45,7 +45,7 @@ public class loginMenuController extends windowController implements Initializab
     
 	public void playLogoAnimation() 
 	{
-		Duration duration = Duration.millis(100);
+		Duration duration = Duration.millis(180);
 		int cycleCount = Transition.INDEFINITE;
 		ScaleTransition scale = new ScaleTransition();
 		scale.setNode(pulseBorder);
@@ -58,7 +58,7 @@ public class loginMenuController extends windowController implements Initializab
 		scale.setToY(1.0);
 		scale.setToZ(1.0);
 		scale.setAutoReverse(true);
-		scale.setInterpolator(Interpolator.EASE_BOTH);
+		scale.setInterpolator(Interpolator.EASE_OUT);
 		
 
 		scale.play();

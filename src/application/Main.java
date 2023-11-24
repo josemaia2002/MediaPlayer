@@ -3,8 +3,6 @@ package application;
 
 import javafx.event.EventHandler;
 
-import java.awt.Button;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -12,7 +10,7 @@ import javafx.stage.StageStyle;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 
 public class Main extends Application {
@@ -45,10 +43,10 @@ public class Main extends Application {
 			
 			
 			Scene scene = new Scene(root,550,460);
-			
+			scene.setFill(Color.TRANSPARENT);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setResizable(false);
-			primaryStage.initStyle(StageStyle.UNDECORATED);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
