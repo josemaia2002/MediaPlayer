@@ -40,41 +40,37 @@ public class loginMenuController extends windowController implements Initializab
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		playBackgroundAnimation();
+		playLogoAnimation();
 	}
     
 	public void playLogoAnimation() 
 	{
 		Duration duration = Duration.millis(100);
-		Duration delay = Duration.millis(400);
 		int cycleCount = Transition.INDEFINITE;
 		ScaleTransition scale = new ScaleTransition();
 		scale.setNode(pulseBorder);
 		scale.setDuration(duration);
-		scale.setDelay(delay);
 		scale.setCycleCount(cycleCount);
-		scale.setFromX(1);
-		scale.setFromY(1);
-		scale.setFromZ(1);
-		
-		scale.setByX(1.2);
-		scale.setByY(1.2);
-		scale.setByZ(1.2);
+		scale.setFromX(0.85);
+		scale.setFromY(0.85);
+		scale.setFromZ(0.85);
+		scale.setToX(1.0);
+		scale.setToY(1.0);
+		scale.setToZ(1.0);
 		scale.setAutoReverse(true);
-		scale.setInterpolator(Interpolator.DISCRETE);
+		scale.setInterpolator(Interpolator.EASE_BOTH);
 		
-		
+
 		scale.play();
 	}
 	
 	public void playBackgroundAnimation() 
 	{
 		Duration duration = Duration.millis(6000);
-		Duration delay = Duration.millis(600);
 		int cycleCount = Transition.INDEFINITE;
 		ScaleTransition scale = new ScaleTransition();
 		scale.setNode(pulseImage);
 		scale.setDuration(duration);
-		scale.setDelay(delay);
 		scale.setCycleCount(cycleCount);
 		scale.setByX(10);
 		scale.setByY(10);
@@ -84,7 +80,6 @@ public class loginMenuController extends windowController implements Initializab
 		TranslateTransition translate = new TranslateTransition();
 		translate.setNode(pulseImage);
 		translate.setDuration(duration);
-		translate.setDelay(delay);
 		translate.setCycleCount(cycleCount);
 		translate.setByY(250);
 		translate.setAutoReverse(true);

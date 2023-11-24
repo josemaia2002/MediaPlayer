@@ -6,8 +6,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,19 +21,15 @@
                <children>
                   <AnchorPane layoutX="172.0" layoutY="3.0">
                      <children>
-                        <ImageView fx:id="pulseImage" blendMode="HARD_LIGHT" fitHeight="152.0" fitWidth="228.0" layoutX="28.0" layoutY="28.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                           <image>
-                              <Image url="@../../../../resources/images/boom.png" />
+                        <ImageView cache="true" cacheHint="SPEED" fitHeight="469.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
+                           <image>	
+                              <Image url="@../../../../resources/images/logo.png" />
                            </image>
                            <effect>
-                              <Lighting bumpInput="$null" diffuseConstant="2.0" specularConstant="2.0" surfaceScale="0.0">
-                                 <light>
-                                    <Light.Distant azimuth="86.9" elevation="61.55" />
-                                 </light>
-                              </Lighting>
+                              <Glow level="0.91" />
                            </effect>
                         </ImageView>
-                        <ImageView fitHeight="208.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="pulseBorder" blendMode="LIGHTEN" fitHeight="208.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../resources/images/logoVine.png" />
                            </image>
@@ -43,12 +37,12 @@
                               <Bloom />
                            </effect>
                         </ImageView>
-                        <ImageView fx:id="pulseBorder" blendMode="ADD" fitHeight="469.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
-                           <image>	
-                              <Image url="@../../../../resources/images/logo.png" />
+                        <ImageView fx:id="pulseImage" blendMode="COLOR_DODGE" fitHeight="152.0" fitWidth="228.0" layoutX="28.0" layoutY="28.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                           <image>
+                              <Image url="@../../../../resources/images/boom.png" />
                            </image>
                            <effect>
-                              <Glow level="0.91" />
+                              <Bloom />
                            </effect>
                         </ImageView>
                      </children>
