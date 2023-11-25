@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPane" prefHeight="460.0" prefWidth="550.0" style="-fx-border-color: 15;" styleClass="mainPannel" stylesheets="@../../../../resources/css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controller.loginMenuController">
+<AnchorPane fx:id="mainPane" prefHeight="460.0" prefWidth="550.0" style="-fx-border-color: transparent;" styleClass="mainPannel" stylesheets="@../../../../resources/css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controller.LoginScreenController">
    <children>
       <VBox alignment="CENTER" prefHeight="469.0" prefWidth="550.0" style="-fx-alignment: center;" stylesheets="@../../../../resources/css/style.css">
          <children>
@@ -47,12 +47,12 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <Button id="exit-button" fx:id="exitButton" layoutX="520.0" mnemonicParsing="false" onAction="#logout" pickOnBounds="false" style="-fx-background-color: transparent;" styleClass="clickable-button2" stylesheets="@../../../../resources/css/style.css" text="x" textAlignment="RIGHT" textFill="#7c6a6e">
+                  <Button id="exit-button" fx:id="exitButton" layoutX="509.0" layoutY="-5.0" mnemonicParsing="false" onAction="#logout" pickOnBounds="false" style="-fx-background-color: transparent;" styleClass="clickable-button2" stylesheets="@../../../../resources/css/style.css" text="x" textAlignment="RIGHT" textFill="#7c6a6e">
                      <effect>
                         <Glow level="1.0" />
                      </effect>
                      <font>
-                        <Font name="Forte" size="14.0" />
+                        <Font name="Cascadia Mono Regular" size="22.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />

@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class loginMenuController extends windowController implements Initializable{
+public class LoginScreenController extends WindowController implements Initializable{
 	
     @FXML
     private Button loginButton;

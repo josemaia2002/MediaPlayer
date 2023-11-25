@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class windowController {
+public class WindowController {
 	
 	@FXML
     protected Button exitButton;
