@@ -46,6 +46,4 @@ public class Musica {
 	public void setAlbum(String album) {
 		this.album = album;
 	}
-	
-	
 }
