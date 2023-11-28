@@ -2,6 +2,7 @@ package br.ufrn.imd.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import br.ufrn.imd.service.LoginService;
 import javafx.animation.FadeTransition;
@@ -10,6 +11,7 @@ import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -50,11 +53,35 @@ public class LoginController extends WindowController implements Initializable{
     
     public void tryLogin() 
     {
+    	class LoginThread implements Runnable
+		{
+			public void run() 
+			{
+				try {
+					TimeUnit.MILLISECONDS.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Platform.runLater(new Runnable() {
+				    @Override 
+				    public void run() {
+				    	closeWindow(new ActionEvent());
+				    }
+				});
+	    		
+			}
+		}
+    	
     	String username = usernameInput.getText();
     	String password = passwordInput.getText();
     	if(service.loginCredentials(username, password)) 
     	{
-    		closeWindow(new ActionEvent());
+    		credentialResponse.setFill(Color.GREEN);
+    		credentialResponse.setVisible(true);
+    		credentialResponse.setText("Loggin in!");
+    		Thread t = new Thread(new LoginThread());
+    		t.start();
     		return;
     	}
     	
