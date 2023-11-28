@@ -81,7 +81,7 @@ public class UserDao {
 					+ username + "\t"
 					+ email + "\t"
 					+ password + "\t";
-		    BufferedWriter writer = new BufferedWriter(new FileWriter("/MediaPlayer/data/usuarios.txt", true));
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/usuarios.txt").getFile(), true));
 	    
 			writer.append('\n');
 		    writer.append(str);

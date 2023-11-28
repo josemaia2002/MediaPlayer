@@ -23,7 +23,7 @@ public class Main extends Application {
 		yOffset = 0;
 		
 		try {
-			AnchorPane root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/LoginScreen.fxml"));
+			AnchorPane root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/SignupScreen.fxml"));
 
 			root.setOnMousePressed(new EventHandler<MouseEvent>() {
 
