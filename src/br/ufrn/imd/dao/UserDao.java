@@ -73,19 +73,14 @@ public class UserDao {
 		return user;
 	}
 	
-	public boolean saveUser(User user) 
-	{
-		ArrayList<User> users = findAllUsers();
-		for(User u : users) 
-		{
-			if(u.getUsername().equals(user.getUsername()) || u.getEmail().equals(user.getEmail())) 
-			{
-				return false;
-			}
-		}
-		
+	public boolean saveUser(String username, String userType, String email, String password) {
+
 		try {
-			String str = user.toString();
+			String str = findAllUsers().size() + "\t"
+					+ userType + "\t"
+					+ username + "\t"
+					+ email + "\t"
+					+ password + "\t";
 		    BufferedWriter writer = new BufferedWriter(new FileWriter("/MediaPlayer/data/usuarios.txt", true));
 	    
 			writer.append('\n');
@@ -97,4 +92,6 @@ public class UserDao {
 		}
 		return true;
 	}
+
+
 }

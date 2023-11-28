@@ -1,11 +1,19 @@
+* 
+{
+	-fx-punk-pink: #FA1E38;
+	-fx-punk-blue: #1EFA98;
+	-fx-punk-black: #00000b;
+}
+
+
 .input-field{
-	-fx-background-color: #00000b;
+	-fx-background-color: -fx-punk-black;
 	-fx-border-color: white;
 	-fx-border-width: 1 0 1 0;
 }
 
 .clickable-button {
-  	-fx-text-fill: #FA1E38;
+  	-fx-text-fill: -fx-punk-pink;
 }
 
 .clickable-button:hover {
@@ -13,7 +21,7 @@
 }
 
 .clickable-button:pressed {
-	-fx-text-fill: #1EFA98;
+	-fx-text-fill: -fx-punk-blue;
 }
 
 
@@ -26,13 +34,57 @@
 }
 
 .clickable-button2:pressed {
-	-fx-text-fill: #FA1E38;
+	-fx-text-fill: -fx-punk-pink;
 }
 
 .mainPannel{
 	-fx-background-size: 550 460;
 	-fx-background-radius: 20;
 	-fx-border-radius: 20;
-	-fx-background-color: #00000b;
-	-fx-border-color: #00000b;
+	-fx-background-color: -fx-punk-black;
+	-fx-border-color: -fx-punk-black;
+}
+
+.radio-button .radio{
+    -fx-border-width: 1px;
+    -fx-border-color: yellow;
+    -fx-background-color: white;
+    -fx-background-image: null;
+    -fx-border-radius: 20px;
+    -fx-padding: 0px;
+    -fx-text-fill: white;
+}
+.radio-button .radio:hover {
+    -fx-background-color: -fx-punk-pink;
+    -fx-background-image: null;
+}
+
+.radio-button .radio:selected {
+    -fx-background-color: -fx-punk-blue;
+    -fx-background-image: null;
+    
+}
+
+.radio-button{
+	-fx-text-fill: white;
+}
+
+.radio-button:hover{
+	-fx-text-fill: -fx-punk-blue;
+}
+
+.radio-button:selected{
+	-fx-text-fill: yellow;
+}
+
+.radio-button.dot {
+	-fx-background-color: white;
+}
+
+.radio-button:hover .dot {
+	-fx-background-color: -fx-punk-blue;
+}
+
+.radio-button:selected .dot {
+	-fx-background-color: yellow;
 }

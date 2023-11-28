@@ -17,42 +17,59 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class LoginController extends WindowController implements Initializable{
+public class SignupController extends WindowController implements Initializable{
 	
     @FXML
-    private Button loginButton;
-    
-    @FXML
     private ImageView pulseImage;
+	
+	@FXML
+	private TextField usernameInput;
+	
+	@FXML
+    private TextField emailInput;
     
-    @FXML
-    private ImageView pulseBorder;
-
     @FXML
     private PasswordField passwordInput;
-
-    @FXML
-    private Button signupButton;
-
-    @FXML
-    private TextField usernameInput;
     
+    @FXML
+    private PasswordField confirmPasswordInput;
+    
+    @FXML
+    private RadioButton userType;
+
     @FXML
     private Text credentialResponse;
     
+    @FXML
+    private Button signupButton;
+    
+    @FXML
+    private Button loginPage;
+    
     private AuthService service;
     
-    // Controll Methods
+    @FXML
+    void selectVip(ActionEvent event) {
+    	if(userType.isSelected())
+    	{
+    		userType.setText("👑 Vip User");
+    		return;
+    	}
+    	userType.setText("Default User");
+    	
+    	
+    }
     
-    
-    public void tryLogin() 
-    {
+    @FXML
+    void trySignup(ActionEvent event) {
     	class LoginThread implements Runnable
 		{
 			public void run() 
@@ -74,32 +91,35 @@ public class LoginController extends WindowController implements Initializable{
 		}
     	
     	String username = usernameInput.getText();
-    	String password = passwordInput.getText();
-    	if(service.loginCredentials(username, password)) 
+    	String email = emailInput.getText();
+    	String p1 = passwordInput.getText();
+    	String p2 = confirmPasswordInput.getText();
+    	String typeuser = userType.isSelected() ? "vipUser" : "defaultUser";
+    	String response = service.signupCredentials(username, typeuser, email, p1, p2);
+    	credentialResponse.setText(response);
+    	if(response.equals("Singed Up!")) 
     	{
     		credentialResponse.setFill(Color.GREEN);
     		credentialResponse.setVisible(true);
-    		credentialResponse.setText("Loggin in!");
+    		credentialResponse.setText(response);
     		Thread t = new Thread(new LoginThread());
     		t.start();
     		return;
     	}
     	
     	credentialResponse.setVisible(true);
-    	playUserNotFoundAnimation();
+    	playSignupErrorAnimation();
     }
-    
-    
-    // Cosmetic methods
 
-	@Override
+    
+    @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		playBackgroundAnimation();
-		playLogoAnimation();
 		service = new AuthService();
 	}
 	
-	private void playUserNotFoundAnimation() 
+    //Cosmetic Methods
+	private void playSignupErrorAnimation() 
 	{
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(credentialResponse);
@@ -122,27 +142,6 @@ public class LoginController extends WindowController implements Initializable{
 		
 		rotate.play();
 		straighten.play();
-	}
-    
-	private void playLogoAnimation() 
-	{
-		Duration duration = Duration.millis(180);
-		int cycleCount = Transition.INDEFINITE;
-		ScaleTransition scale = new ScaleTransition();
-		scale.setNode(pulseBorder);
-		scale.setDuration(duration);
-		scale.setCycleCount(cycleCount);
-		scale.setFromX(0.85);
-		scale.setFromY(0.85);
-		scale.setFromZ(0.85);
-		scale.setToX(1.0);
-		scale.setToY(1.0);
-		scale.setToZ(1.0);
-		scale.setAutoReverse(true);
-		scale.setInterpolator(Interpolator.EASE_OUT);
-		
-
-		scale.play();
 	}
 	
 	private void playBackgroundAnimation() 
@@ -189,4 +188,5 @@ public class LoginController extends WindowController implements Initializable{
 		fade.play();
 		scale.play();
 	}
+
 }
