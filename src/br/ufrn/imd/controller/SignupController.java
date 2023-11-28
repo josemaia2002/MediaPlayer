@@ -20,7 +20,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -43,7 +42,7 @@ public class SignupController extends WindowController implements Initializable{
     private PasswordField confirmPasswordInput;
     
     @FXML
-    private RadioButton userType;
+    private RadioButton userTypeRadio;
 
     @FXML
     private Text credentialResponse;
@@ -58,12 +57,12 @@ public class SignupController extends WindowController implements Initializable{
     
     @FXML
     void selectVip(ActionEvent event) {
-    	if(userType.isSelected())
+    	if(userTypeRadio.isSelected())
     	{
-    		userType.setText("👑 Vip User");
+    		userTypeRadio.setText("👑 Vip User");
     		return;
     	}
-    	userType.setText("Default User");
+    	userTypeRadio.setText("Default User");
     	
     	
     }
@@ -94,8 +93,8 @@ public class SignupController extends WindowController implements Initializable{
     	String email = emailInput.getText();
     	String p1 = passwordInput.getText();
     	String p2 = confirmPasswordInput.getText();
-    	String typeuser = userType.isSelected() ? "vipUser" : "defaultUser";
-    	String response = service.signupCredentials(username, typeuser, email, p1, p2);
+    	String userType = userTypeRadio.isSelected() ? "vipUser" : "defaultUser";
+    	String response = service.signupCredentials(username, userType, email, p1, p2);
     	credentialResponse.setText(response);
     	if(response.equals("Singed Up!")) 
     	{

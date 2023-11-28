@@ -136,7 +136,7 @@
                               <Glow level="0.49" />
                            </effect>
                         </Text>
-                        <Button id="signup-button" fx:id="signupButton" blendMode="ADD" layoutX="142.0" layoutY="-5.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button" stylesheets="@../../../../resources/css/style.css" text="Sign up!" textAlignment="RIGHT" textFill="#ff1c35">
+                        <Button id="signup-button" fx:id="signupButton" blendMode="ADD" layoutX="142.0" layoutY="-5.0" mnemonicParsing="false" onAction="#navigateToSignup" pickOnBounds="false" style="-fx-background-color: black;" styleClass="clickable-button" stylesheets="@../../../../resources/css/style.css" text="Sign up!" textAlignment="RIGHT" textFill="#ff1c35">
                            <effect>
                               <Glow level="1.0" />
                            </effect>

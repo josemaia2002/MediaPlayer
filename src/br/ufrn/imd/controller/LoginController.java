@@ -91,7 +91,6 @@ public class LoginController extends WindowController implements Initializable{
     
     
     // Cosmetic methods
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		playBackgroundAnimation();
