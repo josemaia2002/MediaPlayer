@@ -60,9 +60,6 @@ public class LoginController extends WindowController implements Initializable{
     	
     	credentialResponse.setVisible(true);
     	playUserNotFoundAnimation();
-    	
-    	
-    	
     }
     
     

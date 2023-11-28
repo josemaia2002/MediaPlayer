@@ -3,6 +3,7 @@ package br.ufrn.imd.dao;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,11 +18,11 @@ public class UserDao {
 	{
 		ArrayList<User> users = new ArrayList<User>();
 		BufferedReader buffRead;
-
 		try {
-			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/usuarios.txt").toString()));
+			
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/usuarios.txt").getFile()));
 		
-			String line = "";
+			String line = buffRead.readLine();
 			while (true) {
 				if (line != null) {
 					String[] credentials = line.split("\t");
@@ -32,12 +33,13 @@ public class UserDao {
 						u = (User) new UserVip(u, playlistDAO.findPlaylistsByUserID(u.getId()));
 					}
 					users.add(u);
+					line = buffRead.readLine();
 				}
 				else break;
 			}
 			buffRead.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		return users;

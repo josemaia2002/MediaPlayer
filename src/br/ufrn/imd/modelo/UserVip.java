@@ -33,8 +33,8 @@ public class UserVip extends User {
 				+ "vipUser\t"
 				+ username + "\t"
 				+ email + "\t"
-				+ password + "\t";
-				
+				+ password + "\t"
+				+ playlists;
 		return s;
 	}
 }
