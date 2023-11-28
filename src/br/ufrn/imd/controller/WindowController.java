@@ -17,9 +17,14 @@ public class WindowController {
 
 	protected Stage stage;
 	
-	public void logout(ActionEvent event) 
+	protected void loadStage()
 	{
-		stage = (Stage) mainPane.getScene().getWindow();
+		if(stage == null) stage = (Stage) mainPane.getScene().getWindow();
+	}
+	
+	public void closeWindow(ActionEvent event) 
+	{
+		loadStage();
 		stage.close();
 	}
 }

@@ -3,21 +3,24 @@ package br.ufrn.imd.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.service.LoginService;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class LoginScreenController extends WindowController implements Initializable{
+public class LoginController extends WindowController implements Initializable{
 	
     @FXML
     private Button loginButton;
@@ -36,14 +39,68 @@ public class LoginScreenController extends WindowController implements Initializ
 
     @FXML
     private TextField usernameInput;
+    
+    @FXML
+    private Text credentialResponse;
+    
+    private LoginService service;
+    
+    // Controll Methods
+    
+    
+    public void tryLogin() 
+    {
+    	String username = usernameInput.getText();
+    	String password = passwordInput.getText();
+    	if(service.loginCredentials(username, password)) 
+    	{
+    		closeWindow(new ActionEvent());
+    		return;
+    	}
+    	
+    	credentialResponse.setVisible(true);
+    	playUserNotFoundAnimation();
+    	
+    	
+    	
+    }
+    
+    
+    // Cosmetic methods
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		playBackgroundAnimation();
 		playLogoAnimation();
+		service = new LoginService();
+	}
+	
+	private void playUserNotFoundAnimation() 
+	{
+		RotateTransition rotate = new RotateTransition();
+		rotate.setNode(credentialResponse);
+		rotate.setDuration(Duration.millis(30));
+		rotate.setCycleCount(2);
+		rotate.setFromAngle(-10);
+		rotate.setToAngle(10);
+		rotate.setInterpolator(Interpolator.LINEAR);
+		rotate.setAutoReverse(true);
+		
+		RotateTransition straighten = new RotateTransition();
+		straighten.setNode(credentialResponse);
+		straighten.setDelay(Duration.millis(60));
+		straighten.setDuration(Duration.millis(15));
+		straighten.setCycleCount(1);
+		straighten.setFromAngle(10);
+		straighten.setToAngle(0);
+		straighten.setInterpolator(Interpolator.LINEAR);
+		straighten.setAutoReverse(false);
+		
+		rotate.play();
+		straighten.play();
 	}
     
-	public void playLogoAnimation() 
+	private void playLogoAnimation() 
 	{
 		Duration duration = Duration.millis(180);
 		int cycleCount = Transition.INDEFINITE;
@@ -64,7 +121,7 @@ public class LoginScreenController extends WindowController implements Initializ
 		scale.play();
 	}
 	
-	public void playBackgroundAnimation() 
+	private void playBackgroundAnimation() 
 	{
 		Duration duration = Duration.millis(6000);
 		int cycleCount = Transition.INDEFINITE;
@@ -107,8 +164,5 @@ public class LoginScreenController extends WindowController implements Initializ
 		translate.play();
 		fade.play();
 		scale.play();
-		
-		
-		
 	}
 }

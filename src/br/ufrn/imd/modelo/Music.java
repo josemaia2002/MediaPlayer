@@ -1,12 +1,21 @@
 package br.ufrn.imd.modelo;
 
-public class Musica {
+public class Music {
 	private String nome;
 	private double duracao;
 	private String artista;
 	private String genero;
 	private String album;
+	private String path;
 	
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 	public String getNome() {
 		return nome;
 	}

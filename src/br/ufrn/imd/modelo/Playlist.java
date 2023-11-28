@@ -3,27 +3,37 @@ package br.ufrn.imd.modelo;
 import java.util.List;
 
 public class Playlist {
-	private String nome;
-	private List<Musica> musicas;
+	private int id;
+	private String name;
+	private List<Music> songs;
 	
-	public Playlist(String nome) {
+	public Playlist(int id, String name) {
 		super();
-		this.nome = nome;
+		this.id = id;
+		this.name = name;
 	}
 	
-	public void addSong(Musica m) {
-		musicas.add(m);
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
-	public void removeSong(Musica m) {
-		musicas.remove(m);
+	public void addSong(Music m) {
+		songs.add(m);
+	}
+	
+	public void removeSong(Music m) {
+		songs.remove(m);
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 }
