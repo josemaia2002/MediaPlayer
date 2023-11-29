@@ -8,12 +8,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import br.ufrn.imd.modelo.Music;
 import br.ufrn.imd.modelo.User;
 import br.ufrn.imd.modelo.UserVip;
 
 public class UserDao {
-
-
 	public ArrayList<User> findAllUsers()
 	{
 		ArrayList<User> users = new ArrayList<User>();

@@ -14,6 +14,10 @@ public class User {
 		this.password = password;
 		
 	}
+	
+	public User() {
+		// super();
+	}
 
 	public String getUsername() {
 		return username;

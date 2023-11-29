@@ -4,8 +4,11 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import br.ufrn.imd.modelo.*; 
-import br.ufrn.imd.dao.*;
+import br.ufrn.imd.modelo.*; // Only for testing
+
+import java.util.ArrayList;
+
+import br.ufrn.imd.dao.*; // Only for testing
 
 public class Main extends Application {
 	
@@ -21,18 +24,6 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		MusicaDao md = new MusicaDao();
-		md.loadSongs();
-		// md.printSongs();
-		
-		// Music m = md.findSongByPath("/home/maia/Music/Kashmir.mp3");
-		
-		// System.out.println(m.getNome());
-		
-		PlaylistDao pd = new PlaylistDao();
-		pd.loadPlaylists();
-		pd.printPlaylists();
-		// pd.printPlaylists();
 		// launch(args);
 	}
 }

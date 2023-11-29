@@ -48,8 +48,13 @@ public class PlaylistDao {
 			// int userId = Integer.parseInt(line);
 			line = buffRead.readLine();
 			
-			// String userName = line;
+			String userName = line;
 			line = buffRead.readLine();
+			
+			UserDao ud = new UserDao();
+			
+			User u = new User();
+			u = ud.findUserByUsername(userName);
 			
 			int playlistId = Integer.parseInt(line);
 			line = buffRead.readLine();
@@ -60,6 +65,7 @@ public class PlaylistDao {
 			Playlist p = new Playlist();
 			p.setName(playlistName);
 			p.setId(playlistId);
+			
 			
 			while(true) {
 				if(line != null) {
@@ -76,6 +82,7 @@ public class PlaylistDao {
 				else break;
 			}
 			playlists.add(p);
+			((UserVip)u).addPlaylist(p);
 			
 			buffRead.close();
 		} catch (IOException e) {
