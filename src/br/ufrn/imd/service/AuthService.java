@@ -19,6 +19,7 @@ public class AuthService {
 		if(username.contains("@"))  u = userDAO.findUserByEmail(username); 
 		else u = userDAO.findUserByUsername(username);
 		if(u == null) return false;
+		if(!password.equals(u.getPassword())) return false;
 		AuthService.setCurrentUser(u);
 		return true;
 	}
