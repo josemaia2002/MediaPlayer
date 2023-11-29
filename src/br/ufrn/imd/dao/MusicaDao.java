@@ -23,6 +23,16 @@ public class MusicaDao {
 		return songs;
 	}
 	
+	public void printSongs() {
+		for(Music m : songs) {
+			System.out.println(m.getNome());
+			System.out.println(m.getArtista());
+			System.out.println(m.getAlbum());
+			System.out.println(m.getGenero());
+			System.out.println(m.getPath());
+		}
+	}
+	
 	public void loadSongs() {
 		BufferedReader buffRead;
 		try {
@@ -31,11 +41,15 @@ public class MusicaDao {
 			String line = buffRead.readLine();
 			while (true) {
 				if (line != null) {
-					String[] info = line.split(" ");					
+					String[] info = line.split(",");					
 							
 					Music m = new Music();
-					m.setNome(info[0]);
-					m.setPath(info[1]);
+					m.setPath(info[0]);
+					m.setNome(info[1]);
+					m.setArtista(info[2]);
+					m.setAlbum(info[3]);
+					m.setGenero(info[4]);
+					m.setDuracao(Double.parseDouble(info[5]));
 					
 					songs.add(m);
 					line = buffRead.readLine();

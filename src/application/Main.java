@@ -23,7 +23,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		// MusicaDao md = new MusicaDao();
 		// md.loadSongs();
-		// md.listSongs();
+		// md.printSongs();
 		launch(args);
 	}
 }
