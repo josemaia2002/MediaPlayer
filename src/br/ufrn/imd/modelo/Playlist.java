@@ -1,16 +1,22 @@
 package br.ufrn.imd.modelo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Playlist {
 	private int id;
 	private String name;
-	private List<Music> songs;
+	private ArrayList<Music> songs = new ArrayList<Music>();
 	
+	/*
 	public Playlist(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
+	}
+	*/
+	
+	public ArrayList<Music> getSongs() {
+		return songs;
 	}
 	
 	public int getId() {

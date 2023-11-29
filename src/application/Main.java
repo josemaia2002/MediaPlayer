@@ -23,11 +23,16 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		MusicaDao md = new MusicaDao();
 		md.loadSongs();
-		md.printSongs();
+		// md.printSongs();
+		
+		// Music m = md.findSongByPath("/home/maia/Music/Kashmir.mp3");
+		
+		// System.out.println(m.getNome());
 		
 		PlaylistDao pd = new PlaylistDao();
 		pd.loadPlaylists();
 		pd.printPlaylists();
+		// pd.printPlaylists();
 		// launch(args);
 	}
 }

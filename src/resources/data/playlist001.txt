@@ -3,3 +3,4 @@ carliu
 1
 Hard Rock
 /home/maia/Music/Kashmir.mp3
+/home/maia/Music/Back In Black.mp3

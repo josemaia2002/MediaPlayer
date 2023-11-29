@@ -1,1 +1,5 @@
-/home/maia/Music/Kashmir.mp3,Kashmir,Led Zeppelin,Physical Graffiti,Hard Rock,8.6167     
+/home/maia/Music/Kashmir.mp3,Kashmir,Led Zeppelin,Physical Graffiti,Hard Rock,8.6167
+/home/maia/Music/Back In Black.mp3,Back In Black,AC/DC,Back In Black,Hard Rock,4.2333
+/home/maia/Music/Commando.mp3,Commando,Ramones,Leave Home,Punk,1.8833
+/home/maia/Music/Pet Sematary.mp3,Pet Sematary,Ramones,Brain Drain,Punk,3.4333
+/home/maia/Music/Now I Wanna Sniff Some Glue.mp3,Now I Wanna Sniff Some Glue,Ramones,Ramones,Punk,1.6      

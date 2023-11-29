@@ -33,6 +33,16 @@ public class MusicaDao {
 		}
 	}
 	
+	public Music findSongByPath(String path) {
+		for(Music m : songs) {
+			if(m.getPath().equals(path)) {
+				return m;
+			}
+		}
+		
+		return null;
+	}
+	
 	public void loadSongs() {
 		BufferedReader buffRead;
 		try {

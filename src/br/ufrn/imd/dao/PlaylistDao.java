@@ -10,6 +10,8 @@ import br.ufrn.imd.modelo.Playlist;
 import br.ufrn.imd.modelo.User;
 import br.ufrn.imd.modelo.UserVip;
 
+import br.ufrn.imd.dao.MusicaDao;
+
 public class PlaylistDao {
 	private ArrayList<Playlist> playlists = new ArrayList<Playlist>();
 	
@@ -29,13 +31,17 @@ public class PlaylistDao {
 		for(Playlist p : playlists) {
 			System.out.println(p.getId());
 			System.out.println(p.getName());
+			
+			for(Music m : p.getSongs()) {
+				System.out.println(m.getNome());
+			}
 		}
 	}
 	
 	public void loadPlaylists() {
 		BufferedReader buffRead;
 		try {
-			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlist001.txt").getFile()));
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlist002.txt").getFile()));
 		
 			String line = buffRead.readLine();
 			
@@ -51,21 +57,25 @@ public class PlaylistDao {
 			String playlistName = line;
 			line = buffRead.readLine();
 			
-			Playlist p = new Playlist(playlistId, playlistName);
-			playlists.add(p);
+			Playlist p = new Playlist();
+			p.setName(playlistName);
+			p.setId(playlistId);
 			
-			
-			// TODO Implement the songs insertion in the playlist
-			/*
-			while (true) {
-				if (line != null) {
+			while(true) {
+				if(line != null) {
+					String songPath = line;
+					
+					MusicaDao md = new MusicaDao();
+					md.loadSongs();
+					
+					Music m = md.findSongByPath(songPath);
+					p.addSong(m);
 					
 					line = buffRead.readLine();
 				}
 				else break;
-				
 			}
-			*/
+			playlists.add(p);
 			
 			buffRead.close();
 		} catch (IOException e) {
