@@ -21,9 +21,13 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		// MusicaDao md = new MusicaDao();
-		// md.loadSongs();
-		// md.printSongs();
-		launch(args);
+		MusicaDao md = new MusicaDao();
+		md.loadSongs();
+		md.printSongs();
+		
+		PlaylistDao pd = new PlaylistDao();
+		pd.loadPlaylists();
+		pd.printPlaylists();
+		// launch(args);
 	}
 }

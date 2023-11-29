@@ -11,11 +11,11 @@ import br.ufrn.imd.modelo.UserVip;
 public class MusicaDao {
 	private ArrayList<Music> songs = new ArrayList<Music>();
 	
-	public void addVeiculo(Music m) {
+	public void addSong(Music m) {
 		songs.add(m);
 	}
 	
-	public void removeVeiculo(Music m) {
+	public void removeSong(Music m) {
 		songs.remove(m);
 	}
 	
