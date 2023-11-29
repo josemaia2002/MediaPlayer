@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+import application.StageNavigator;
 import br.ufrn.imd.service.AuthService;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -66,7 +67,7 @@ public class LoginController extends WindowController implements Initializable{
 				Platform.runLater(new Runnable() {
 				    @Override 
 				    public void run() {
-				    	closeWindow(new ActionEvent());
+				    	StageNavigator.getInstance().loadPlayerScreen(new ActionEvent());
 				    }
 				});
 	    		

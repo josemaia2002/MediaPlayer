@@ -30,9 +30,19 @@ public class StageNavigator {
 		return instance;
 	}
 	
-	public void loadLoginScreen(ActionEvent event)
+	public void loadPlayerScreen(ActionEvent event)
 	{
 		Stage prevStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		Stage stage = new Stage();
+		stage.setX(prevStage.getX());
+        stage.setY(prevStage.getY());
+		loadStage(stage, "PlayerScreen");
+		prevStage.close();
+	}
+	
+	public void loadLoginScreen(ActionEvent event)
+	{
+		Stage prevStage = (Stage) ((Node)(event.getSource())).getScene().getWindow();
 		Stage stage = new Stage();
 		stage.setX(prevStage.getX());
         stage.setY(prevStage.getY());
@@ -42,7 +52,7 @@ public class StageNavigator {
 	
 	public void loadSignupScreen(ActionEvent event)
 	{
-		Stage prevStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		Stage prevStage = (Stage) ((Node)(event.getSource())).getScene().getWindow();
 		Stage stage = new Stage();
 		stage.setX(prevStage.getX());
         stage.setY(prevStage.getY());
@@ -77,7 +87,6 @@ public class StageNavigator {
                 primaryStage.setY(event.getScreenY() + yOffset);
             }
         });
-		
 		
 		Scene scene = new Scene(root);
 		

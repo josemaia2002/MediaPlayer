@@ -4,7 +4,7 @@ import br.ufrn.imd.modelo.User;
 import br.ufrn.imd.dao.UserDao;
 
 public class AuthService {
-	static User currentUser;
+	private static User currentUser;
 	private UserDao userDAO;
 	
 	
@@ -19,7 +19,7 @@ public class AuthService {
 		if(username.contains("@"))  u = userDAO.findUserByEmail(username); 
 		else u = userDAO.findUserByUsername(username);
 		if(u == null) return false;
-		AuthService.currentUser = u;
+		AuthService.setCurrentUser(u);
 		return true;
 	}
 	
@@ -35,5 +35,15 @@ public class AuthService {
 		
 		userDAO.saveUser(username, userType, email, p1);
 		return "Singed Up!";
+	}
+
+
+	public static User getCurrentUser() {
+		return currentUser;
+	}
+
+
+	public static void setCurrentUser(User currentUser) {
+		AuthService.currentUser = currentUser;
 	}
 }

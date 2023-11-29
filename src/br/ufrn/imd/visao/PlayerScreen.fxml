@@ -1,8 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="1201.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controller.PlayerScreenController">
+   <children>
+      <BorderPane layoutX="440.0" layoutY="268.0" prefHeight="200.0" prefWidth="200.0" styleClass="mainPannel" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <VBox prefHeight="138.0" prefWidth="1199.0" spacing="20.0" style="-fx-alignment: center;" BorderPane.alignment="TOP_CENTER">
+               <children>
+                  <ScrollBar fx:id="progressBar">
+                     <VBox.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </VBox.margin>
+                  </ScrollBar>
+                  <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1199.0">
+                     <children>
+                        <Button fx:id="leftButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
+                           <effect>
+                              <Glow level="1.0" />
+                           </effect>
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../resources/images/left.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <ToggleButton fx:id="playButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fx:id="playButtonImage" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../resources/images/play.png" />
+                                 </image>
+                                 <effect>
+                                    <Glow level="1.0" />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <Button fx:id="rightButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
+                           <effect>
+                              <Glow level="1.0" />
+                           </effect>
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../resources/images/right.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </bottom>
+         <center>
+            <Pane fx:id="videoPane" prefHeight="386.0" prefWidth="1080.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER" />
+         </center>
+         <top>
+            <Pane prefHeight="108.0" prefWidth="1199.0" BorderPane.alignment="CENTER" />
+         </top>
+         <left>
+            <Pane prefHeight="386.0" prefWidth="70.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <TabPane prefHeight="447.0" prefWidth="300.0" style="-fx-background-color: black;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Musics">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="302.0" style="-fx-background-color: -fx-punk-black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="302.0" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
+                                       <children>
+                                          <TableView prefHeight="415.0" prefWidth="304.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn fx:id="musicColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="playlistTab" text="Playlists">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="302.0" style="-fx-background-color: -fx-punk-black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="302.0" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
+                                       <children>
+                                          <TableView prefHeight="415.0" prefWidth="304.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn fx:id="playListColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="25.0" right="60.0" top="5.0" />
+               </BorderPane.margin>
+            </TabPane>
+         </right>
+      </BorderPane>
+      <Button id="exit-button" fx:id="exitButton" mnemonicParsing="false" onAction="#closeWindow" pickOnBounds="false" style="-fx-background-color: transparent;" styleClass="clickable-button2" stylesheets="@../../../../resources/css/style.css" text="x" textAlignment="RIGHT" textFill="#7c6a6e" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+         <font>
+            <Font name="Cascadia Mono Regular" size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView cache="true" cacheHint="SPEED" fitHeight="113.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../resources/images/logo.png" />
+         </image>
+         <effect>
+            <Glow level="0.91" />
+         </effect>
+      </ImageView>
+   </children>
 </AnchorPane>
-

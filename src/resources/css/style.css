@@ -2,6 +2,11 @@
 {
 	-fx-punk-pink: #FA1E38;
 	-fx-punk-blue: #1EFA98;
+
+	-fx-punk-pink-transparent: #FA1E38aa;
+	-fx-punk-blue-transparent: #1EFA98aa;
+
+
 	-fx-punk-black: #00000b;
 }
 
@@ -40,7 +45,8 @@
 	-fx-background-size: 550 460;
 	-fx-background-radius: 20;
 	-fx-border-radius: 20;
-	-fx-background-color: -fx-punk-black;
+
+	-fx-background-color: linear-gradient(to bottom right, -fx-punk-black, #10001b); 
 	-fx-border-color: -fx-punk-black;
 }
 
@@ -86,4 +92,108 @@
 
 .radio-button:selected .dot {
 	-fx-background-color: yellow;
+}
+
+
+.controll-button
+{
+	-fx-background-color: transparent;
+}
+
+
+.input-field{
+	-fx-background-color: -fx-punk-black;
+	-fx-border-color: white;
+	-fx-border-width: 1 0 1 0;
+}
+
+.tab-header-area .tab-header-background {
+ 	-fx-background-color: linear-gradient(to top, -fx-punk-pink, -fx-punk-black);
+ 	-fx-background-radius: 5 5 0 0;
+}
+
+.tab-pane .tab {
+	-fx-background-color: transparent;
+	-fx-text-fill: black;
+	-fx-font-weight: bold;
+	-fx-background-color: white;
+
+}
+
+.tab-pane .tab:selected {
+	-fx-text-fill: white;
+	-fx-background-color: -fx-punk-pink;
+
+}
+
+.table-view .column-header-background{
+    
+    -fx-background-color:transparent;
+}
+
+.table-view .column-header{
+    
+    -fx-background-color:transparent;
+}
+
+.table-view{
+    
+    -fx-background-color: linear-gradient(to bottom, #FA1E38ff, #00000b00);
+}
+
+.back-table-pane
+{
+	-fx-background-color: linear-gradient(to right, deeppink, #00000bff);
+}
+
+.table-row-cell: highlighted {
+    -fx-background-color: -fx-punk-blue;
+    -fx-background-radius: 15px;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: linear-gradient(to right, deeppink, #00000bff);
+}
+
+.scroll-pane .corner
+{
+	-fx-background-radius: 20;
+	-fx-background-color: transparent;
+}
+
+.scroll-bar
+{
+	-fx-background-radius: 20;
+	-fx-background-color: #00002bff;
+}
+
+.scroll-bar .track
+{
+	-fx-border-color: white;
+	-fx-border-width: 1 0 1 0;
+}
+
+.scroll-bar:horizontal .track
+{
+	-fx-border-width: 1 0 1 0;
+}
+
+.scroll-bar:vertical .track
+{
+	-fx-border-width: 0 1 0 1;
+}
+
+.scroll-bar .decrement-arrow
+{
+	-fx-background-color: transparent;
+}
+
+.scroll-bar .increment-arrow
+{
+	-fx-background-color: transparent;
+}
+
+.scroll-bar .thumb
+{
+	-fx-background-color: #FA1E38;
 }
