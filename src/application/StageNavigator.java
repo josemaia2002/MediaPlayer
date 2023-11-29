@@ -32,7 +32,7 @@ public class StageNavigator {
 	
 	public void loadPlayerScreen(ActionEvent event)
 	{
-		Stage prevStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		Stage prevStage = (Stage) ((Node)(event.getSource())).getScene().getWindow();
 		Stage stage = new Stage();
 		stage.setX(prevStage.getX());
         stage.setY(prevStage.getY());

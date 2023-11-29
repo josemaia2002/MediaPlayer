@@ -43,5 +43,10 @@ public class WindowController {
 		StageNavigator.getInstance().loadSignupScreen(event);
 	}
 	
+	public void navigateToPlayer(ActionEvent event)
+	{
+		StageNavigator.getInstance().loadPlayerScreen(event);
+	}
+	
 	
 }

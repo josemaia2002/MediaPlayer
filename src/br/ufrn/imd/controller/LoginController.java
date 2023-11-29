@@ -52,7 +52,7 @@ public class LoginController extends WindowController implements Initializable{
     // Controll Methods
     
     
-    public void tryLogin() 
+    public void tryLogin(ActionEvent event) 
     {
     	class LoginThread implements Runnable
 		{
@@ -67,7 +67,7 @@ public class LoginController extends WindowController implements Initializable{
 				Platform.runLater(new Runnable() {
 				    @Override 
 				    public void run() {
-				    	StageNavigator.getInstance().loadPlayerScreen(new ActionEvent());
+				    	navigateToPlayer(event);
 				    }
 				});
 	    		

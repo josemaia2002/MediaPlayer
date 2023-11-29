@@ -83,7 +83,7 @@ public class SignupController extends WindowController implements Initializable{
 				Platform.runLater(new Runnable() {
 				    @Override 
 				    public void run() {
-				    	StageNavigator.getInstance().loadLoginScreen(new ActionEvent());
+				    	navigateToLogin(event);
 				    }
 				});
 	    		
