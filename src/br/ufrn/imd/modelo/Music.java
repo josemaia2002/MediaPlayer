@@ -55,4 +55,25 @@ public class Music {
 	public void setAlbum(String album) {
 		this.album = album;
 	}
+	
+	public boolean equals(Music m) 
+	{
+		if(this.getPath().equals(m.getPath())) return true;
+		if(!this.getNome().equals(m.getNome())) return false;
+		if(this.getDuracao() != m.getDuracao()) return false;
+		if(!this.getArtista().equals(m.getArtista())) return false;
+		if(!this.getGenero().equals(m.getGenero())) return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return nome + "\t"
+				+ duracao + "\t"
+				+ artista + "\t"
+				+ genero + "\t"
+				+ album + "\t"
+				+ path;
+	}
 }
