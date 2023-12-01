@@ -1,3 +1,3 @@
 1	defaultUser	matias	davimatiassg@gmail.com	potente123
 2	defaultUser	jose	jose@email.com	potente345
-3	vipUser	carliu	jcarliux@email.com	potente666
+3	defaultUser	1	1@gmail	1

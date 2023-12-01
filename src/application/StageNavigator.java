@@ -36,6 +36,7 @@ public class StageNavigator {
 		Stage stage = new Stage();
 		stage.setX(prevStage.getX());
         stage.setY(prevStage.getY());
+        stage.setResizable(true);
 		loadStage(stage, "PlayerScreen");
 		prevStage.close();
 	}
@@ -46,6 +47,7 @@ public class StageNavigator {
 		Stage stage = new Stage();
 		stage.setX(prevStage.getX());
         stage.setY(prevStage.getY());
+        stage.setResizable(false);
 		loadStage(stage, "LoginScreen");
 		prevStage.close();
 	}
@@ -56,6 +58,7 @@ public class StageNavigator {
 		Stage stage = new Stage();
 		stage.setX(prevStage.getX());
         stage.setY(prevStage.getY());
+        stage.setResizable(false);
 		loadStage(stage, "SignupScreen");
 		prevStage.close();
 	}
@@ -91,7 +94,7 @@ public class StageNavigator {
 		Scene scene = new Scene(root);
 		
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setResizable(false);
+		
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		scene.setFill(Color.TRANSPARENT);
 		primaryStage.setScene(scene);

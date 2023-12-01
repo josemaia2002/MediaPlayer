@@ -10,6 +10,8 @@ import br.ufrn.imd.model.UserVip;
 import br.ufrn.imd.service.AuthService;
 import br.ufrn.imd.service.FileManagementService;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +19,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -34,18 +38,27 @@ public class PlayerController extends WindowController implements Initializable 
 
 	    @FXML
 	    private ImageView playButtonImage;
-
+	    
 	    @FXML
 	    private Tab playlistTab;
 	    
 	    @FXML
-	    private TableColumn<String, String> directoriesColumn;
+	    private TableView<Playlist> playlistTable;
 	    
 	    @FXML
-	    private TableColumn<String, String> musicsColumn;
-
+	    private TableColumn<Playlist, String> playlistsColumn;
+	       
 	    @FXML
-	    private TableColumn<String, String> playlistsColumn;
+	    private TableView<Music> musicTable;
+	    
+	    @FXML
+	    private TableColumn<Music, String> musicsColumn;
+	    
+	    @FXML
+	    private TableView<String> directoryTable;
+	    
+	    @FXML
+	    private TableColumn<String, String> directoriesColumn;
 
 	    @FXML
 	    private ScrollBar progressBar;
@@ -77,9 +90,13 @@ public class PlayerController extends WindowController implements Initializable 
 	    
 	    public void feedMusics()
 	    {
-	    	ArrayList<Music> musics = tabContentManager.loadMusics();
 	    	
-	    	musicsColumn.setCellValueFactory(c -> new SimpleStringProperty(new String("123")));
+	    	ObservableList<Music> musicnames = FXCollections.observableArrayList(tabContentManager.loadMusics());
+	    
+	    	musicsColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
+	    	
+	    	if(musicTable == null) System.out.println("NULOAAAAAAAAAAAAAAAAAAA");
+	    	musicTable.setItems(musicnames);
 	    }
 	    
 	    public void feedDirectories()
