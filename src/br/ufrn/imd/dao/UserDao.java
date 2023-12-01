@@ -9,9 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import br.ufrn.imd.modelo.Music;
-import br.ufrn.imd.modelo.User;
-import br.ufrn.imd.modelo.UserVip;
+import br.ufrn.imd.model.Music;
+import br.ufrn.imd.model.User;
+import br.ufrn.imd.model.UserVip;
 
 public class UserDao {
 	public ArrayList<User> findAllUsers()
@@ -29,12 +29,13 @@ public class UserDao {
 					User u = new User(Integer.parseInt(credentials[0]), credentials[2], credentials[3], credentials[4]);
 					if(credentials[1].equals("vipUser")) 
 					{
-						PlaylistDao playlistDAO = new PlaylistDao();
 						line = buffRead.readLine();
 						ArrayList<String> playlistsFound = new ArrayList<String>();
-						for(String p : line.split("\t")) 
-						{
-							playlistsFound.add(p);
+						if(line != null) {
+							for(String p : line.split("\t")) 
+							{
+								playlistsFound.add(p);
+							}
 						}
 						u = (User) new UserVip(u, playlistsFound);
 					}

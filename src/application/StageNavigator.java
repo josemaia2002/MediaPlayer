@@ -66,7 +66,7 @@ public class StageNavigator {
 		yOffset = 0;
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/"+ScreenName+".fxml"));
+			root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/view/"+ScreenName+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;

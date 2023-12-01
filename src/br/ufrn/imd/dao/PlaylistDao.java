@@ -5,12 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import br.ufrn.imd.modelo.Music;
-import br.ufrn.imd.modelo.Playlist;
-import br.ufrn.imd.modelo.User;
-import br.ufrn.imd.modelo.UserVip;
-
-import br.ufrn.imd.dao.MusicaDao;
+import br.ufrn.imd.dao.MusicDao;
+import br.ufrn.imd.model.Music;
+import br.ufrn.imd.model.Playlist;
+import br.ufrn.imd.model.User;
+import br.ufrn.imd.model.UserVip;
 
 public class PlaylistDao {
 	private ArrayList<Playlist> playlists;
@@ -52,7 +51,7 @@ public class PlaylistDao {
 			if(line == null) return null;
 			p.setName(line);
 			
-			MusicaDao musicdao = new MusicaDao();
+			MusicDao musicdao = new MusicDao();
 			
 			while(true) {
 				String musicPath = buffRead.readLine();

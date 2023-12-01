@@ -1,7 +1,7 @@
 package br.ufrn.imd.service;
 
-import br.ufrn.imd.modelo.User;
 import br.ufrn.imd.dao.UserDao;
+import br.ufrn.imd.model.User;
 
 public class AuthService {
 	private static User currentUser;

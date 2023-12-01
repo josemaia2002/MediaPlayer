@@ -1,4 +1,4 @@
-package br.ufrn.imd.modelo;
+package br.ufrn.imd.model;
 
 public class User {
 	protected String username;

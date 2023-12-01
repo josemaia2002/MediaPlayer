@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollBar?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -99,65 +98,37 @@
                      <content>
                         <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to bottom, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                            <children>
-                              <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="302.0" style="-fx-background-color: -fx-punk-black;" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <content>
-                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="415.0" prefWidth="291.0" style="-fx-background-color: linear-gradient(to right , #FF5F78, -fx-punk-blue);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
-                                       <children>
-                                          <Pane style="-fx-background-color: linear-gradient(to bottom, #FA1E38, #0000bb44);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <TableView prefHeight="400.0" prefWidth="298.0" stylesheets="@../../../../resources/css/style.css">
-                                                   <columns>
-                                                      <TableColumn fx:id="musicColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
-                                                   </columns>
-                                                </TableView>
-                                             </children>
-                                          </Pane>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </ScrollPane>
+                              <TableView prefHeight="400.0" prefWidth="298.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="musicsColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
+                                 </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
                      </content>
                   </Tab>
                   <Tab fx:id="playlistTab" text="Playlists">
                      <content>
-                        <AnchorPane prefHeight="414.0" prefWidth="273.0" styleClass="back-table-pane2">
+                        <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to bottom, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                            <children>
-                              <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="302.0" style="-fx-background-color: -fx-punk-black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <content>
-                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="402.0" prefWidth="302.0" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
-                                       <children>
-                                          <TableView prefHeight="415.0" prefWidth="304.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <columns>
-                                                <TableColumn fx:id="playListColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
-                                             </columns>
-                                          </TableView>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </ScrollPane>
+                              <TableView prefHeight="400.0" prefWidth="298.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="playlistsColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
+                                 </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="playlistTab1" text="Directories">
+                  <Tab text="Directories">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="back-table-pane2">
+                        <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to bottom, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                            <children>
-                              <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="302.0" style="-fx-background-color: -fx-punk-black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <content>
-                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="302.0" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
-                                       <children>
-                                          <TableView prefHeight="415.0" prefWidth="304.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <columns>
-                                                <TableColumn fx:id="playListColumn1" editable="false" minWidth="-1.0" prefWidth="5000.0" />
-                                             </columns>
-                                          </TableView>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </ScrollPane>
+                              <TableView prefHeight="400.0" prefWidth="298.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="directoriesColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
+                                 </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
                      </content>

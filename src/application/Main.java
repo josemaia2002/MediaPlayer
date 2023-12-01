@@ -4,11 +4,10 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import br.ufrn.imd.modelo.*; // Only for testing
-
 import java.util.ArrayList;
 
 import br.ufrn.imd.dao.*; // Only for testing
+import br.ufrn.imd.model.*;
 
 public class Main extends Application {
 	

@@ -7,15 +7,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import br.ufrn.imd.modelo.Music;
-import br.ufrn.imd.modelo.User;
-import br.ufrn.imd.modelo.UserVip;
+
+import br.ufrn.imd.model.Music;
+import br.ufrn.imd.model.User;
+import br.ufrn.imd.model.UserVip;
 import javafx.beans.property.MapProperty;
 import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableMap;
 import javafx.scene.media.Media;
 
-public class MusicaDao {
+public class MusicDao {
 	private ArrayList<Music> songs = new ArrayList<Music>();
 	
 	public void addSong(Music m) {
