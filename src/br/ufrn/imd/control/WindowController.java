@@ -1,4 +1,4 @@
-package br.ufrn.imd.controller;
+package br.ufrn.imd.control;
 
 
 import java.io.IOException;

@@ -4,27 +4,27 @@ import java.util.ArrayList;
 
 public class UserVip extends User {
 	
-	private ArrayList<Playlist> playlists;
+	private ArrayList<String> playlistsIDs;
 	
 	public UserVip(int id, String nome, String email, String senha) {
 		super(id, nome, email, senha);
 	}
 	
-	public UserVip(User user, ArrayList<Playlist> playlists){
+	public UserVip(User user, ArrayList<String> arrayList){
 		super(user.getId(), user.getUsername(), user.getEmail(), user.getPassword());
-		this.playlists = playlists;
+		this.playlistsIDs = arrayList;
 	}
 	
-	public void addPlaylist(Playlist p) {
-		playlists.add(p);
+	public void addPlaylist(String id) {
+		playlistsIDs.add(id);
 	}
 
-	public ArrayList<Playlist> getPlaylists() {
-		return playlists;
+	public ArrayList<String> getPlaylistsIDs() {
+		return playlistsIDs;
 	}
 
-	public void setPlaylists(ArrayList<Playlist> playlists) {
-		this.playlists = playlists;
+	public void setPlaylists(ArrayList<String> playlists) {
+		this.playlistsIDs = playlists;
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class UserVip extends User {
 				+ username + "\t"
 				+ email + "\t"
 				+ password + "\t"
-				+ playlists;
+				+ playlistsIDs;
 		return s;
 	}
 }

@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="1201.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controller.PlayerScreenController">
+<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="1201.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.control.PlayerController">
    <children>
       <BorderPane layoutX="440.0" layoutY="268.0" prefHeight="200.0" prefWidth="200.0" styleClass="mainPannel" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
@@ -31,17 +32,17 @@
                         <Insets left="50.0" right="50.0" />
                      </VBox.margin>
                   </ScrollBar>
-                  <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1199.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1199.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Button fx:id="leftButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
-                           <effect>
-                              <Glow level="1.0" />
-                           </effect>
                            <graphic>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../../resources/images/left.png" />
                                  </image>
+                                 <effect>
+                                    <Bloom threshold="0.0" />
+                                 </effect>
                               </ImageView>
                            </graphic></Button>
                         <ToggleButton fx:id="playButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
@@ -49,25 +50,25 @@
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin>
                            <graphic>
-                              <ImageView fx:id="playButtonImage" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="playButtonImage" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="controll-button">
                                  <image>
                                     <Image url="@../../../../resources/images/play.png" />
                                  </image>
                                  <effect>
-                                    <Glow level="1.0" />
+                                    <Bloom threshold="0.0" />
                                  </effect>
                               </ImageView>
                            </graphic>
                         </ToggleButton>
                         <Button fx:id="rightButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
-                           <effect>
-                              <Glow level="1.0" />
-                           </effect>
                            <graphic>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="60.0" fitWidth="60.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../../resources/images/right.png" />
                                  </image>
+                                 <effect>
+                                    <Bloom threshold="0.0" />
+                                 </effect>
                               </ImageView>
                            </graphic>
                         </Button>
@@ -92,21 +93,25 @@
             <Pane prefHeight="386.0" prefWidth="70.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <TabPane prefHeight="447.0" prefWidth="300.0" style="-fx-background-color: black;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane prefHeight="447.0" prefWidth="300.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab text="Musics">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to bottom, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                            <children>
-                              <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="302.0" style="-fx-background-color: -fx-punk-black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="302.0" style="-fx-background-color: -fx-punk-black;" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
-                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="302.0" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
+                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="415.0" prefWidth="291.0" style="-fx-background-color: linear-gradient(to right , #FF5F78, -fx-punk-blue);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                                        <children>
-                                          <TableView prefHeight="415.0" prefWidth="304.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <columns>
-                                                <TableColumn fx:id="musicColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
-                                             </columns>
-                                          </TableView>
+                                          <Pane style="-fx-background-color: linear-gradient(to bottom, #FA1E38, #0000bb44);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <TableView prefHeight="400.0" prefWidth="298.0" stylesheets="@../../../../resources/css/style.css">
+                                                   <columns>
+                                                      <TableColumn fx:id="musicColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
+                                                   </columns>
+                                                </TableView>
+                                             </children>
+                                          </Pane>
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -117,7 +122,28 @@
                   </Tab>
                   <Tab fx:id="playlistTab" text="Playlists">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="414.0" prefWidth="273.0" styleClass="back-table-pane2">
+                           <children>
+                              <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="302.0" style="-fx-background-color: -fx-punk-black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="402.0" prefWidth="302.0" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
+                                       <children>
+                                          <TableView prefHeight="415.0" prefWidth="304.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn fx:id="playListColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="playlistTab1" text="Directories">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="back-table-pane2">
                            <children>
                               <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="302.0" style="-fx-background-color: -fx-punk-black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
@@ -125,7 +151,7 @@
                                        <children>
                                           <TableView prefHeight="415.0" prefWidth="304.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <columns>
-                                                <TableColumn fx:id="playListColumn" editable="false" minWidth="-1.0" prefWidth="5000.0" />
+                                                <TableColumn fx:id="playListColumn1" editable="false" minWidth="-1.0" prefWidth="5000.0" />
                                              </columns>
                                           </TableView>
                                        </children>

@@ -46,8 +46,13 @@
 	-fx-background-radius: 20;
 	-fx-border-radius: 20;
 
-	-fx-background-color: linear-gradient(to bottom right, -fx-punk-black, #10001b); 
+	-fx-background-color: linear-gradient(to bottom right, -fx-punk-black, #000011); 
 	-fx-border-color: -fx-punk-black;
+}
+
+.mainPannel:selected
+{
+	-fx-background-color: linear-gradient(to bottom, -fx-punk-black 0%, -fx-punk-black 85%, -fx-punk-blue 100%); 
 }
 
 .radio-button .radio{
@@ -100,6 +105,19 @@
 	-fx-background-color: transparent;
 }
 
+.controll-button:hover
+{
+	-fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-scale-z: 1.1;
+}
+
+.controll-button:pressed
+{
+	-fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+    -fx-scale-z: 0.9;
+}
 
 .input-field{
 	-fx-background-color: -fx-punk-black;
@@ -108,21 +126,31 @@
 }
 
 .tab-header-area .tab-header-background {
- 	-fx-background-color: linear-gradient(to top, -fx-punk-pink, -fx-punk-black);
+ 	-fx-background-color: #fa1e38;
  	-fx-background-radius: 5 5 0 0;
+
+}
+
+.tab-pane
+{
+	-fx-background-color: #FA1E38aa;
+ 	-fx-background-radius: 5 5 0 0;
+ 	-fx-border-color: radial-gradient(focus-distance 50% , center 50% 50% , radius 85% , deeppink, #1EFA98aa);
+ 	-fx-border-radius: 5 5 0 0;
+ 	-fx-border-width: 1;
 }
 
 .tab-pane .tab {
 	-fx-background-color: transparent;
 	-fx-text-fill: black;
 	-fx-font-weight: bold;
-	-fx-background-color: white;
-
+	-fx-background-color: #FA1E38aa;
 }
 
 .tab-pane .tab:selected {
 	-fx-text-fill: white;
-	-fx-background-color: -fx-punk-pink;
+	-fx-background-color: white;
+	
 
 }
 
@@ -138,12 +166,12 @@
 
 .table-view{
     
-    -fx-background-color: linear-gradient(to bottom, #FA1E38ff, #00000b00);
+    -fx-background-color: transparent;
 }
 
-.back-table-pane
+.back-table-pane2 
 {
-	-fx-background-color: linear-gradient(to right, deeppink, #00000bff);
+	-fx-background-color: linear-gradient(to right , #FF5F78, -fx-punk-blue);
 }
 
 .table-row-cell:highlighted {
@@ -151,11 +179,19 @@
     -fx-background-radius: 15px;
 }
 
-.scroll-pane > .viewport {
-   -fx-background-color: linear-gradient(to right, deeppink, #00000bff);
+.table-view > .viewport {
+	-fx-border-color: #FA1E38aa;
+
+	-fx-background-color: transparent;
+
+}
+.table-view
+{
+	-fx-padding: 0 0 0 0 ;
+	-fx-background-color: linear-gradient(to bottom, #FA1E38, #0000bb44);
 }
 
-.scroll-pane .corner
+.table-view .corner
 {
 	-fx-background-radius: 20;
 	-fx-background-color: transparent;
@@ -164,21 +200,41 @@
 .scroll-bar
 {
 	-fx-background-radius: 20;
-	-fx-background-color: #00002bff;
+	-fx-border-radius: 20;
+	-fx-border-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 55% , deeppink, #1EFA98aa);
 }
+
+.scroll-bar:horizontal
+{
+	-fx-background-color: linear-gradient(to top, #1EFA9811, transparent);
+}
+.scroll-bar:vertical
+{
+	-fx-background-color: linear-gradient(to right, #1EFA9811, transparent);
+}
+
+
+.scroll-bar:pressed, .scroll-bar:focused
+{
+	-fx-background-color: linear-gradient(to top, #1EFA9833, transparent);
+	-fx-border-color: white;
+}
+
+.scroll-bar:pressed .thumb, .scroll-bar:focused .thumb
+{
+	-fx-background-color: radial-gradient(focus-distance 50% , center 50% 50% , radius 100% , -fx-punk-blue, -fx-punk-black);
+}
+
+
+.table-view .scroll-bar
+{
+	-fx-background-color: transparent;
+}
+
+
+
 
 .scroll-bar .track
-{
-	-fx-border-color: white;
-	-fx-border-width: 1 0 1 0;
-}
-
-.scroll-bar:horizontal .track
-{
-	-fx-border-width: 1 0 1 0;
-}
-
-.scroll-bar:vertical .track
 {
 	-fx-border-width: 0 1 0 1;
 }
@@ -195,5 +251,7 @@
 
 .scroll-bar .thumb
 {
-	-fx-background-color: #FA1E38;
+	-fx-background-color: radial-gradient(focus-distance 10% , center 50% 50% , radius 100% , white, whitesmoke);
+	-fx-pref-width: 1;
+
 }

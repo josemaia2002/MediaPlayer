@@ -20,7 +20,7 @@ public class UserDao {
 		BufferedReader buffRead;
 		try {
 			
-			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/usuarios.txt").getFile()));
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/users.txt").getFile()));
 		
 			String line = buffRead.readLine();
 			while (true) {
@@ -30,7 +30,13 @@ public class UserDao {
 					if(credentials[1].equals("vipUser")) 
 					{
 						PlaylistDao playlistDAO = new PlaylistDao();
-						u = (User) new UserVip(u, playlistDAO.findPlaylistsByUserID(u.getId()));
+						line = buffRead.readLine();
+						ArrayList<String> playlistsFound = new ArrayList<String>();
+						for(String p : line.split("\t")) 
+						{
+							playlistsFound.add(p);
+						}
+						u = (User) new UserVip(u, playlistsFound);
 					}
 					users.add(u);
 					line = buffRead.readLine();

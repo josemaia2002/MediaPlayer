@@ -1,12 +1,19 @@
 package br.ufrn.imd.dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import br.ufrn.imd.modelo.Music;
 import br.ufrn.imd.modelo.User;
 import br.ufrn.imd.modelo.UserVip;
+import javafx.beans.property.MapProperty;
+import javafx.collections.MapChangeListener.Change;
+import javafx.collections.ObservableMap;
+import javafx.scene.media.Media;
 
 public class MusicaDao {
 	private ArrayList<Music> songs = new ArrayList<Music>();
@@ -25,11 +32,7 @@ public class MusicaDao {
 	
 	public void printSongs() {
 		for(Music m : songs) {
-			System.out.println(m.getNome());
-			System.out.println(m.getArtista());
-			System.out.println(m.getAlbum());
-			System.out.println(m.getGenero());
-			System.out.println(m.getPath());
+			System.out.println(m);
 		}
 	}
 	
@@ -43,32 +46,112 @@ public class MusicaDao {
 		return null;
 	}
 	
-	public void loadSongs() {
-		BufferedReader buffRead;
-		try {
-			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/musicas.txt").getFile()));
+	public Music loadSong(String path) 
+	{
+		Media m = new Media(path);
 		
-			String line = buffRead.readLine();
-			while (true) {
-				if (line != null) {
-					String[] info = line.split(",");					
-							
-					Music m = new Music();
-					m.setPath(info[0]);
-					m.setNome(info[1]);
-					m.setArtista(info[2]);
-					m.setAlbum(info[3]);
-					m.setGenero(info[4]);
-					m.setDuracao(Double.parseDouble(info[5]));
-					
-					songs.add(m);
-					line = buffRead.readLine();
-				}
-				else break;
+		MapProperty<String, Object> metaData = (MapProperty<String, Object>) m.getMetadata();
+		Music song = new Music();
+		song.setPath(path);
+		metaData.addListener( (Change<? extends String, ? extends Object> c) -> {
+	        if (c.wasAdded()) {
+	            if ("artist".equals(c.getKey())) {
+	                song.setAuthor(c.getValueAdded().toString());
+	            } else if ("title".equals(c.getKey())) {
+	            	 song.setTitle(c.getValueAdded().toString());
+	            } else if ("album".equals(c.getKey())) {
+	                song.setAlbum(c.getValueAdded().toString());
+	            } else if ("genre".equals(c.getKey())) {
+	                song.setGenre(c.getValueAdded().toString());
+	            }
+	        }
+	    });
+		
+		return song;
+	}
+	
+	public ArrayList<Music> loadDirectorySongs(String directoryPath)
+	{
+		ArrayList<Music> directorySongs = new ArrayList<Music>();
+		
+		File dir = new File(directoryPath);
+		
+		if(!dir.isDirectory()) return directorySongs;
+		
+		for(File f : dir.listFiles()) 
+		{	
+			directorySongs.add(loadSong(f.toURI().toString()));
+		}
+		
+		return directorySongs;
+	}
+	
+	public ArrayList<Music> loadSongsFromSelectedDirectories()
+	{
+		BufferedReader buffRead;
+		ArrayList<Music> selectedSongs = new ArrayList<Music>();
+		try {
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/directories.txt").getFile()));
+		
+			String line;
+			
+			while(true) 
+			{
+				line = buffRead.readLine();
+				if(line == null) break;
+				selectedSongs.addAll(loadDirectorySongs(line));
 			}
 			buffRead.close();
 		} catch (IOException e) {
 			//e.printStackTrace();
 		}
+		return selectedSongs;
 	}
+	
+	
+	public ArrayList<Music> loadSelectedSongs() {
+		BufferedReader buffRead;
+		ArrayList<Music> selectedSongs = new ArrayList<Music>();
+		try {
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/songs.txt").getFile()));
+		
+			String line;
+			
+			while(true) 
+			{
+				line = buffRead.readLine();
+				if(line == null) break;
+				selectedSongs.add(loadSong(new File(line).toURI().toString()));
+			}
+			buffRead.close();
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+		return selectedSongs;
+	}
+	
+	public ArrayList<Music> loadSongs()
+	{
+		songs = loadSongsFromSelectedDirectories();
+		songs.addAll(loadSelectedSongs());
+		return songs;
+	}
+
+	public boolean saveSong(Music song) 
+	{
+
+		try {
+
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/songs.txt").getFile(), true));
+	    
+			writer.append('\n');
+		    writer.append(song.toString());
+		    writer.close();
+		    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
 }

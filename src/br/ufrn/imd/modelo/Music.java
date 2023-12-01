@@ -1,13 +1,32 @@
 package br.ufrn.imd.modelo;
 
 public class Music {
-	private String nome;
-	private double duracao;
-	private String artista;
-	private String genero;
+	
+	private String title;
+	private double duration;
+	private String author;
+	private String genre;
 	private String album;
 	private String path;
 	
+	public Music(String name, double duration, String author, String genre, String album, String path) {
+		this.title = name;
+		this.duration = duration;
+		this.author = author;
+		this.genre = genre;
+		this.album = album;
+		this.path = path;
+	}
+
+	public Music() {
+		this.title = "Unknown";
+		this.duration = 0;
+		this.author = "Unknown Artist";
+		this.genre = "No genre";
+		this.album = "No album";
+		this.path = "";
+	}
+
 	public String getPath() {
 		return path;
 	}
@@ -16,36 +35,36 @@ public class Music {
 		this.path = path;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getTitle() {
+		return title;
 	}
 	
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTitle(String name) {
+		this.title = name;
 	}
 	
-	public double getDuracao() {
-		return duracao;
+	public double getDuration() {
+		return duration;
 	}
 	
-	public void setDuracao(double duracao) {
-		this.duracao = duracao;
+	public void getDuration(double duration) {
+		this.duration = duration;
 	}
 	
-	public String getArtista() {
-		return artista;
+	public String getAuthor() {
+		return author;
 	}
 	
-	public void setArtista(String artista) {
-		this.artista = artista;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	
-	public String getGenero() {
-		return genero;
+	public String getGenre() {
+		return genre;
 	}
 	
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 	
 	public String getAlbum() {
@@ -59,20 +78,20 @@ public class Music {
 	public boolean equals(Music m) 
 	{
 		if(this.getPath().equals(m.getPath())) return true;
-		if(!this.getNome().equals(m.getNome())) return false;
-		if(this.getDuracao() != m.getDuracao()) return false;
-		if(!this.getArtista().equals(m.getArtista())) return false;
-		if(!this.getGenero().equals(m.getGenero())) return false;
+		if(!this.getTitle().equals(m.getTitle())) return false;
+		if(this.getDuration() != m.getDuration()) return false;
+		if(!this.getAuthor().equals(m.getAuthor())) return false;
+		if(!this.getGenre().equals(m.getGenre())) return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return nome + "\t"
-				+ duracao + "\t"
-				+ artista + "\t"
-				+ genero + "\t"
+		return title + "\t"
+				+ duration + "\t"
+				+ author + "\t"
+				+ genre + "\t"
 				+ album + "\t"
 				+ path;
 	}

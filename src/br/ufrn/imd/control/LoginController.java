@@ -1,4 +1,4 @@
-package br.ufrn.imd.controller;
+package br.ufrn.imd.control;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,58 +18,42 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class SignupController extends WindowController implements Initializable{
+public class LoginController extends WindowController implements Initializable{
 	
+    @FXML
+    private Button loginButton;
+    
     @FXML
     private ImageView pulseImage;
-	
-	@FXML
-	private TextField usernameInput;
-	
-	@FXML
-    private TextField emailInput;
     
+    @FXML
+    private ImageView pulseBorder;
+
     @FXML
     private PasswordField passwordInput;
-    
-    @FXML
-    private PasswordField confirmPasswordInput;
-    
-    @FXML
-    private RadioButton userTypeRadio;
 
+    @FXML
+    private Button signupButton;
+
+    @FXML
+    private TextField usernameInput;
+    
     @FXML
     private Text credentialResponse;
     
-    @FXML
-    private Button signupButton;
-    
-    @FXML
-    private Button loginPage;
-    
     private AuthService service;
     
-    @FXML
-    void selectVip(ActionEvent event) {
-    	if(userTypeRadio.isSelected())
-    	{
-    		userTypeRadio.setText("👑 Vip User");
-    		return;
-    	}
-    	userTypeRadio.setText("Default User");
-    	
-    	
-    }
+    // Controll Methods
     
-    @FXML
-    void trySignup(ActionEvent event) {
+    
+    public void tryLogin(ActionEvent event) 
+    {
     	class LoginThread implements Runnable
 		{
 			public void run() 
@@ -83,7 +67,7 @@ public class SignupController extends WindowController implements Initializable{
 				Platform.runLater(new Runnable() {
 				    @Override 
 				    public void run() {
-				    	navigateToLogin(event);
+				    	navigateToPlayer(event);
 				    }
 				});
 	    		
@@ -91,35 +75,31 @@ public class SignupController extends WindowController implements Initializable{
 		}
     	
     	String username = usernameInput.getText();
-    	String email = emailInput.getText();
-    	String p1 = passwordInput.getText();
-    	String p2 = confirmPasswordInput.getText();
-    	String userType = userTypeRadio.isSelected() ? "vipUser" : "defaultUser";
-    	String response = service.signupCredentials(username, userType, email, p1, p2);
-    	credentialResponse.setText(response);
-    	if(response.equals("Singed Up!")) 
+    	String password = passwordInput.getText();
+    	if(service.loginCredentials(username, password)) 
     	{
     		credentialResponse.setFill(Color.GREEN);
     		credentialResponse.setVisible(true);
-    		credentialResponse.setText(response);
+    		credentialResponse.setText("Loggin in!");
     		Thread t = new Thread(new LoginThread());
     		t.start();
     		return;
     	}
     	
     	credentialResponse.setVisible(true);
-    	playSignupErrorAnimation();
+    	playUserNotFoundAnimation();
     }
-
     
-    @Override
+    
+    // Cosmetic methods
+	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		playBackgroundAnimation();
+		playLogoAnimation();
 		service = new AuthService();
 	}
 	
-    //Cosmetic Methods
-	private void playSignupErrorAnimation() 
+	private void playUserNotFoundAnimation() 
 	{
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(credentialResponse);
@@ -142,6 +122,27 @@ public class SignupController extends WindowController implements Initializable{
 		
 		rotate.play();
 		straighten.play();
+	}
+    
+	private void playLogoAnimation() 
+	{
+		Duration duration = Duration.millis(180);
+		int cycleCount = Transition.INDEFINITE;
+		ScaleTransition scale = new ScaleTransition();
+		scale.setNode(pulseBorder);
+		scale.setDuration(duration);
+		scale.setCycleCount(cycleCount);
+		scale.setFromX(0.85);
+		scale.setFromY(0.85);
+		scale.setFromZ(0.85);
+		scale.setToX(1.0);
+		scale.setToY(1.0);
+		scale.setToZ(1.0);
+		scale.setAutoReverse(true);
+		scale.setInterpolator(Interpolator.EASE_OUT);
+		
+
+		scale.play();
 	}
 	
 	private void playBackgroundAnimation() 
@@ -188,5 +189,4 @@ public class SignupController extends WindowController implements Initializable{
 		fade.play();
 		scale.play();
 	}
-
 }

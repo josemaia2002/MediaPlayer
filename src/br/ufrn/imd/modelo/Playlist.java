@@ -5,15 +5,18 @@ import java.util.ArrayList;
 public class Playlist {
 	private int id;
 	private String name;
-	private ArrayList<Music> songs = new ArrayList<Music>();
+	private ArrayList<Music> songs;
 	
-	/*
-	public Playlist(int id, String name) {
-		super();
+	public Playlist(int id) {
+		this.id = id;
+		songs = new ArrayList<Music>();
+	}
+	
+	public Playlist(int id, String name, ArrayList<Music> songs) {
 		this.id = id;
 		this.name = name;
+		this.songs = songs;
 	}
-	*/
 	
 	public ArrayList<Music> getSongs() {
 		return songs;

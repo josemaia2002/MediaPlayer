@@ -1,4 +1,4 @@
-package br.ufrn.imd.controller;
+package br.ufrn.imd.control;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +15,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class PlayerScreenController extends WindowController implements Initializable {
+public class PlayerController extends WindowController implements Initializable {
 
     @FXML
     private Button leftButton;

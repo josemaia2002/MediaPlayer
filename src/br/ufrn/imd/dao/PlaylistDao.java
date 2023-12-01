@@ -13,8 +13,12 @@ import br.ufrn.imd.modelo.UserVip;
 import br.ufrn.imd.dao.MusicaDao;
 
 public class PlaylistDao {
-	private ArrayList<Playlist> playlists = new ArrayList<Playlist>();
+	private ArrayList<Playlist> playlists;
 	
+	public PlaylistDao() {
+		this.playlists = new ArrayList<Playlist>();
+	}
+
 	public void addPlaylist(Playlist p) {
 		playlists.add(p);
 	}
@@ -33,66 +37,63 @@ public class PlaylistDao {
 			System.out.println(p.getName());
 			
 			for(Music m : p.getSongs()) {
-				System.out.println(m.getNome());
+				System.out.println(m);
 			}
 		}
 	}
 	
-	public void loadPlaylists() {
+	public Playlist loadPlaylist(int id) {
 		BufferedReader buffRead;
+		Playlist p = new Playlist(id);
 		try {
-			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlist002.txt").getFile()));
-		
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlists/" + id + ".ply").getFile()));
 			String line = buffRead.readLine();
 			
-			// int userId = Integer.parseInt(line);
-			line = buffRead.readLine();
+			if(line == null) return null;
+			p.setName(line);
 			
-			String userName = line;
-			line = buffRead.readLine();
-			
-			UserDao ud = new UserDao();
-			
-			User u = new User();
-			u = ud.findUserByUsername(userName);
-			
-			int playlistId = Integer.parseInt(line);
-			line = buffRead.readLine();
-			
-			String playlistName = line;
-			line = buffRead.readLine();
-			
-			Playlist p = new Playlist();
-			p.setName(playlistName);
-			p.setId(playlistId);
-			
+			MusicaDao musicdao = new MusicaDao();
 			
 			while(true) {
-				if(line != null) {
-					String songPath = line;
-					
-					MusicaDao md = new MusicaDao();
-					md.loadSongs();
-					
-					Music m = md.findSongByPath(songPath);
-					p.addSong(m);
-					
-					line = buffRead.readLine();
-				}
-				else break;
+				String musicPath = buffRead.readLine();
+				if(musicPath == null) break;
+				Music m = musicdao.loadSong(musicPath);
+				p.addSong(m);
 			}
 			playlists.add(p);
-			((UserVip)u).addPlaylist(p);
 			
 			buffRead.close();
 		} catch (IOException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
+			return null;
 		}
+		return p;
+	}
+	
+	public ArrayList<Playlist> readPlaylistsFromLine(BufferedReader readingPoint)
+	{
+		String[] playlistsIDs = null;
+		try {
+			playlistsIDs = readingPoint.readLine().split("\t");
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		for(String id : playlistsIDs)
+		{
+			playlists.add(loadPlaylist(Integer.parseInt(id)));
+		}
+		
+		
+		return playlists;
+		
 	}
 	
 	public ArrayList<Playlist> findPlaylistsByUserID(int id) {
 		
 		return playlists;
 	}
+	
 	
 }
