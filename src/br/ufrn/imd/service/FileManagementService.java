@@ -1,17 +1,20 @@
 package br.ufrn.imd.service;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import br.ufrn.imd.dao.MusicDao;
 import br.ufrn.imd.dao.PlaylistDao;
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
+import br.ufrn.imd.model.User;
 import br.ufrn.imd.model.UserVip;
 
 public class FileManagementService {
 	
 	private MusicDao musicDataAccess;
-	
 	private PlaylistDao playlistDataAccess;
 	
 	
@@ -22,15 +25,20 @@ public class FileManagementService {
 	}
 
 	/**
-     * Metodo que comanda a inicialização das músicas.
-     * @param user o usuário cujas playlists serão carregadas.
-     * @return Uma ArrayList com as músicas carregadas.
+     * Metodo que comanda a inicializacao das playlists.
+     * @param user o usuario cujas playlists serao carregadas.
+     * @return Uma ArrayList com as playlists carregadas.
      */
-	public ArrayList<Playlist> loadPlaylists(UserVip user) { /*TODO*/ return new ArrayList<Playlist>(); }
+	public ArrayList<Playlist> loadPlaylists(UserVip user) { 
+		/*TODO*/ 
+		
+		return new ArrayList<Playlist>(); 
+	}
+	
 	
 	/**
-     * Metodo que comanda a inicialização das playlists.
-     * @return Uma ArrayList com as playlists carregadas.
+     * Metodo que comanda a inicializacao das musicas.
+     * @return Uma ArrayList com as musicas carregadas.
      */
 	public ArrayList<Music> loadMusics() {
 		ArrayList<Music> musics = new ArrayList<Music>(); 
@@ -44,10 +52,33 @@ public class FileManagementService {
 	}
 	
 	/**
-     * Metodo que comanda a inicialização dos diretórios de músicas.
-     * @return Uma ArrayList com os diretórios de músicas que foram carregados.
+     * Metodo que comanda a inicializacao dos diretorios de musicas.
+     * @return Uma ArrayList com os diretorios de musicas que foram carregados.
      */
-	public ArrayList<String> loadDirectories() { /*TODO*/ return new ArrayList<String>(); }
+	public ArrayList<String> loadDirectories() { 
+		ArrayList<String> loadedDirectories = new ArrayList<String>();
+		
+		BufferedReader buffRead;
+		try {
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/directories.txt").getFile()));
+		
+			String line = buffRead.readLine();
+			while(true) {
+				if(line != null) {
+					loadedDirectories.add(line);
+					line = buffRead.readLine();
+				}
+				else { 
+					break;
+				}
+			}
+			buffRead.close();
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+		
+		return loadedDirectories; 
+	}
 	
 	
 	// Operational Methods

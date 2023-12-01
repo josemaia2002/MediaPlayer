@@ -108,13 +108,13 @@ public class SignupController extends WindowController implements Initializable{
     	}
     	
     	credentialResponse.setVisible(true);
-    	playSignupErrorAnimation();
+    	//playSignupErrorAnimation();
     }
 
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		playBackgroundAnimation();
+		// playBackgroundAnimation();
 		service = new AuthService();
 	}
 	

@@ -41,11 +41,12 @@ public class PlaylistDao {
 		}
 	}
 	
+	
 	public Playlist loadPlaylist(int id) {
 		BufferedReader buffRead;
 		Playlist p = new Playlist(id);
 		try {
-			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlists/" + id + ".ply").getFile()));
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlists/playlist" + id + ".txt").getFile()));
 			String line = buffRead.readLine();
 			
 			if(line == null) return null;
@@ -90,6 +91,7 @@ public class PlaylistDao {
 	}
 	
 	public ArrayList<Playlist> findPlaylistsByUserID(int id) {
+		
 		
 		return playlists;
 	}
