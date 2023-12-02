@@ -5,12 +5,15 @@ import java.util.ArrayList;
 public class Playlist {
 	private int id;
 	private String name;
+	private String ownerName;
+	private int ownerId;
 	private ArrayList<Music> songs;
 	
 	public Playlist(int id) {
 		this.id = id;
 		songs = new ArrayList<Music>();
 	}
+
 	
 	public Playlist(int id, String name, ArrayList<Music> songs) {
 		this.id = id;
@@ -45,4 +48,26 @@ public class Playlist {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+
+	public int getOwnerID() {
+		return ownerId;
+	}
+
+
+	public void setOwnerID(int ownerId) {
+		this.ownerId = ownerId;
+	}
+	
+	
 }

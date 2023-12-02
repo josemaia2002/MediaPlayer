@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import br.ufrn.imd.dao.MusicDao;
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
-import br.ufrn.imd.model.User;
-import br.ufrn.imd.model.UserVip;
 
 public class PlaylistDao {
 	private ArrayList<Playlist> playlists;
@@ -49,8 +47,15 @@ public class PlaylistDao {
 			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlists/playlist" + id + ".txt").getFile()));
 			String line = buffRead.readLine();
 			
-			if(line == null) return null;
-			p.setName(line);
+			if(line == null) 
+			{
+				buffRead.close();
+				return null;
+			}
+			String[] headerData = line.split("\t");
+			p.setName(headerData[0]);
+			p.setOwnerName(headerData[1]);
+			p.setOwnerID(Integer.parseInt(headerData[2]));
 			
 			MusicDao musicdao = new MusicDao();
 			

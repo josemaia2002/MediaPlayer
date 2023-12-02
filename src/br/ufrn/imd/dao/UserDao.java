@@ -30,11 +30,13 @@ public class UserDao {
 					if(credentials[1].equals("vipUser")) 
 					{
 						line = buffRead.readLine();
-						ArrayList<String> playlistsFound = new ArrayList<String>();
-						if(line != null) {
-							for(String p : line.split("\t")) 
-							{
-								playlistsFound.add(p);
+						ArrayList<Integer> playlistsFound = new ArrayList<Integer>();
+						if(!line.equals("")) {
+							if(line != null) {
+								for(String p : line.split("\t")) 
+								{
+									playlistsFound.add(Integer.parseInt(p));
+								}
 							}
 						}
 						u = (User) new UserVip(u, playlistsFound);

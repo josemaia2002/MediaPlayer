@@ -4,26 +4,26 @@ import java.util.ArrayList;
 
 public class UserVip extends User {
 	
-	private ArrayList<String> playlistsIDs;
+	private ArrayList<Integer> playlistsIDs;
 	
 	public UserVip(int id, String nome, String email, String senha) {
 		super(id, nome, email, senha);
 	}
 	
-	public UserVip(User user, ArrayList<String> arrayList){
+	public UserVip(User user, ArrayList<Integer> arrayList){
 		super(user.getId(), user.getUsername(), user.getEmail(), user.getPassword());
 		this.playlistsIDs = arrayList;
 	}
 	
-	public void addPlaylist(String id) {
+	public void addPlaylist(Integer id) {
 		playlistsIDs.add(id);
 	}
 
-	public ArrayList<String> getPlaylistsIDs() {
+	public ArrayList<Integer> getPlaylistsIDs() {
 		return playlistsIDs;
 	}
 
-	public void setPlaylists(ArrayList<String> playlists) {
+	public void setPlaylists(ArrayList<Integer> playlists) {
 		this.playlistsIDs = playlists;
 	}
 	

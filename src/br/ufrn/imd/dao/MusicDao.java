@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.User;
@@ -17,18 +18,50 @@ import javafx.collections.ObservableMap;
 import javafx.scene.media.Media;
 
 public class MusicDao {
-	private ArrayList<Music> songs = new ArrayList<Music>();
+	private ArrayList<Music> songs;
+	private ArrayList<String> directories;
 	
-	public void addSong(Music m) {
-		songs.add(m);
+	
+	
+	public MusicDao() {
+		this.songs = new ArrayList<Music>();
+		this.directories = new ArrayList<String>();
+		loadSongs();
+	}
+
+	/**
+     * Method that adds a song to the loaded songs and saves it to be loaded the next time.
+     * @param The new song to be saved
+     */
+	public void addSong(Music song) {
+		if(!songs.contains(song))
+		{
+			songs.add(song);
+			saveSong(song);
+		}
 	}
 	
-	public void removeSong(Music m) {
-		songs.remove(m);
+	/**
+     * Method that adds many songs.
+     * @param A list with the new songs to be saved
+     */
+	public void addAllSongs(Collection<Music> songs) {
+		for(Music m : songs) 
+		{
+			addSong(m);
+		}
+	}
+	
+	public void removeSong(Music song) {
+		songs.remove(song);
 	}
 	
 	public ArrayList<Music> listSongs() {
 		return songs;
+	}
+	
+	public ArrayList<String> listDirectories() {
+		return directories;
 	}
 	
 	public void printSongs() {
@@ -43,15 +76,29 @@ public class MusicDao {
 				return m;
 			}
 		}
-		
 		return null;
+	}
+	
+	public Boolean addDirectory(String path) 
+	{
+		try {
+
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/songs.txt").getFile(), true));
+			writer.append('\n' + path);
+		    writer.close();
+		    return true;
+		    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public Music loadSong(String path) 
 	{
 		Media m = new Media(path);
-		
-		MapProperty<String, Object> metaData = (MapProperty<String, Object>) m.getMetadata();
+		System.out.println(path);
+		ObservableMap<String,Object> metaData = m.getMetadata();
 		Music song = new Music();
 		song.setPath(path);
 		metaData.addListener( (Change<? extends String, ? extends Object> c) -> {
@@ -71,7 +118,11 @@ public class MusicDao {
 		return song;
 	}
 	
-	public ArrayList<Music> loadDirectorySongs(String directoryPath)
+	/**
+	 * Method that loads the songs from a specific directory.
+	 * @return An ArrayList with all the loaded songs
+	 */
+	public ArrayList<Music> loadSongsFromDirectory(String directoryPath)
 	{
 		ArrayList<Music> directorySongs = new ArrayList<Music>();
 		
@@ -87,6 +138,10 @@ public class MusicDao {
 		return directorySongs;
 	}
 	
+	/**
+	 * Method that loads all the songs in the selected directories.
+	 * @return An ArrayList with all the loaded songs
+	 */
 	public ArrayList<Music> loadSongsFromSelectedDirectories()
 	{
 		BufferedReader buffRead;
@@ -100,7 +155,8 @@ public class MusicDao {
 			{
 				line = buffRead.readLine();
 				if(line == null) break;
-				selectedSongs.addAll(loadDirectorySongs(line));
+				directories.add(line);
+				selectedSongs.addAll(loadSongsFromDirectory(line));
 			}
 			buffRead.close();
 		} catch (IOException e) {
@@ -109,7 +165,10 @@ public class MusicDao {
 		return selectedSongs;
 	}
 	
-	
+	/**
+	 * Method that loads all the songs selected by the user.
+	 * @return An ArrayList with all the loaded songs
+	 */
 	public ArrayList<Music> loadSelectedSongs() {
 		BufferedReader buffRead;
 		ArrayList<Music> selectedSongs = new ArrayList<Music>();
@@ -131,16 +190,18 @@ public class MusicDao {
 		return selectedSongs;
 	}
 	
-	public ArrayList<Music> loadSongs()
+	
+	/**
+	 * Method that loads all songs saved, both in the selected directories and specifically saved by the user
+	 */
+	public void loadSongs()
 	{
-		songs = loadSongsFromSelectedDirectories();
-		songs.addAll(loadSelectedSongs());
-		return songs;
+		addAllSongs(loadSongsFromSelectedDirectories());
+		addAllSongs(loadSelectedSongs());
 	}
 
 	public boolean saveSong(Music song) 
 	{
-
 		try {
 
 		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/songs.txt").getFile(), true));
@@ -153,6 +214,17 @@ public class MusicDao {
 			e.printStackTrace();
 		}
 		return true;
+	}
+	
+	/**
+	 * A method that manages song deleting from file loading data
+	 * @param song that will be deleted
+	 * @return true when the song was correctly deleted, false otherwise.
+	 */
+	public boolean deleteSong(Music song)
+	{
+		//TODO
+		return false;
 	}
 	
 }
