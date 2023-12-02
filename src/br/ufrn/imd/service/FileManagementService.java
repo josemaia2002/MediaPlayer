@@ -42,13 +42,34 @@ public class FileManagementService {
      */
 	public ArrayList<Music> loadMusics() {
 		ArrayList<Music> musics = new ArrayList<Music>(); 
-		/*TODO*/ 
 		
+		BufferedReader buffRead;
+		try {
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/songs.txt").getFile()));
 		
-		/*STUB*/
-		musics.add(new Music());
+			String line = buffRead.readLine();
+			while(true) {
+				if (line != null) {
+					String[] info = line.split(",");					
+							
+					Music m = new Music();
+					m.setTitle(info[1]);
+					m.setAuthor(info[2]);
+					m.setAlbum(info[3]);
+					m.setGenre(info[4]);
+					m.setDuration(Double.parseDouble(info[5]));
+					
+					musics.add(m);
+					line = buffRead.readLine();
+				}
+				else break;
+			}
+			buffRead.close();
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+		
 		return musics;
-		/*STUB*/
 	}
 	
 	/**

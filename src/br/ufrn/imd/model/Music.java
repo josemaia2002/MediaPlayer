@@ -47,7 +47,7 @@ public class Music {
 		return duration;
 	}
 	
-	public void getDuration(double duration) {
+	public void setDuration(double duration) {
 		this.duration = duration;
 	}
 	
