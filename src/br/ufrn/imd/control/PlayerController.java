@@ -100,14 +100,8 @@ public class PlayerController extends WindowController implements Initializable,
 	    
 	    	musicColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
 	    	
-	    	for(Music m: musicnames) System.out.println(m);
-	    	
-
 	    	musicTable.setItems(musicnames);
-	    	
-	    	System.out.println(musicColumn.getCellData(0));
-	    	
-	    	//for(String m: musicColumn.get) System.out.println(m);
+	    
 	    }
 	    
 	    public void feedDirectories()
@@ -117,7 +111,7 @@ public class PlayerController extends WindowController implements Initializable,
 	    	directoriesColumn.setCellValueFactory(new PropertyValueFactory<DirectoryDTO, String>("path"));
 	    	
 	    	directoryTable.setItems(directories);
-	    	
+	 
 	    }
 
 
