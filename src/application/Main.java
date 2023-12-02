@@ -25,17 +25,18 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		/*
 		FileManagementService fms = new FileManagementService();
 		ArrayList<Playlist> playlists = fms.loadPlaylists(2);
 		
 		for(Playlist p : playlists) {
 			System.out.println(p.getId());
 			System.out.println(p.getName());
-			// System.out.println(p.get);
+			
+			for(Music m : p.getSongs()) {
+				System.out.println(m.getPath());
+			}
 		}
-		*/
 		
-		launch(args);
+		// launch(args);
 	}
 }
