@@ -2,8 +2,11 @@ package br.ufrn.imd.control;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.model.DirectoryDTO;
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
 import br.ufrn.imd.model.UserVip;
@@ -18,14 +21,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 
-public class PlayerController extends WindowController implements Initializable {
+public class PlayerController extends WindowController implements Initializable, Observer  {
 
 	    @FXML
 	    private Button leftButton;
@@ -52,13 +57,13 @@ public class PlayerController extends WindowController implements Initializable 
 	    private TableView<Music> musicTable;
 	    
 	    @FXML
-	    private TableColumn<Music, String> musicsColumn;
+	    public TableColumn<Music, String> musicColumn;
 	    
 	    @FXML
-	    private TableView<String> directoryTable;
+	    private TableView<DirectoryDTO> directoryTable;
 	    
 	    @FXML
-	    private TableColumn<String, String> directoriesColumn;
+	    private TableColumn<DirectoryDTO, String> directoriesColumn;
 
 	    @FXML
 	    private ScrollBar progressBar;
@@ -93,15 +98,33 @@ public class PlayerController extends WindowController implements Initializable 
 	    	
 	    	ObservableList<Music> musicnames = FXCollections.observableArrayList(tabContentManager.loadMusics());
 	    
-	    	musicsColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
+	    	musicColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
 	    	
-	    	if(musicTable == null) System.out.println("NULOAAAAAAAAAAAAAAAAAAA");
+	    	for(Music m: musicnames) System.out.println(m);
+	    	
+
 	    	musicTable.setItems(musicnames);
+	    	
+	    	System.out.println(musicColumn.getCellData(0));
+	    	
+	    	//for(String m: musicColumn.get) System.out.println(m);
 	    }
 	    
 	    public void feedDirectories()
 	    {
-	    	ArrayList<String> directories = tabContentManager.loadDirectories();
+	    	ObservableList<DirectoryDTO> directories = FXCollections.observableArrayList(tabContentManager.listDirectoriesDTO());
+		    
+	    	directoriesColumn.setCellValueFactory(new PropertyValueFactory<DirectoryDTO, String>("path"));
+	    	
+	    	directoryTable.setItems(directories);
+	    	
 	    }
+
+
+		@Override
+		public void update(Observable arg0, Object arg1) {
+			// TODO Auto-generated method stub
+			
+		}
 
 	}

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import br.ufrn.imd.dao.MusicDao;
 import br.ufrn.imd.dao.PlaylistDao;
+import br.ufrn.imd.model.DirectoryDTO;
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
 import br.ufrn.imd.model.UserVip;
@@ -50,15 +51,18 @@ public class FileManagementService {
      * Method that manages the directories initialization.
      * @return An ArrayList with the loaded directories.
      */
-	public ArrayList<String> loadDirectories() {
-		return musicDataAccess.listDirectories();
+	public ArrayList<DirectoryDTO> listDirectoriesDTO() {
+		ArrayList<DirectoryDTO> dirDTO = new ArrayList<DirectoryDTO>();
+		for(String d: musicDataAccess.listDirectories()) 
+		{
+			dirDTO.add(new DirectoryDTO(d));
+		}
+		return dirDTO;
 	}
-	
 	
 	// Operational Methods
 	public void addMusic(String path) { 
-		Music m = new Music();
-		m.setPath(path);
+		Music m = new Music(path);
 		musicDataAccess.addSong(m);
 	}
 	

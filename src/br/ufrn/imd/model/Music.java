@@ -1,6 +1,8 @@
 package br.ufrn.imd.model;
 
-public class Music {
+import java.util.Observable;
+
+public class Music extends Observable {
 	
 	private String title;
 	private double duration;
@@ -18,13 +20,14 @@ public class Music {
 		this.path = path;
 	}
 
-	public Music() {
-		this.title = "Unknown";
+	public Music(String path) {
+		String[] t = path.split("/");
+		this.title = t[t.length-1];
 		this.duration = 0;
 		this.author = "Unknown Artist";
 		this.genre = "No genre";
 		this.album = "No album";
-		this.path = "";
+		this.path = path;
 	}
 
 	public String getPath() {
@@ -41,6 +44,8 @@ public class Music {
 	
 	public void setTitle(String name) {
 		this.title = name;
+		setChanged();
+		this.notifyObservers();
 	}
 	
 	public double getDuration() {
@@ -49,6 +54,8 @@ public class Music {
 	
 	public void setDuration(double duration) {
 		this.duration = duration;
+		setChanged();
+		this.notifyObservers();
 	}
 	
 	public String getAuthor() {
@@ -57,6 +64,8 @@ public class Music {
 	
 	public void setAuthor(String author) {
 		this.author = author;
+		setChanged();
+		this.notifyObservers();
 	}
 	
 	public String getGenre() {
@@ -65,6 +74,8 @@ public class Music {
 	
 	public void setGenre(String genre) {
 		this.genre = genre;
+		setChanged();
+		this.notifyObservers();
 	}
 	
 	public String getAlbum() {
@@ -73,16 +84,13 @@ public class Music {
 	
 	public void setAlbum(String album) {
 		this.album = album;
+		setChanged();
+		this.notifyObservers();
 	}
 	
 	public boolean equals(Music m) 
 	{
-		if(this.getPath().equals(m.getPath())) return true;
-		if(!this.getTitle().equals(m.getTitle())) return false;
-		if(this.getDuration() != m.getDuration()) return false;
-		if(!this.getAuthor().equals(m.getAuthor())) return false;
-		if(!this.getGenre().equals(m.getGenre())) return false;
-		return true;
+		return this.getPath().equals(m.getPath());
 	}
 
 	@Override
@@ -94,5 +102,6 @@ public class Music {
 				+ genre + "\t"
 				+ album + "\t"
 				+ path;
-	}
+	}	
+	
 }

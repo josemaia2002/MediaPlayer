@@ -6,9 +6,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import br.ufrn.imd.model.DirectoryDTO;
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.User;
 import br.ufrn.imd.model.UserVip;
@@ -63,7 +67,7 @@ public class MusicDao {
 	public ArrayList<String> listDirectories() {
 		return directories;
 	}
-	
+		
 	public void printSongs() {
 		for(Music m : songs) {
 			System.out.println(m);
@@ -79,42 +83,31 @@ public class MusicDao {
 		return null;
 	}
 	
-	public Boolean addDirectory(String path) 
-	{
-		try {
-
-		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/songs.txt").getFile(), true));
-			writer.append('\n' + path);
-		    writer.close();
-		    return true;
-		    
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
+	
 	
 	public Music loadSong(String path) 
 	{
-		Media m = new Media(path);
-		System.out.println(path);
+		URI u = (new File(path)).toURI();
+		Music song = new Music(path);
+		Media m ;
+		m = new Media(u.toString());
 		ObservableMap<String,Object> metaData = m.getMetadata();
-		Music song = new Music();
-		song.setPath(path);
-		metaData.addListener( (Change<? extends String, ? extends Object> c) -> {
-	        if (c.wasAdded()) {
-	            if ("artist".equals(c.getKey())) {
-	                song.setAuthor(c.getValueAdded().toString());
-	            } else if ("title".equals(c.getKey())) {
-	            	 song.setTitle(c.getValueAdded().toString());
-	            } else if ("album".equals(c.getKey())) {
-	                song.setAlbum(c.getValueAdded().toString());
-	            } else if ("genre".equals(c.getKey())) {
-	                song.setGenre(c.getValueAdded().toString());
+		
+		metaData.addListener( (Change<? extends String, ? extends Object> atributeChange) -> {
+	        if (atributeChange.wasAdded()) {
+	        	//System.out.println("atrchange on: " + u + ": " + atributeChange.getKey());
+	            if (atributeChange.getKey().equals("artist")) {
+	                song.setAuthor(atributeChange.getValueAdded().toString());
+	            } else if ("title".equals(atributeChange.getKey())) {
+	            	 song.setTitle(atributeChange.getValueAdded().toString());
+	            } else if ("album".equals(atributeChange.getKey())) {
+	                song.setAlbum(atributeChange.getValueAdded().toString());
+	            } else if ("genre".equals(atributeChange.getKey())) {
+	                song.setGenre(atributeChange.getValueAdded().toString());
 	            }
 	        }
+	        
 	    });
-		
 		return song;
 	}
 	
@@ -124,15 +117,21 @@ public class MusicDao {
 	 */
 	public ArrayList<Music> loadSongsFromDirectory(String directoryPath)
 	{
+		System.out.println(directoryPath);
 		ArrayList<Music> directorySongs = new ArrayList<Music>();
 		
 		File dir = new File(directoryPath);
 		
 		if(!dir.isDirectory()) return directorySongs;
 		
+		
 		for(File f : dir.listFiles()) 
 		{	
-			directorySongs.add(loadSong(f.toURI().toString()));
+			if(f.toString().contains(".mp3")) 
+			{
+				directorySongs.add(loadSong(f.toPath().toString()));
+			}
+			
 		}
 		
 		return directorySongs;
@@ -165,6 +164,20 @@ public class MusicDao {
 		return selectedSongs;
 	}
 	
+	public Boolean addDirectory(String path) 
+	{
+		try {
+
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/songs.txt").getFile(), true));
+			writer.append('\n' + path);
+		    writer.close();
+		    return true;
+		    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	/**
 	 * Method that loads all the songs selected by the user.
 	 * @return An ArrayList with all the loaded songs
@@ -181,6 +194,7 @@ public class MusicDao {
 			{
 				line = buffRead.readLine();
 				if(line == null) break;
+				if(line.equals("")) break;
 				selectedSongs.add(loadSong(new File(line).toURI().toString()));
 			}
 			buffRead.close();
