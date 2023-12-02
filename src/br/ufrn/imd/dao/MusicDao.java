@@ -172,6 +172,7 @@ public class MusicDao {
 		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/songs.txt").getFile(), true));
 			writer.append('\n' + path);
 		    writer.close();
+		    directories.add(path);
 		    return true;
 		    
 		} catch (IOException e) {
