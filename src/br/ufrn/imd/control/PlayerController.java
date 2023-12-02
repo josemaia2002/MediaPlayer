@@ -1,7 +1,13 @@
 package br.ufrn.imd.control;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -28,9 +34,13 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Callback;
 
-public class PlayerController extends WindowController implements Initializable, Observer  {
+public class PlayerController extends WindowController implements Initializable  {
 
 	    @FXML
 	    private Button leftButton;
@@ -46,6 +56,15 @@ public class PlayerController extends WindowController implements Initializable,
 	    
 	    @FXML
 	    private Tab playlistTab;
+	    
+	    @FXML
+	    private Button addDirectoryButton;
+
+	    @FXML
+	    private Button addMusicButton;
+	    
+	    @FXML
+	    private Button newPlaylistButton;
 	    
 	    @FXML
 	    private TableView<Playlist> playlistTable;
@@ -77,10 +96,12 @@ public class PlayerController extends WindowController implements Initializable,
 		public void initialize(URL arg0, ResourceBundle arg1) {
 	    	tabContentManager = new FileManagementService();
 			if(!(AuthService.getCurrentUser() instanceof UserVip)) {
-				playlistTab.setDisable(true); 
+				playlistTab.setDisable(true);
+				newPlaylistButton.setDisable(true);
 			}
 			else {
 				playlistTab.setDisable(false);
+				newPlaylistButton.setDisable(false);
 				feedPlaylist();
 			}
 			feedMusics();
@@ -90,7 +111,11 @@ public class PlayerController extends WindowController implements Initializable,
 	    
 	    public void feedPlaylist()
 	    {
-	    	ArrayList<Playlist> playlists = tabContentManager.loadPlaylists((UserVip) AuthService.getCurrentUser());
+	    	ObservableList<Playlist> playlists = FXCollections.observableArrayList(tabContentManager.loadPlaylists((UserVip) AuthService.getCurrentUser()));
+		    
+	    	playlistsColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("name"));
+	    	
+	    	playlistTable.setItems(playlists);
 	    }
 	    
 	    public void feedMusics()
@@ -113,12 +138,35 @@ public class PlayerController extends WindowController implements Initializable,
 	    	directoryTable.setItems(directories);
 	 
 	    }
-
-
-		@Override
-		public void update(Observable arg0, Object arg1) {
-			// TODO Auto-generated method stub
-			
-		}
+	    
+	    public void addMusic(ActionEvent e) 
+	    {
+	    	FileChooser musicChooser = new FileChooser();
+			musicChooser.setInitialDirectory(new File(getClass().getResource("/resources/data/").getPath()));
+			musicChooser.setTitle("Select your musics");
+			musicChooser.getExtensionFilters().add(new ExtensionFilter("Select mp3 Files", "*.mp3"));
+			List<File> newSongs = musicChooser.showOpenMultipleDialog(new Stage());
+			if(newSongs == null) return;
+			for(File f : newSongs) 
+			{
+				tabContentManager.addMusic(f.getAbsolutePath());
+			}
+	    	feedMusics();
+	    }
+	    
+	    public void createNewPlaylist(ActionEvent e) 
+	    {
+	    	
+	    }
+	    
+	    public void AddDirectory(ActionEvent e) 
+	    {
+	    	DirectoryChooser directoryChooser = new DirectoryChooser();
+	    	directoryChooser.setInitialDirectory(new File(getClass().getResource("/resources/data/").getPath()));
+	    	directoryChooser.setTitle("Select your music directory");
+			File newDir = directoryChooser.showDialog(new Stage());
+			tabContentManager.addDirectory(newDir.getAbsolutePath());
+	    	feedDirectories();
+	    }
 
 	}

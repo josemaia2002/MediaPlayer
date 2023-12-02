@@ -31,8 +31,8 @@ public class UserDao {
 					{
 						line = buffRead.readLine();
 						ArrayList<Integer> playlistsFound = new ArrayList<Integer>();
-						if(!line.equals("")) {
-							if(line != null) {
+						if(line != null) {
+							if(!line.equals("")) {
 								for(String p : line.split("\t")) 
 								{
 									playlistsFound.add(Integer.parseInt(p));

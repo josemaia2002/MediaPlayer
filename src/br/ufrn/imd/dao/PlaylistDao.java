@@ -1,13 +1,17 @@
 package br.ufrn.imd.dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import br.ufrn.imd.dao.MusicDao;
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
+import br.ufrn.imd.model.UserVip;
 
 public class PlaylistDao {
 	private ArrayList<Playlist> playlists;
@@ -22,6 +26,7 @@ public class PlaylistDao {
 	
 	public void removePlaylist(Playlist p) {
 		playlists.remove(p);
+		p.getId();
 	}
 	
 	public ArrayList<Playlist> listPlaylists() {
@@ -39,6 +44,73 @@ public class PlaylistDao {
 		}
 	}
 	
+	public Playlist createPlaylist(UserVip owner, String playlistName, ArrayList<Music> songs) 
+	{
+		String path = getClass().getResource("/resources/data/playlists/").getPath();
+		File dir = new File(path);
+		Playlist p = new Playlist(dir.list().length, playlistName, songs);
+		p.setOwnerID(owner.getId());
+		p.setName(owner.getUsername());
+		
+		File playlistFile = new File(path + p.getId() + ".txt");
+		try {
+			playlistFile.createNewFile();
+			
+			BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource(path + p.getId() + ".txt").getFile(), true));
+		    
+			writer.append('\n');
+		    writer.append(p.toString());
+		    
+		    writer.close();
+		    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		playlists.add(p);
+		return p;
+	}
+	
+	public void addMusicsToPlaylist(Playlist p, ArrayList<Music> songs) 
+	{
+		String path = getClass().getResource("/resources/data/playlists/").getPath();
+		File playlistFile = new File(path + p.getId() + ".txt");
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource(path + p.getId() + ".txt").getFile(), true));
+			for(Music m : songs) 
+			{
+				writer.append('\n');
+				writer.append(m.getPath());
+			}
+		    
+		    writer.close();
+		    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void removeMusicsFromPlaylist(Playlist p, ArrayList<Music> songs) 
+	{
+		String path = getClass().getResource("/resources/data/playlists/").getPath();
+		File playlistFile = new File(path + p.getId() + ".txt");
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource(path + p.getId() + ".txt").getFile(), true));
+			for(Music m : songs) 
+			{
+				writer.append('\n');
+				writer.append(m.getPath());
+			}
+		    
+		    writer.close();
+		    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		playlists.add(p);
+	}
 	
 	public Playlist loadPlaylist(int id) {
 		BufferedReader buffRead;
@@ -95,11 +167,7 @@ public class PlaylistDao {
 		
 	}
 	
-	public ArrayList<Playlist> findPlaylistsByUserID(int id) {
-		
-		
-		return playlists;
-	}
+	
 	
 	
 }

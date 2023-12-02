@@ -18,6 +18,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="1201.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.control.PlayerController">
@@ -31,54 +34,163 @@
                         <Insets left="50.0" right="50.0" />
                      </VBox.margin>
                   </ScrollBar>
-                  <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1199.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Button fx:id="leftButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
-                           <graphic>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../resources/images/left.png" />
-                                 </image>
-                                 <effect>
-                                    <Bloom threshold="0.0" />
-                                 </effect>
-                              </ImageView>
-                           </graphic></Button>
-                        <ToggleButton fx:id="playButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView fx:id="playButtonImage" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="controll-button">
-                                 <image>
-                                    <Image url="@../../../../resources/images/play.png" />
-                                 </image>
-                                 <effect>
-                                    <Bloom threshold="0.0" />
-                                 </effect>
-                              </ImageView>
-                           </graphic>
-                        </ToggleButton>
-                        <Button fx:id="rightButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
-                           <graphic>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../resources/images/right.png" />
-                                 </image>
-                                 <effect>
-                                    <Bloom threshold="0.0" />
-                                 </effect>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <AnchorPane VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                  </HBox>
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1199.0">
+                           <children>
+                              <Button fx:id="leftButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../resources/images/left.png" />
+                                       </image>
+                                       <effect>
+                                          <Bloom threshold="0.0" />
+                                       </effect>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <ToggleButton fx:id="playButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
+                                 <HBox.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <ImageView fx:id="playButtonImage" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="controll-button">
+                                       <image>
+                                          <Image url="@../../../../resources/images/play.png" />
+                                       </image>
+                                       <effect>
+                                          <Bloom threshold="0.0" />
+                                       </effect>
+                                    </ImageView>
+                                 </graphic>
+                              </ToggleButton>
+                              <Button fx:id="rightButton" mnemonicParsing="false" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../resources/images/right.png" />
+                                       </image>
+                                       <effect>
+                                          <Bloom threshold="0.0" />
+                                       </effect>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <AnchorPane prefHeight="50.0" prefWidth="182.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="5.0">
+                           <children>
+                              <HBox layoutX="232.0" spacing="15.0" AnchorPane.rightAnchor="0.0">
+                                 <children>
+                                  <Button fx:id="addMusicButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" graphicTextGap="0.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#addMusic" prefHeight="50.0" prefWidth="50.0" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css" text="🎶" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+                                       <font>
+                                          <Font name="Microsoft PhagsPa" size="21.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                       <textFill>
+                                          <RadialGradient centerX="0.7458563535911602" centerY="0.3293838862559242" focusAngle="-10.01" focusDistance="-0.4252873563218391" radius="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="1.0" green="0.05092592537403107" blue="0.05092592537403107" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="0.006711409395973154">
+                                                   <color>
+                                                      <Color red="1.0" green="0.05092592537403107" blue="0.05092592537403107" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="0.7180555462837219" green="0.11659356951713562" blue="0.8684210777282715" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </RadialGradient>
+                                       </textFill>
+                                    </Button>
+                                    <Button fx:id="newPlaylistButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" graphicTextGap="50.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#createNewPlaylist" prefHeight="50.0" prefWidth="50.0" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css" text="💽" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+                                       <font>
+                                          <Font name="Microsoft PhagsPa" size="21.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                       <textFill>
+                                          <RadialGradient centerX="0.7458563535911602" centerY="0.3293838862559242" focusAngle="-10.01" focusDistance="-0.4252873563218391" radius="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="1.0" green="0.05092592537403107" blue="0.05092592537403107" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="0.006711409395973154">
+                                                   <color>
+                                                      <Color red="1.0" green="0.05092592537403107" blue="0.05092592537403107" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="0.7180555462837219" green="0.11659356951713562" blue="0.8684210777282715" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </RadialGradient>
+                                       </textFill>
+                                    </Button>
+                                    <Button fx:id="addDirectoryButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" graphicTextGap="0.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#AddDirectory" prefHeight="50.0" prefWidth="50.0" styleClass="controll-button" stylesheets="@../../../../resources/css/style.css" text="📁" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+                                       <font>
+                                          <Font name="Microsoft PhagsPa" size="21.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                       <textFill>
+                                          <RadialGradient centerX="0.7458563535911602" centerY="0.3293838862559242" focusAngle="-10.01" focusDistance="-0.4252873563218391" radius="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="1.0" green="0.05092592537403107" blue="0.05092592537403107" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="0.006711409395973154">
+                                                   <color>
+                                                      <Color red="1.0" green="0.05092592537403107" blue="0.05092592537403107" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="0.7180555462837219" green="0.11659356951713562" blue="0.8684210777282715" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </RadialGradient>
+                                       </textFill>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
                </children>
             </VBox>
          </bottom>
@@ -98,13 +210,10 @@
                      <content>
                         <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to right, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                            <children>
-                              <TableView fx:id="musicTable" editable="true" layoutX="36.0" layoutY="29.0" stylesheets="@../../../../resources/css/style.css" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="musicTable" layoutX="36.0" layoutY="29.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
                                     <TableColumn fx:id="musicColumn" editable="false" maxWidth="298.0" minWidth="-1.0" prefWidth="298.0" />
                                  </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
                               </TableView>
                            </children>
                         </AnchorPane>
@@ -114,7 +223,7 @@
                      <content>
                         <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to bottom, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                            <children>
-                              <TableView fx:id="playlistTable" editable="true" layoutY="-4.0" prefHeight="415.0" prefWidth="298.0" stylesheets="@../../../../resources/css/style.css" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
+                              <TableView fx:id="playlistTable" layoutY="-4.0" prefHeight="415.0" prefWidth="298.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
                                  <columns>
                                     <TableColumn fx:id="playlistsColumn" editable="false" maxWidth="298.0" minWidth="-1.0" prefWidth="298.0" />
                                  </columns>

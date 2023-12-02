@@ -169,7 +169,7 @@
     -fx-background-color: transparent;
 }
 
-.back-table-pane2
+.back-table-pane2 
 {
 	-fx-background-color:  linear-gradient(to right, #FA1E38, #0000bb44);
 }
@@ -179,24 +179,24 @@
 	-fx-background-color: transparent;
 }
 
-.table-view .table-cell{
+.table-row-cell{
+	-fx-background-radius: 5;
     -fx-border-color: transparent;
     -fx-text-fill: white;
-    -fx-padding: 2 20 2 10px;
-    
+   
 }
 
-.table-row:hover {
+.table-row-cell:hover {
     -fx-background-color: deeppink;
     -fx-text-fill: yellow;
 }
 
-.table-row:odd{
+.table-view .table-row-cell:odd{
     -fx-background-color: #93f9b911;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
-.table-row:even{
+.table-view .table-row-cell:even{
     -fx-background-color: #1dbbdd11;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;

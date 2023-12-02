@@ -1,9 +1,11 @@
 package br.ufrn.imd.service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrn.imd.dao.MusicDao;
 import br.ufrn.imd.dao.PlaylistDao;
@@ -11,6 +13,9 @@ import br.ufrn.imd.model.DirectoryDTO;
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
 import br.ufrn.imd.model.UserVip;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 public class FileManagementService {
 	
@@ -20,6 +25,29 @@ public class FileManagementService {
 	public FileManagementService() {
 		musicDataAccess = new MusicDao();
 		playlistDataAccess = new PlaylistDao();
+	}
+	
+	public void createPlaylist(String playlistName, ArrayList<Music> songs)
+	{
+		UserVip owner = (UserVip) AuthService.getCurrentUser();
+		owner.addPlaylist(playlistDataAccess.createPlaylist(owner, playlistName, songs).getId());
+	}
+	
+	public void addMusicsToPlaylist(Playlist playlist, ArrayList<Music> songs) 
+	{ 
+		playlist.addAllSongs(songs);
+		playlistDataAccess.addMusicsToPlaylist(playlist, songs);
+	}
+	
+	public void removeMusicsFromPlaylist(Playlist playlist, ArrayList<Music> songs) 
+	{	
+		playlistDataAccess.removeMusicsFromPlaylist(playlist, songs);
+		playlist.removeAllSongs(songs);
+	}
+	
+	public void removePlaylist(Playlist playlist) 
+	{
+		playlistDataAccess.removePlaylist(playlist);
 	}
 
 	/**
@@ -70,9 +98,7 @@ public class FileManagementService {
 		musicDataAccess.addSong(song);
 	}
 	
-	public void addMusicToPlaylist(Playlist playlist, Music song) { /*TODO*/ }
 	
-	public void removeMusicFromPlaylist(Playlist playlist, Music song) { /*TODO*/ }
 	
 	public void addDirectory(String path) { 
 		musicDataAccess.addDirectory(path);
@@ -87,7 +113,7 @@ public class FileManagementService {
 			while(true) {
 				if(line != null) {
 					if(line == path) {
-						
+						//TODO
 					}
 							
 					line = buffRead.readLine();

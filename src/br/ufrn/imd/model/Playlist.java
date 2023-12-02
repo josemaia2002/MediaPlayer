@@ -14,7 +14,6 @@ public class Playlist {
 		songs = new ArrayList<Music>();
 	}
 
-	
 	public Playlist(int id, String name, ArrayList<Music> songs) {
 		this.id = id;
 		this.name = name;
@@ -35,6 +34,15 @@ public class Playlist {
 	
 	public void addSong(Music m) {
 		songs.add(m);
+	}
+	
+	public void addAllSongs(ArrayList<Music> m) {
+		songs.addAll(m);
+	}
+	
+	public void removeAllSongs(ArrayList<Music> m) 
+	{
+		songs.removeAll(m);
 	}
 	
 	public void removeSong(Music m) {
@@ -68,6 +76,18 @@ public class Playlist {
 	public void setOwnerID(int ownerId) {
 		this.ownerId = ownerId;
 	}
+
+	@Override
+	public String toString() {
+		String s = name + "\t" + ownerName + "\t" + ownerId + "\n";
+		for(Music m: songs) 
+		{
+			s += m.getPath() + "\n";
+		}
+		return super.toString();
+	}
+	
+	
 	
 	
 }
