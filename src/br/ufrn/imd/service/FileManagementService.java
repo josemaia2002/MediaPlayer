@@ -1,6 +1,7 @@
 package br.ufrn.imd.service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,9 +31,145 @@ public class FileManagementService {
      * @return Uma ArrayList com as playlists carregadas.
      */
 	public ArrayList<Playlist> loadPlaylists(UserVip user) { 
-		/*TODO*/ 
+		ArrayList<Playlist> playlists = new ArrayList<Playlist>(); 
 		
-		return new ArrayList<Playlist>(); 
+		int userId = user.getId();
+		
+		BufferedReader buffRead;
+		int playlistId = 1;
+		
+		try {
+			while(true) {
+				buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlists/playlist" + playlistId + ".txt").getFile()));
+				
+				String line = buffRead.readLine();
+				
+				if(line == null) {
+					break;
+				}
+				
+				int fileUserId = Integer.parseInt(line);
+				
+				if(fileUserId != userId) {
+					playlistId++;
+					continue;
+				}
+				
+				line = buffRead.readLine();
+				
+				String userName = line;
+				line = buffRead.readLine();
+				
+				line = buffRead.readLine();
+				
+				String playlistName = line;
+				line = buffRead.readLine();
+				
+				Playlist p = new Playlist(playlistId);
+				p.setName(playlistName);
+				
+				while(true) {
+					if(line != null) {
+						String songPath = line;
+						Music m = new Music();
+						m.setPath(songPath);
+						
+						p.addSong(m);
+					}
+					else {
+						break;
+					}
+				}
+				
+				buffRead.close();
+				
+			}
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+		
+		return playlists; 
+	}
+	
+	
+	public ArrayList<Playlist> loadPlaylists(int idUsuario) { 
+		ArrayList<Playlist> playlists = new ArrayList<Playlist>(); 
+		
+		int userId = idUsuario;
+		
+		BufferedReader buffRead;
+		int playlistId = 0;
+		
+		try {
+			while(true) {
+				playlistId++;
+				
+				
+				File directory = new File("/home/maia/eclipse-workspace/MediaPlayer/src/resources/data/playlists");
+				
+				int fileCount = directory.list().length;
+				
+				
+				if(playlistId > fileCount)
+					break;
+					
+				
+				buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlists/playlist" + playlistId + ".txt").getFile()));
+				
+				
+				
+				String line = buffRead.readLine();
+				
+				if(line == null) {
+					break;
+				}
+				
+				int fileUserId = Integer.parseInt(line);
+				
+				if(fileUserId != userId) {
+					continue;
+				}
+				
+				line = buffRead.readLine();
+				
+				String userName = line;
+				line = buffRead.readLine();
+				
+				line = buffRead.readLine();
+				
+				String playlistName = line;
+				line = buffRead.readLine();
+				
+				Playlist p = new Playlist(playlistId);
+				p.setName(playlistName);
+				
+				
+				
+				while(true) {
+					if(line != null) {
+						String songPath = line;
+						Music m = new Music();
+						m.setPath(songPath);
+						
+						p.addSong(m);
+						
+						line = buffRead.readLine();
+					}
+					else {
+						break;
+					}
+				}
+				
+				playlists.add(p);
+				
+				buffRead.close();
+				
+			}
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+		
+		return playlists; 
 	}
 	
 	

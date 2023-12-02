@@ -4,10 +4,12 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import br.ufrn.imd.dao.*; // Only for testing
 import br.ufrn.imd.model.*;
+import br.ufrn.imd.service.FileManagementService;
 
 public class Main extends Application {
 	
@@ -23,6 +25,17 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
+		/*
+		FileManagementService fms = new FileManagementService();
+		ArrayList<Playlist> playlists = fms.loadPlaylists(2);
+		
+		for(Playlist p : playlists) {
+			System.out.println(p.getId());
+			System.out.println(p.getName());
+			// System.out.println(p.get);
+		}
+		*/
+		
 		launch(args);
 	}
 }
