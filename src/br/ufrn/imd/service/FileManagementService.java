@@ -176,8 +176,9 @@ public class FileManagementService {
 	
 	// Operational Methods
 	public void addMusic(String path) { 
-		// TODO
-		
+		Music m = new Music();
+		m.setPath(path);
+		musicDataAccess.addSong(m);
 	}
 	
 	public void addMusic(Music song) { 
