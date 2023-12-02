@@ -25,6 +25,9 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		launch(args);
+		FileManagementService fms = new FileManagementService();
+		fms.addDirectory("/home/maia/Documents/music");
+		
+		// launch(args);
 	}
 }

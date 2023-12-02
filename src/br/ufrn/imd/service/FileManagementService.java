@@ -190,23 +190,36 @@ public class FileManagementService {
 	public void removeMusicFromPlaylist(Playlist playlist, Music song) { /*TODO*/ }
 	
 	public void addDirectory(String path) { 
-		File file = new File("/resources/data/directories.txt");
-		FileWriter fr = null;
-		
+		// TODO Implement relative path
 		try {
-			fr = new FileWriter(file, true);
-			fr.write(path);
-		} catch (IOException e) {
+			FileWriter myWriter = new FileWriter("/home/maia/eclipse-workspace/MediaPlayer/src/resources/data/directories.txt", true);
+			myWriter.write("\n" + path);
+			myWriter.close();
+	    } 
+		catch (IOException e) {
 			// e.printStackTrace();
-		} finally {
-			try {
-				fr.close();
-			} catch (IOException e) {
-				//e.printStackTrace();
-			}
-			
-		}
+	    }
 	}
 	
-	public void removeDirectory(String path) { /*TODO*/ }
+	public void removeDirectory(String path) { 
+		BufferedReader buffRead;
+		try {
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/directories.txt").getFile()));
+		
+			String line = buffRead.readLine();
+			while(true) {
+				if(line != null) {
+					if(line == path) {
+						
+					}
+							
+					line = buffRead.readLine();
+				}
+				else break;
+			}
+			buffRead.close();
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+	}
 }
