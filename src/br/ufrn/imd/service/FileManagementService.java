@@ -182,7 +182,7 @@ public class FileManagementService {
 	}
 	
 	public void addMusic(Music song) { 
-		musicDataAccess.addSong(m);
+		musicDataAccess.addSong(song);
 	}
 	
 	public void addMusicToPlaylist(Playlist playlist, Music song) { /*TODO*/ }
