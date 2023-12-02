@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import application.StageNavigator;
 import br.ufrn.imd.service.AuthService;
+import br.ufrn.imd.service.PlayerService;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -94,8 +95,9 @@ public class LoginController extends WindowController implements Initializable{
     // Cosmetic methods
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		playBackgroundAnimation();
-		playLogoAnimation();
+		// playBackgroundAnimation();
+		// playLogoAnimation();
+		
 		service = new AuthService();
 	}
 	
