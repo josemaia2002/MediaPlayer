@@ -173,6 +173,7 @@ public class MusicDao {
 			writer.append('\n' + path);
 		    writer.close();
 		    directories.add(path);
+		    addAllSongs(loadSongsFromDirectory(path));
 		    return true;
 		    
 		} catch (IOException e) {

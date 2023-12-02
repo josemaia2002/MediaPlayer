@@ -24,8 +24,7 @@ public class FileManagementService {
 	
 	public FileManagementService() {
 		musicDataAccess = new MusicDao();
-		playlistDataAccess = new PlaylistDao();
-	}
+		playlistDataAccess = new PlaylistDao();	}
 	
 	public void createPlaylist(String playlistName, ArrayList<Music> songs)
 	{

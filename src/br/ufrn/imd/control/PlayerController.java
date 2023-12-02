@@ -165,8 +165,10 @@ public class PlayerController extends WindowController implements Initializable 
 	    	directoryChooser.setInitialDirectory(new File(getClass().getResource("/resources/data/").getPath()));
 	    	directoryChooser.setTitle("Select your music directory");
 			File newDir = directoryChooser.showDialog(new Stage());
+			if(newDir == null) return;
 			tabContentManager.addDirectory(newDir.getAbsolutePath());
 	    	feedDirectories();
+	    	feedMusics();
 	    }
 
 	}
