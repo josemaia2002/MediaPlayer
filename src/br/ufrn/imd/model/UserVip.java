@@ -34,7 +34,7 @@ public class UserVip extends User {
 				+ username + "\t"
 				+ email + "\t"
 				+ password + "\t"
-				+ playlistsIDs;
+				+ playlistsIDs + "\n";
 		return s;
 	}
 }
