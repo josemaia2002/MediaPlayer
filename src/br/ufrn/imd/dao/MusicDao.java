@@ -88,7 +88,9 @@ public class MusicDao {
 	{
 		URI u = (new File(path)).toURI();
 		String[] slicedpath = path.split("\\\\");
-		Music song = new Music(slicedpath[slicedpath.length-1]);
+		Music song = new Music(path);
+		song.setTitle(slicedpath[slicedpath.length-1]);
+		System.out.println(song);
 		Media m ;
 		m = new Media(u.toString());	
 		ObservableMap<String,Object> metaData = m.getMetadata();

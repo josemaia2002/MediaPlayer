@@ -46,10 +46,9 @@ public class FileManagementService {
 
 	/**
      * Method that manages the playlists initialization.
-     * @param user the user whose playlists will be loaded.
      * @return An ArrayList with the loaded playlists.
      */
-	public ArrayList<Playlist> loadPlaylists(User user) { 
+	public ArrayList<Playlist> loadCurrentUserPlaylists() { 
 		return playlistDataAccess.loadPlaylistsOfUser(AuthService.getCurrentUser());
 	}
 	

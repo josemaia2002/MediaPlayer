@@ -104,9 +104,8 @@ public class PlayerController extends WindowController implements Initializable 
 	    
 	    public void feedPlaylist()
 	    {
-	    	ObservableList<Playlist> playlists = FXCollections.observableArrayList(tabContentManager.loadPlaylists(AuthService.getCurrentUser()));
-		    
-	    	for(Playlist p : playlists) {System.out.println(p);}
+	    	ObservableList<Playlist> playlists = FXCollections.observableArrayList(tabContentManager.loadCurrentUserPlaylists());
+	    	
 	    	playlistsColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("name"));
 	    	
 	    	playlistTable.setItems(playlists);
@@ -150,9 +149,10 @@ public class PlayerController extends WindowController implements Initializable 
 	    
 	    public void createNewPlaylist(ActionEvent event) 
 	    {
+	    	ArrayList<Music> selection = new ArrayList<Music>();
+	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
 	    	newPlaylistButton.setDisable(true);
 	    	NewPlaylistController newPlaylist = StageNavigator.getInstance().loadNewPlaylistScreen(event);
-	    	
 	    	newPlaylist.getConfirmButton().setOnMousePressed(new EventHandler<MouseEvent>() {
 
 				@Override
@@ -161,15 +161,16 @@ public class PlayerController extends WindowController implements Initializable 
 					{
 						if(newPlaylist.getInput().getText().length() > 0) 
 						{
-							tabContentManager.createPlaylist(newPlaylist.getInput().getText(), new ArrayList<Music>());
+							tabContentManager.createPlaylist(newPlaylist.getInput().getText(), selection);
 						}
 					}
+					
 					newPlaylist.closeWindow(new ActionEvent());
 					feedPlaylist();
-					newPlaylistButton.setDisable(false);
+					
 	            }
-	        }
-	    	);
+	        });
+	    	newPlaylistButton.setDisable(false);
 	    }
 	    
 	    public void AddDirectory(ActionEvent event) 
