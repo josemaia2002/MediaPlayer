@@ -185,7 +185,7 @@ public class FileManagementService {
 			while(true) {
 				if(line != null) {
 					if(line == path) {
-						//musicDataAccess.ad
+						musicDataAccess.removeDirectory(path);
 					}
 							
 					line = buffRead.readLine();
