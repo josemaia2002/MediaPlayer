@@ -66,7 +66,7 @@ public class PlaylistDao {
 	}
 
 	/**
-	 * Method that lists all the playlists.
+	 * Method that creates a playlist with the given parameters.
 	 * 
 	 * @param owner The vip user that owns the playlist.
 	 * @param playlistName The name of the playlist to be created.
