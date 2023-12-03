@@ -15,6 +15,7 @@ import br.ufrn.imd.model.Playlist;
 import br.ufrn.imd.service.AuthService;
 import br.ufrn.imd.service.FileManagementService;
 import br.ufrn.imd.service.PlayerService;
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,6 +33,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
@@ -81,6 +83,9 @@ public class PlayerController extends WindowController implements Initializable 
 	    
 	    @FXML
 	    private Text muteBtn;
+	    
+	    @FXML
+	    private Text textView;
 	    
 	    @FXML
 	    private Tab playlistTab;
@@ -141,6 +146,31 @@ public class PlayerController extends WindowController implements Initializable 
 
 	    @Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
+	    	volumeSlider.setValue(100);
+	    	volumeSlider.valueProperty().addListener(new InvalidationListener()
+	    	{
+
+				@Override
+				public void invalidated(javafx.beans.Observable arg0) {
+					if(mediaPlayerManager == null) return;
+					mediaPlayerManager.setVolume(volumeSlider.getValue()/100);
+					
+				}
+	    		
+	    	});
+	    	
+	    	progressBar.setValue(0);
+	    	progressBar.valueProperty().addListener(new InvalidationListener()
+	    	{
+				@Override
+				public void invalidated(javafx.beans.Observable arg0) {
+					if(mediaPlayerManager == null) return;
+					mediaPlayerManager.seek(progressBar.getValue()/100);
+					
+				}
+	    		
+	    	});
+	    	
 	    	tabContentManager = new FileManagementService();
 			if(!(AuthService.getCurrentUser().getUserType().contentEquals("vipUser"))) {
 				playlistTab.setDisable(true);
@@ -215,6 +245,39 @@ public class PlayerController extends WindowController implements Initializable 
             }
         });
 			
+			
+			progressBar.setOnScrollStarted(new EventHandler<ScrollEvent>() 
+			{
+
+				@Override
+				public void handle(ScrollEvent arg0) {
+					if(mediaPlayerManager == null) 
+					{
+						progressBar.setValue(progressBar.getMin());
+						return;
+					}
+					
+					mediaPlayerManager.pause();
+				}
+				
+			});
+
+			progressBar.setOnScrollFinished(new EventHandler<ScrollEvent>() 
+			{
+
+				@Override
+				public void handle(ScrollEvent arg0) {
+					if(mediaPlayerManager == null) 
+					{
+						progressBar.setValue(progressBar.getMin());
+						return;
+					}
+					double total = progressBar.getMax() - progressBar.getMin();
+			    	mediaPlayerManager.seek(progressBar.getValue()/total);
+					mediaPlayerManager.play();
+				}
+				
+			});
 			
 		}
 	    
@@ -509,6 +572,8 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(selection.size() == 0) return;
 	    	if(mediaPlayerManager == null) mediaPlayerManager = new PlayerService(selection.get(0));
 	    	for(Music m : selection) mediaPlayerManager.removeSong(m);
+	    	
+	    	feedQueue();
 	    }
 	    
 	    /**
@@ -554,7 +619,18 @@ public class PlayerController extends WindowController implements Initializable 
 
 	    @FXML
 	    void playToggle(ActionEvent event) {
-	    	//TODO
+	    	if(mediaPlayerManager == null) return;
+	    	
+	    	if(mediaPlayerManager.isPlaying()) 
+	    	{ 
+	    		mediaPlayerManager.pause(); 
+	    		playButtonImage.setImage(new Image(getClass().getResource("/resources/images/play.png").toString()));
+	    	}
+	    	else 
+	    	{
+	    		mediaPlayerManager.play(); 
+	    		playButtonImage.setImage(new Image(getClass().getResource("/resources/images/pause.png").toString()));
+	    	}
 	    }
 	    
 	    /**
@@ -579,19 +655,6 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(mediaPlayerManager == null) return;
 	    	mediaPlayerManager.prevSong();
 	    	feedQueue();
-	    }
-	    
-	    /**
-	     * Method to change song's volume.
-	     *
-	     * @param event The ActionEvent triggered by the song's volume scrolling.
-	     */
-	    @FXML
-	    void setVolume(ScrollEvent event) {
-	    	if(mediaPlayerManager == null) return;
-	    	double total = volumeSlider.getMax() - volumeSlider.getMin();
-	    	mediaPlayerManager.setVolume(volumeSlider.getValue()/total);
-	    	volumeSlider.getMin();
 	    }
 	    
 	    /**

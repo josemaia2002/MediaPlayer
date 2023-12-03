@@ -194,7 +194,7 @@
                               </HBox>
                            </children>
                         </AnchorPane>
-                        <ScrollBar fx:id="volumeSlider" layoutX="10.0" layoutY="10.0" onScroll="#setVolume" prefHeight="16.0" prefWidth="184.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="25.0" />
+                        <ScrollBar fx:id="volumeSlider" layoutX="10.0" layoutY="10.0" prefHeight="16.0" prefWidth="184.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="25.0" />
                         <Text fx:id="muteBtn" onMouseClicked="#toggleMute" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-fill: radial-gradient(focus-angle -10.01deg, focus-distance -42.5287% , center 74.5856% 32.9384%, radius 100.0%, #000000 0.0%, #ffffff 100.0%);" text="🔊" wrappingWidth="49.0" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="5.0">
                            <fill>
                               <RadialGradient centerX="0.7458563535911602" centerY="0.3293838862559242" focusAngle="-10.01" focusDistance="-0.4252873563218391" radius="1.0">
@@ -349,7 +349,7 @@
                   <Insets bottom="5.0" left="5.0" top="5.0" />
                </BorderPane.margin>
                <top>
-                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" text="Now Playing:" BorderPane.alignment="CENTER">
+                  <Text fx:id="textView" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" text="Now Playing:" BorderPane.alignment="TOP_LEFT">
                      <fill>
                         <RadialGradient centerX="0.5165745856353592" centerY="0.542654028436019" focusAngle="-136.69" focusDistance="1.0" radius="0.7758620689655172">
                            <stops>

@@ -38,6 +38,7 @@ public class PlayerService {
         songQueue = new ArrayList<Music>();
         songQueue.add(song);
         currentSong = song;
+        mediaPlayer.setVolume(1.0);
         play();
     }
     
@@ -167,9 +168,10 @@ public class PlayerService {
     /**
      * Sets the position in the file to the specified time.
      *
-     * @param seconds The time in seconds.
+     * @param proportion A value between 0 and 1, indicating the position to seek for.
      */
-    public void seek(double seconds) {
+    public void seek(double proportion) {
+    	double seconds = mediaPlayer.getMedia().getDuration().toSeconds()*proportion;
         mediaPlayer.seek(Duration.seconds(seconds));
     }
 
@@ -200,6 +202,11 @@ public class PlayerService {
     public void setMute(boolean mute) 
     {
     	mediaPlayer.setMute(mute);
+    }
+    
+    public boolean isPlaying() 
+    {
+    	return mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
     }
 }
 
