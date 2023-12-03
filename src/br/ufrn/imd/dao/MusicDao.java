@@ -15,12 +15,24 @@ import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableMap;
 import javafx.scene.media.Media;
 
+
+/**
+ * Data Access Object (DAO) class for managing interactions
+ * with the storage files that store the songs.
+ * 
+ * @author Davi Matias
+ * @author Jose Maia
+ * @version 1.0
+ * @since 3/12/2023
+ */
 public class MusicDao {
 	private ArrayList<Music> songs;
 	private ArrayList<String> directories;
 	
 	
-	
+	/**
+	 * Consctructs a new instance of the MusicDao Class.
+	 */
 	public MusicDao() {
 		this.songs = new ArrayList<Music>();
 		this.directories = new ArrayList<String>();
@@ -49,20 +61,37 @@ public class MusicDao {
 		}
 	}
 	
+	/**
+	 * A method that removes a specific song
+	 * @param the song to be removed
+	 */
 	public void removeSong(Music song) {
 		songs.remove(song);
 	}
-
+	
+	/**
+	 * A method that removes all the songs
+	 * @param the songs to be removed
+	 */
 	public void removeAllSong(Collection<Music> songs) {
 		for(Music m : songs) 
 		{
 			removeSong(m);
 		}
 	}
+	
+	/**
+	 * Method that lists all the songs.
+	 * @return An ArrayList with all the songs.
+	 */
 	public ArrayList<Music> listSongs() {
 		return songs;
 	}
 	
+	/**
+	 * Method that lists all the directories.
+	 * @return An ArrayList with all the directories.
+	 */
 	public ArrayList<String> listDirectories() {
 		if(this.directories.size() > 0) return this.directories;
 		
@@ -83,7 +112,10 @@ public class MusicDao {
 		return directories;
 	}
 		
-	
+	/**
+	 * Method that loads a song selected by the user.
+	 * @return The song corresponding to the given path
+	 */
 	public Music loadSong(String path) 
 	{
 		URI u = (new File(path)).toURI();
