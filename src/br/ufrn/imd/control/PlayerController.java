@@ -498,6 +498,8 @@ public class PlayerController extends WindowController implements Initializable 
 	    	
 	    	feedQueue();
 	    	updatePlayButton();
+	    	
+	    	addCurrentSong.play();
 	    }
 
 	    /**
