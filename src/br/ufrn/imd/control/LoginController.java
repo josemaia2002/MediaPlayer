@@ -25,6 +25,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+/**
+ * The LoginController class manages the logic and user interface interactions for the login scene.
+ * It handles user authentication, input validation, and provides visual feedback through animations.
+ * This controller extends WindowController and implements Initializable to initialize the scene.
+ *
+ * The class includes methods for attempting login, playing cosmetic animations, and initializing
+ * the controller with the necessary services and UI components.
+ * 
+ * @author Davi Matias
+ * @author Jose Maia
+ * @version 1.0
+ * @since 3/12/2023
+ */
 public class LoginController extends WindowController implements Initializable{
 	
     @FXML
@@ -50,9 +63,15 @@ public class LoginController extends WindowController implements Initializable{
     
     private AuthService service;
     
-    // Controll Methods
+    // Control Methods
     
-    
+    /**
+     * Attempts to log in the user based on the provided credentials.
+     * If successful, initiates a background thread to simulate a login process
+     * and navigates to the player screen.
+     *
+     * @param event The ActionEvent triggering the login attempt.
+     */
     public void tryLogin(ActionEvent event) 
     {
     	class LoginThread implements Runnable
@@ -93,14 +112,26 @@ public class LoginController extends WindowController implements Initializable{
     
     
     // Cosmetic methods
+    
+    /**
+     * Initializes the controller by setting up the AuthService and
+     * handling any required scene initialization.
+     *
+     * @param arg0 The URL location of the FXML file to initialize.
+     * @param arg1 The ResourceBundle, not used in this implementation.
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// playBackgroundAnimation();
-		// playLogoAnimation();
+		playBackgroundAnimation();
+		playLogoAnimation();
 		
 		service = new AuthService();
 	}
 	
+	
+	/**
+     * Plays an animation to indicate that the user was not found during login.
+     */
 	private void playUserNotFoundAnimation() 
 	{
 		RotateTransition rotate = new RotateTransition();
@@ -126,6 +157,9 @@ public class LoginController extends WindowController implements Initializable{
 		straighten.play();
 	}
     
+	/**
+     * Plays the logo animation.
+     */
 	private void playLogoAnimation() 
 	{
 		Duration duration = Duration.millis(180);
@@ -147,6 +181,9 @@ public class LoginController extends WindowController implements Initializable{
 		scale.play();
 	}
 	
+	/**
+     * Plays the background animation for the login scene.
+     */
 	private void playBackgroundAnimation() 
 	{
 		Duration duration = Duration.millis(6000);
