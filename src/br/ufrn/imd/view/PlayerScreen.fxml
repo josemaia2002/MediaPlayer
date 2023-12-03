@@ -233,7 +233,7 @@
             <Pane prefHeight="386.0" prefWidth="70.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <TabPane prefHeight="442.0" prefWidth="259.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane prefHeight="442.0" prefWidth="306.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab text="Musics">
                      <content>
@@ -313,13 +313,13 @@
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <right>
-                  <TabPane prefHeight="442.0" prefWidth="222.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                  <TabPane prefHeight="410.0" prefWidth="269.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                      <tabs>
                         <Tab text="Queue">
                            <content>
                               <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to right, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                                  <children>
-                                    <TableView fx:id="queueTable" layoutX="-2.0" layoutY="29.0" prefHeight="379.0" prefWidth="222.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="queueTable" layoutX="-2.0" layoutY="29.0" prefHeight="379.0" prefWidth="336.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
                                        <contextMenu>
                                           <ContextMenu fx:id="musicContextMenu1">
                                              <items>
@@ -343,37 +343,71 @@
                            </content>
                         </Tab>
                      </tabs>
+                     <BorderPane.margin>
+                        <Insets right="-15.0" />
+                     </BorderPane.margin>
                   </TabPane>
                </right>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" top="5.0" />
                </BorderPane.margin>
-               <top>
-                  <Text fx:id="textView" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" text="Now Playing:" BorderPane.alignment="TOP_LEFT">
-                     <fill>
-                        <RadialGradient centerX="0.5165745856353592" centerY="0.542654028436019" focusAngle="-136.69" focusDistance="1.0" radius="0.7758620689655172">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" green="0.05098039284348488" blue="0.05098039284348488" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.7176470756530762" green="0.11764705926179886" blue="0.8666666746139526" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </RadialGradient>
-                     </fill>
-                     <effect>
-                        <Glow />
-                     </effect>
-                     <font>
-                        <Font name="Microsoft PhagsPa" size="25.0" />
-                     </font>
-                  </Text>
-               </top>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #50005055;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Text fx:id="textView" fontSmoothingType="LCD" layoutX="8.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" wrappingWidth="448.4814453125" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+                           <fill>
+                              <RadialGradient centerX="0.5165745856353592" centerY="0.542654028436019" focusAngle="-136.69" focusDistance="1.0" radius="0.7758620689655172">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="1.0" green="0.05098039284348488" blue="0.05098039284348488" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.7176470756530762" green="0.11764705926179886" blue="0.8666666746139526" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                           <effect>
+                              <Glow />
+                           </effect>
+                           <font>
+                              <Font name="Microsoft PhagsPa" size="44.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="artistView" fontSmoothingType="LCD" layoutX="6.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" textAlignment="RIGHT" wrappingWidth="464.529296875" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0">
+                           <fill>
+                              <RadialGradient centerX="0.5165745856353592" centerY="0.542654028436019" focusAngle="-136.69" focusDistance="1.0" radius="0.7758620689655172">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="1.0" green="0.05098039284348488" blue="0.05098039284348488" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.7176470756530762" green="0.11764705926179886" blue="0.8666666746139526" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                           <effect>
+                              <Glow />
+                           </effect>
+                           <font>
+                              <Font name="Microsoft PhagsPa" size="29.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+                     </BorderPane.margin>
+                  </AnchorPane>
+               </center>
             </BorderPane>
          </center>
       </BorderPane>

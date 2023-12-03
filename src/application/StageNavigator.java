@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -107,6 +108,7 @@ public class StageNavigator {
 		
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
+		primaryStage.getIcons().add(new Image(getClass().getResource("/resources/images/logo.png").toString()));
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		scene.setFill(Color.TRANSPARENT);
 		primaryStage.setScene(scene);

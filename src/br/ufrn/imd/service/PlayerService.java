@@ -52,7 +52,10 @@ public class PlayerService {
     }
     
     
-    
+    public Music getCurrentSong() 
+    {
+    	return currentSong;
+    }
     
     public ArrayList<Music> getSongQueue() {
 		return songQueue;
@@ -119,8 +122,12 @@ public class PlayerService {
     {
     	if (song.equals(currentSong)){nextSong();}
     	songQueue.remove(song);
-    	if(song.equals(currentSong)) {stop();}
-    	currentSong = null;
+    	if(songQueue.size() <= 0 ) {
+    		currentSong = null; 
+    		stop(); 
+    		return;
+    	}
+    	currentSong = songQueue.get(0);
     }
     
     /**

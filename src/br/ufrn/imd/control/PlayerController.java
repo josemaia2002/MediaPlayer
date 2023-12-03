@@ -88,6 +88,9 @@ public class PlayerController extends WindowController implements Initializable 
 	    private Text textView;
 	    
 	    @FXML
+	    private Text artistView;
+	    
+	    @FXML
 	    private Tab playlistTab;
 	    
 	    @FXML
@@ -377,6 +380,8 @@ public class PlayerController extends WindowController implements Initializable 
 	    	queueColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
 	    	
 	    	queueTable.setItems(queue);
+	    	
+	    	updateSong();
 
 	    }
 	    
@@ -670,5 +675,12 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(mediaPlayerManager == null) return;
 	    	if(mediaPlayerManager.isMuted()) { mediaPlayerManager.setMute(false); muteBtn.setText("🔊"); }
 	    	else {mediaPlayerManager.setMute(true); muteBtn.setText("🔇");}
+	    }
+	    
+	    void updateSong() 
+	    {
+	    	Music m = mediaPlayerManager.getCurrentSong();
+	    	textView.setText("Now Playing: \n"  + m.getTitle());
+	    	artistView.setText(m.getAuthor());
 	    }
 	}
