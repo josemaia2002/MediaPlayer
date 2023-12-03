@@ -13,7 +13,7 @@ import br.ufrn.imd.model.Playlist;
 import br.ufrn.imd.model.User;
 
 /**
- * Class that handles file management playing operations.
+ * Class that handles file management operations.
  * 
  * @author Davi Matias
  * @author Jose Maia
