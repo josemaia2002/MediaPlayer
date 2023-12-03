@@ -54,6 +54,8 @@ public class PlaylistDao {
 	public void removePlaylist(Playlist p) {
 		playlists.remove(p);
 		p.getId();
+		File playlistFile = new File(getClass().getResource("/resources/data/playlists/").getPath() + p.getId() + ".txt");
+		playlistFile.delete();
 	}
 	
 	/**

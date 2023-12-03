@@ -254,7 +254,6 @@ public class PlayerController extends WindowController implements Initializable 
 				@Override
 				public void handle(MouseEvent arg0) {
 					if(mediaPlayerManager == null)  return;
-					System.out.println("AAAAAAAAAAAAAAAAAAAAAAA");
 					mediaPlayerManager.pause();
 				}
 	    	});
@@ -264,7 +263,6 @@ public class PlayerController extends WindowController implements Initializable 
 				@Override
 				public void handle(MouseEvent arg0) {
 					if(mediaPlayerManager == null)  return;
-					System.out.println("BBBBBBBBBBBBBBBBBBBBBBBB");
 					mediaPlayerManager.seek(progressBar.getValue()/100);
 					mediaPlayerManager.play();
 				}
@@ -280,6 +278,8 @@ public class PlayerController extends WindowController implements Initializable 
 	    	ObservableList<Playlist> playlists = FXCollections.observableArrayList(tabContentManager.loadCurrentUserPlaylists());
 	    	
 	    	playlistsColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("name"));
+	    	
+	    	playlistTable.setItems(playlists);
 	    	
 	    	AddPlaylistContextMenu.setOnShowing(new EventHandler<Event>() {
 
@@ -313,7 +313,7 @@ public class PlayerController extends WindowController implements Initializable 
 
 				@Override
 	            public void handle(Event event) {
-					ObservableList<MenuItem> menu = AddPlaylistContextMenu.getItems();
+					ObservableList<MenuItem> menu = AddPlaylistContextMenu1.getItems();
 					MenuItem newBTN = menu.get(0);
 					MenuItem sep =  menu.get(1);
 					menu.clear();
@@ -337,7 +337,7 @@ public class PlayerController extends WindowController implements Initializable 
 	            }
 	        });
 	    	
-	    	playlistTable.setItems(playlists);
+	    	
 		}
 	    	
 	    /**
@@ -483,16 +483,6 @@ public class PlayerController extends WindowController implements Initializable 
 	    }
 
 	    /**
-	     * Sets the playback position of the currently playing music.
-	     *
-	     * @param event The ActionEvent triggered by the set position button.
-	     */
-	    @FXML
-	    void setPosition(ActionEvent event) {
-	    	//TODO!!!!!!!!!!!!!!!!!!!!
-	    }
-	    
-	    /**
 	     * Sets the volume of the music player.
 	     *
 	     * @param event The ActionEvent triggered by the set volume button.
@@ -507,6 +497,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	for(Music m : selection) mediaPlayerManager.addNextSong(m);
 	    	
 	    	feedQueue();
+	    	updatePlayButton();
 	    }
 
 	    /**
@@ -585,7 +576,8 @@ public class PlayerController extends WindowController implements Initializable 
 	    		tabContentManager.removeDirectory(d.getPath());
 	    	}
 	    	
-	    	
+	    	feedDirectories();
+	    	feedMusics();
 	    }
 	    
 		/**
@@ -598,6 +590,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	ArrayList<Music> selection = new ArrayList<Music>();
 	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
 	    	tabContentManager.removeAllSongs(selection);
+	    	feedMusics();
 	    }
 	    
 	    /**
@@ -610,6 +603,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	ArrayList<Playlist> selection = new ArrayList<Playlist>();
 	    	selection.addAll(playlistTable.getSelectionModel().getSelectedItems());
 	    	tabContentManager.removeAllPlaylists(selection);
+	    	feedPlaylist();
 	    }
 
 	    @FXML
@@ -622,7 +616,8 @@ public class PlayerController extends WindowController implements Initializable 
 	    	}
 	    	else 
 	    	{
-	    		mediaPlayerManager.play(); 
+	    		mediaPlayerManager.play();
+	    		updateSong();
 	    	}
 	    	updatePlayButton();
 	    }
@@ -680,6 +675,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    void updateSong() 
 	    {
 	    	Music m = mediaPlayerManager.getCurrentSong();
+	    	if(m == null) {textView.setText(""); artistView.setText(""); return;}
 	    	textView.setText("Now Playing: \n"  + m.getTitle());
 	    	artistView.setText(m.getAuthor());
 	    }

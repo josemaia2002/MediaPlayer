@@ -243,6 +243,7 @@
                                  <contextMenu>
                                     <ContextMenu fx:id="musicContextMenu">
                                       <items>
+                                          <MenuItem mnemonicParsing="false" onAction="#deleteMusic" text="Delete Music" />
                                           <MenuItem mnemonicParsing="false" onAction="#addCurrentSong" text="Play now" />
                                         <MenuItem mnemonicParsing="false" onAction="#addNextSong" text="Play next" />
                                           <MenuItem mnemonicParsing="false" onAction="#addLastSong" text="Add to queue" />
@@ -378,7 +379,7 @@
                               <Font name="Microsoft PhagsPa" size="44.0" />
                            </font>
                         </Text>
-                        <Text fx:id="artistView" fontSmoothingType="LCD" layoutX="6.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" textAlignment="RIGHT" wrappingWidth="464.529296875" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0">
+                        <Text fx:id="artistView" fontSmoothingType="LCD" layoutX="6.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" textAlignment="RIGHT" wrappingWidth="464.529296875" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0">
                            <fill>
                               <RadialGradient centerX="0.5165745856353592" centerY="0.542654028436019" focusAngle="-136.69" focusDistance="1.0" radius="0.7758620689655172">
                                  <stops>
@@ -430,5 +431,16 @@
             <Glow level="0.91" />
          </effect>
       </ImageView>
+      <Button id="exit-button" fx:id="maximizeButton" mnemonicParsing="false" onAction="#maximizeWindow" pickOnBounds="false" style="-fx-background-color: transparent;" styleClass="clickable-button2" stylesheets="@../../../../resources/css/style.css" text="▣" textAlignment="RIGHT" textFill="#7c6a6e" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="12.0">
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+         <font>
+            <Font name="Cascadia Mono Regular" size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

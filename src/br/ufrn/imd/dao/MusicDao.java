@@ -77,6 +77,7 @@ public class MusicDao {
 	 */
 	public void removeSong(Music song) {
 		songs.remove(song);
+		deleteSong(song);
 	}
 	
 	/**
@@ -344,18 +345,48 @@ public class MusicDao {
 	}
 	
 	/**
-	 * A method that removes a specific song.
+	 * A method that removes a specific directory.
 	 * 
-	 * @param song The song to be removed.
+	 * @param path The path of the directory to be removed.
 	 */
-	public void removeDirectory(String path) {
+	public boolean removeDirectory(String path) {
 		directories.remove(path);
+		String s = "";
+		BufferedReader buffRead;
+		try {
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/directories.txt").getFile()));
+		
+			String line;
+			
+			while(true) 
+			{
+				line = buffRead.readLine();
+				if(line == null) break;
+				if(!line.equals(path)) { s += line;}
+			}
+			buffRead.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		try {
+
+			FileWriter writer = new FileWriter(getClass().getResource("/resources/data/directories.txt").getFile(), false);
+	    
+			writer.append(s);
+			writer.close();
+		    
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	/**
-	 * A method that removes all the directories.
+	 * A method that removes all the specified directories.
 	 * 
-	 * @param songs The directories to be removed.
+	 * @param directories The directories to be removed.
 	 */
 	public void removeAllDirectories(Collection<String> directories) {
 		for(String d : directories) 

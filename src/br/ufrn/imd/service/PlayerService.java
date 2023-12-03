@@ -47,7 +47,7 @@ public class PlayerService {
         songQueue = new ArrayList<Music>();
         songQueue.add(song);
         currentSong = song;
-        mediaPlayer.setVolume(1.0);
+        mediaPlayer.setVolume(1.0);        
         play();
     }
     
@@ -158,6 +158,16 @@ public class PlayerService {
      * Starts playing the file.
      */
     public void play() {
+    	
+    	mediaPlayer.setOnEndOfMedia(new Runnable() {
+
+			@Override
+			public void run() {
+				nextSong();
+			}
+    		
+    	});
+    	
     	currentTimeListener = new InvalidationListener() 
         {
 

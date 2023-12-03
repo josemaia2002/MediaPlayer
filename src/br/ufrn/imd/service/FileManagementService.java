@@ -155,7 +155,7 @@ public class FileManagementService {
 	/**
      * Method that removes all the given songs.
      * 
-     * @param songs The song to be removed.
+     * @param songs The songs to be removed.
      */
 	public void removeAllSongs(ArrayList<Music> songs) 
 	{
@@ -177,25 +177,8 @@ public class FileManagementService {
      * @param path The directory's path.
      */
 	public void removeDirectory(String path) { 
-		BufferedReader buffRead;
-		try {
-			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/directories.txt").getFile()));
 		
-			String line = buffRead.readLine();
-			while(true) {
-				if(line != null) {
-					if(line == path) {
-						musicDataAccess.removeDirectory(path);
-					}
-							
-					line = buffRead.readLine();
-				}
-				else break;
-			}
-			buffRead.close();
-		} catch (IOException e) {
-			//e.printStackTrace();
-		}
+		musicDataAccess.removeDirectory(path);
 	}
 	
 	public void removeAllDirectories(ArrayList<String> directories) 

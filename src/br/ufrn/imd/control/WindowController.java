@@ -59,6 +59,23 @@ public class WindowController {
 	}
 	
 	/**
+     * Toggles the maximization of the associated window or stage.
+     *
+     * @param event The ActionEvent triggered by the maximize button.
+     */
+	public void maximizeWindow(ActionEvent event) 
+	{
+		loadStage();
+		if(stage.isMaximized()) 
+		{
+			stage.setMaximized(false);
+			return;
+		}
+		stage.setMaximized(true);
+		
+	}
+	
+	/**
      * Navigates to the login scene using the StageNavigator utility.
      *
      * @param event The ActionEvent triggered by a navigation button or action.
