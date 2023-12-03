@@ -13,6 +13,16 @@ import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
 import br.ufrn.imd.model.User;
 
+
+/**
+ * Data Access Object (DAO) class for managing interactions
+ * with the files that store the playlists.
+ * 
+ * @author Davi Matias
+ * @author Jose Maia
+ * @version 1.0
+ * @since 3/12/2023
+ */
 public class PlaylistDao {
 	private ArrayList<Playlist> playlists;
 	

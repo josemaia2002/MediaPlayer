@@ -18,7 +18,7 @@ import javafx.scene.media.Media;
 
 /**
  * Data Access Object (DAO) class for managing interactions
- * with the storage files that store the songs.
+ * with the files that store the songs.
  * 
  * @author Davi Matias
  * @author Jose Maia
@@ -41,7 +41,8 @@ public class MusicDao {
 
 	/**
      * Method that adds a song to the loaded songs and saves it to be loaded the next time.
-     * @param The new song to be saved
+     * 
+     * @param song The new song to be saved.
      */
 	public void addSong(Music song) {
 		if(!songs.contains(song))
@@ -52,7 +53,8 @@ public class MusicDao {
 	}
 	/**
      * Method that adds many songs.
-     * @param A list with the new songs to be saved
+     * 
+     * @param songs A list with the new songs to be saved.
      */
 	public void addAllSongs(Collection<Music> songs) {
 		for(Music m : songs) 
@@ -62,16 +64,18 @@ public class MusicDao {
 	}
 	
 	/**
-	 * A method that removes a specific song
-	 * @param the song to be removed
+	 * A method that removes a specific song.
+	 * 
+	 * @param song The song to be removed.
 	 */
 	public void removeSong(Music song) {
 		songs.remove(song);
 	}
 	
 	/**
-	 * A method that removes all the songs
-	 * @param the songs to be removed
+	 * A method that removes all the songs.
+	 * 
+	 * @param songs The songs to be removed.
 	 */
 	public void removeAllSong(Collection<Music> songs) {
 		for(Music m : songs) 
@@ -82,6 +86,7 @@ public class MusicDao {
 	
 	/**
 	 * Method that lists all the songs.
+	 * 
 	 * @return An ArrayList with all the songs.
 	 */
 	public ArrayList<Music> listSongs() {
@@ -90,6 +95,7 @@ public class MusicDao {
 	
 	/**
 	 * Method that lists all the directories.
+	 * 
 	 * @return An ArrayList with all the directories.
 	 */
 	public ArrayList<String> listDirectories() {
@@ -114,7 +120,9 @@ public class MusicDao {
 		
 	/**
 	 * Method that loads a song selected by the user.
-	 * @return The song corresponding to the given path
+	 * 
+	 * @param path The path to the directory where the song is stored.
+	 * @return The song corresponding to the given path.
 	 */
 	public Music loadSong(String path) 
 	{
@@ -148,7 +156,8 @@ public class MusicDao {
 	
 	/**
 	 * Method that loads all the songs selected by the user.
-	 * @return An ArrayList with all the loaded songs
+	 * 
+	 * @return An ArrayList with all the loaded songs.
 	 */
 	public ArrayList<Music> loadSelectedSongs() {
 		BufferedReader buffRead;
@@ -175,7 +184,9 @@ public class MusicDao {
 	
 	/**
 	 * Method that loads the songs from a specific directory.
-	 * @return An ArrayList with all the loaded songs
+	 * 
+	 * @param directoryPath The path to the directory where the songs are stored.
+	 * @return An ArrayList with all the loaded songs.
 	 */
 	public ArrayList<Music> loadSongsFromDirectory(String directoryPath)
 	{
@@ -201,7 +212,8 @@ public class MusicDao {
 	
 	/**
 	 * Method that loads all the songs in the selected directories.
-	 * @return An ArrayList with all the loaded songs
+	 * 
+	 * @return An ArrayList with all the loaded songs.
 	 */
 	public ArrayList<Music> loadSongsFromAllDirectories()
 	{
@@ -227,7 +239,7 @@ public class MusicDao {
 	
 	
 	/**
-	 * Method that loads all songs saved, both in the selected directories and specifically saved by the user
+	 * Method that loads all songs saved, both in the selected directories and specifically saved by the user.
 	 */
 	public void loadSongs()
 	{
@@ -236,9 +248,10 @@ public class MusicDao {
 	}
 
 	/**
-	 * A method that manages song saving in disk
-	 * @param the song to be saved
-	 * @return true when the song was correctly saved, false otherwise.
+	 * A method that manages song saving in disk.
+	 * 
+	 * @param song The song to be saved.
+	 * @return True when the song was correctly saved, false otherwise.
 	 */
 	public boolean saveSong(Music song) 
 	{
@@ -257,9 +270,10 @@ public class MusicDao {
 	}
 	
 	/**
-	 * A method that manages song deleting from file loading data
-	 * @param song that will be deleted
-	 * @return true when the song was correctly deleted, false otherwise.
+	 * A method that manages song deleting from file loading data.
+	 * 
+	 * @param song The song that will be deleted.
+	 * @return True when the song was correctly deleted, false otherwise.
 	 */
 	public boolean deleteSong(Music song)
 	{
@@ -269,9 +283,10 @@ public class MusicDao {
 	
 	
 	/**
-	 * A method that stores a directory on disk for further music loading
-	 * @param the directory to be saved
-	 * @return true when the directory was inserted, false if any errors occured or if the directory was already added.
+	 * A method that stores a directory on disk for further music loading.
+	 * 
+	 * @param path The directory to be saved.
+	 * @return True when the directory was inserted, false if any errors occured or if the directory was already added.
 	 */
 	public Boolean addDirectory(String path)
 	{
