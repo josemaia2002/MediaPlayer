@@ -322,7 +322,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(mediaPlayerManager == null)  return;
 	    
     		ObservableList<Music> queue = FXCollections.observableArrayList(mediaPlayerManager.getSongQueue());
-		    
+		    System.out.println(queueColumn == null);
 	    	queueColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
 	    	
 	    	queueTable.setItems(queue);

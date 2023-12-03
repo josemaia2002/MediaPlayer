@@ -335,7 +335,7 @@
                                           </ContextMenu>
                                        </contextMenu>
                                        <columns>
-                                          <TableColumn fx:id="musicColumn1" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="302.0" />
+                                          <TableColumn fx:id="queueColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="302.0" />
                                        </columns>
                                     </TableView>
                                  </children>

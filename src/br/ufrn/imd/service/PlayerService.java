@@ -34,7 +34,7 @@ public class PlayerService {
      */
     public PlayerService(Music song) {
         //Media media = new Media("file:///" + FilePath.replace("\\", "/"));
-        mediaPlayer = new MediaPlayer(new Media((new File(song.getPath())).getPath()));
+        mediaPlayer = new MediaPlayer(new Media((new File(song.getPath())).toURI().toString()));
         songQueue = new ArrayList<Music>();
         songQueue.add(song);
         currentSong = song;
@@ -121,7 +121,7 @@ public class PlayerService {
     	MediaPlayer.Status previousStatus = mediaPlayer.getStatus();
     	double volume = mediaPlayer.getVolume();
     	mediaPlayer.dispose();
-    	mediaPlayer = new MediaPlayer(new Media((new File(song.getPath())).getPath()));
+    	mediaPlayer = new MediaPlayer(new Media((new File(song.getPath())).toURI().toString()));
     	setVolume(volume);
     	if(previousStatus.equals(MediaPlayer.Status.PLAYING)) play();
     }
