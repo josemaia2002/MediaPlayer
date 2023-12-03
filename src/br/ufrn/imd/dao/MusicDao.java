@@ -352,4 +352,16 @@ public class MusicDao {
 		directories.remove(path);
 	}
 	
+	/**
+	 * A method that removes all the directories.
+	 * 
+	 * @param songs The directories to be removed.
+	 */
+	public void removeAllDirectories(Collection<String> directories) {
+		for(String d : directories) 
+		{
+			removeDirectory(d);
+		}
+	}
+	
 }
