@@ -513,6 +513,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	tabContentManager.removeAllSongs(selection);
 	    }
 	    
+	    /**
+	     * Deletes selected playlist from the application.
+	     *
+	     * @param event The ActionEvent triggered by the delete playlist button.
+	     */
 	    @FXML
 	    void deletePlaylist(ActionEvent event) {
 	    	ArrayList<Playlist> selection = new ArrayList<Playlist>();
@@ -525,6 +530,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	//TODO
 	    }
 	    
+	    /**
+	     * Method to skip to the next song.
+	     *
+	     * @param event The ActionEvent triggered by the next music button.
+	     */
 	    @FXML
 	    void nextMusic(ActionEvent event) {
 	    	if(mediaPlayerManager == null) return;
@@ -532,6 +542,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedQueue();
 	    }
 	    
+	    /**
+	     * Method to go back to the previous song.
+	     *
+	     * @param event The ActionEvent triggered by the previous music button.
+	     */
 	    @FXML
 	    void prevMusic(ActionEvent event) {
 	    	if(mediaPlayerManager == null) return;
@@ -539,6 +554,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedQueue();
 	    }
 	    
+	    /**
+	     * Method to change song's volume.
+	     *
+	     * @param event The ActionEvent triggered by the song's volume scrolling.
+	     */
 	    @FXML
 	    void setVolume(ScrollEvent event) {
 	    	if(mediaPlayerManager == null) return;
@@ -547,6 +567,12 @@ public class PlayerController extends WindowController implements Initializable 
 	    	volumeSlider.getMin();
 	    }
 	    
+	    /**
+	     * Method to mute the media player or unmute it if it's
+	     * already muted.
+	     *
+	     * @param event The ActionEvent triggered by the toggle mute button.
+	     */
 	    @FXML
 	    void toggleMute(MouseEvent event) {
 	    	if(mediaPlayerManager == null) return;
