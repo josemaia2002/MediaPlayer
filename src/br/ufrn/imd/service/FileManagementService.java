@@ -197,4 +197,9 @@ public class FileManagementService {
 			//e.printStackTrace();
 		}
 	}
+	
+	public void removeAllDirectories(ArrayList<String> directories) 
+	{
+		musicDataAccess.removeAllDirectories(directories);
+	}
 }
