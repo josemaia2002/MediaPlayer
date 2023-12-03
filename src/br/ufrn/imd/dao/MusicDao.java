@@ -56,7 +56,7 @@ public class MusicDao {
 	public void removeAllSong(Collection<Music> songs) {
 		for(Music m : songs) 
 		{
-			songs.remove(m);
+			removeSong(m);
 		}
 	}
 	public ArrayList<Music> listSongs() {
@@ -92,6 +92,7 @@ public class MusicDao {
 		song.setTitle(slicedpath[slicedpath.length-1]);
 		System.out.println(song);
 		Media m ;
+		System.out.println(u);
 		m = new Media(u.toString());	
 		ObservableMap<String,Object> metaData = m.getMetadata();
 		
@@ -198,8 +199,8 @@ public class MusicDao {
 	 */
 	public void loadSongs()
 	{
-		addAllSongs(loadSongsFromAllDirectories());
-		addAllSongs(loadSelectedSongs());
+		songs.addAll(loadSongsFromAllDirectories());
+		songs.addAll(loadSelectedSongs());
 	}
 
 	/**
@@ -230,6 +231,7 @@ public class MusicDao {
 	 */
 	public boolean deleteSong(Music song)
 	{
+		//TODO
 		return false;
 	}
 	
@@ -244,16 +246,16 @@ public class MusicDao {
 		
 		for(String p : listDirectories()) 
 		{
-			if(p.equals(path)) return false;
+			if(p.equals(path)) { return false;}
 		}
 		
 		try {
 
-		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/songs.txt").getFile(), true));
-			writer.append('\n' + path);
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/directories.txt").getFile(), true));
+			writer.append(path + "\n");
 		    writer.close();
 		    directories.add(path);
-		    addAllSongs(loadSongsFromDirectory(path));
+		    songs.addAll(loadSongsFromDirectory(path));
 		    return true;
 		    
 		} catch (IOException e) {

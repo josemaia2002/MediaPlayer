@@ -9,6 +9,8 @@ public class Playlist {
 	private int ownerId;
 	private ArrayList<Music> songs;
 	
+	
+
 	public Playlist(int id) {
 		this.id = id;
 		songs = new ArrayList<Music>();
@@ -22,6 +24,10 @@ public class Playlist {
 	
 	public ArrayList<Music> getSongs() {
 		return songs;
+	}
+	
+	public void setSongs(ArrayList<Music> songs) {
+		this.songs = songs;
 	}
 	
 	public int getId() {

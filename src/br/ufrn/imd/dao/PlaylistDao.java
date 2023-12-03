@@ -51,15 +51,14 @@ public class PlaylistDao {
 		Playlist p = new Playlist(dir.list().length, playlistName, songs);
 		p.setOwnerID(owner.getId());
 		p.setOwnerName(owner.getUsername());
+		p.setSongs(songs);
 		
 		File playlistFile = new File(path + p.getId() + ".txt");
 		try {
 			playlistFile.createNewFile();
-			System.out.println(p);
 			FileWriter writer = new FileWriter(playlistFile, false);
 			
 		    writer.append(p.toString());
-		    
 		    writer.close();
 		    
 		} catch (IOException e) {
@@ -75,11 +74,11 @@ public class PlaylistDao {
 		String path = getClass().getResource("/resources/data/playlists/").getPath();
 		File playlistFile = new File(path + p.getId() + ".txt");
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource(path + p.getId() + ".txt").getFile(), true));
+			FileWriter writer = new FileWriter(playlistFile, true);
 			for(Music m : songs) 
 			{
-				writer.append('\n');
 				writer.append(m.getPath());
+				writer.append('\n');
 			}
 		    
 		    writer.close();

@@ -4,6 +4,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import application.StageNavigator;
@@ -15,17 +17,22 @@ import br.ufrn.imd.service.FileManagementService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
@@ -34,7 +41,10 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class PlayerController extends WindowController implements Initializable  {
-
+		
+		@FXML
+	    private Menu AddPlaylistContextMenu;
+		
 	    @FXML
 	    private Button leftButton;
 
@@ -79,6 +89,9 @@ public class PlayerController extends WindowController implements Initializable 
 
 	    @FXML
 	    private ScrollBar progressBar;
+	    
+	    @FXML
+	    private ScrollBar volumeSlider;
 
 	    @FXML
 	    private Pane videoPane;
@@ -91,14 +104,33 @@ public class PlayerController extends WindowController implements Initializable 
 			if(!(AuthService.getCurrentUser().getUserType().contentEquals("vipUser"))) {
 				playlistTab.setDisable(true);
 				newPlaylistButton.setDisable(true);
+				AddPlaylistContextMenu.setDisable(true);
 			}
 			else {
 				playlistTab.setDisable(false);
 				newPlaylistButton.setDisable(false);
+				AddPlaylistContextMenu.setDisable(false);
 				feedPlaylist();
 			}
 			feedMusics();
 			feedDirectories();
+			
+			mainPane.setOnDragDropped(new EventHandler<DragEvent>() {
+
+	            @Override
+	            public void handle(DragEvent event) {
+	                if (event.getDragboard().hasFiles()) {
+	                	for(File f : event.getDragboard().getFiles()) 
+	        			{
+	        				tabContentManager.addSong(f.getAbsolutePath());
+	        			}
+	                	feedMusics();
+	                }
+	                event.consume();
+	            }
+	        });
+			
+			
 		}
 	    
 	    
@@ -108,9 +140,37 @@ public class PlayerController extends WindowController implements Initializable 
 	    	
 	    	playlistsColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("name"));
 	    	
+	    	AddPlaylistContextMenu.setOnShowing(new EventHandler<Event>() {
+
+				@Override
+	            public void handle(Event event) {
+					ObservableList<MenuItem> menu = AddPlaylistContextMenu.getItems();
+					MenuItem newBTN = menu.get(0);
+					MenuItem sep =  menu.get(1);
+					menu.clear();
+					menu.addAll(newBTN, sep);
+					
+					for(Playlist p : playlists) 
+					{
+						MenuItem PlaylistBtn = new MenuItem(p.getName());
+						PlaylistBtn.setOnAction(new EventHandler<ActionEvent>() 
+						{
+							Playlist playlist = p;
+							
+							@Override
+							public void handle(ActionEvent event) 
+							{
+								addMusicsToPlayList(playlist);
+							}
+						});
+						menu.add(PlaylistBtn);
+					}
+	            }
+	        });
+	    	
 	    	playlistTable.setItems(playlists);
-	    }
-	    
+		}
+	    	
 	    public void feedMusics()
 	    {
 	    	
@@ -142,16 +202,26 @@ public class PlayerController extends WindowController implements Initializable 
 			if(newSongs == null) return;
 			for(File f : newSongs) 
 			{
-				tabContentManager.addMusic(f.getAbsolutePath());
+				tabContentManager.addSong(f.getAbsolutePath());
 			}
 	    	feedMusics();
 	    }
 	    
-	    public void createNewPlaylist(ActionEvent event) 
+	    public void addMusicsToPlayList(Playlist p) 
 	    {
 	    	ArrayList<Music> selection = new ArrayList<Music>();
 	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
+	    	tabContentManager.addMusicsToPlaylist(p, selection);
+	    }
+	    
+	    public void createNewPlaylist(ActionEvent event) 
+	    {
+	    	
 	    	newPlaylistButton.setDisable(true);
+	    	AddPlaylistContextMenu.setDisable(true);
+	    	
+	    	ArrayList<Music> selection = new ArrayList<Music>();
+	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
 	    	NewPlaylistController newPlaylist = StageNavigator.getInstance().loadNewPlaylistScreen(event);
 	    	newPlaylist.getConfirmButton().setOnMousePressed(new EventHandler<MouseEvent>() {
 
@@ -171,6 +241,7 @@ public class PlayerController extends WindowController implements Initializable 
 	            }
 	        });
 	    	newPlaylistButton.setDisable(false);
+	    	AddPlaylistContextMenu.setDisable(false);
 	    }
 	    
 	    public void AddDirectory(ActionEvent event) 
@@ -183,6 +254,29 @@ public class PlayerController extends WindowController implements Initializable 
 			tabContentManager.addDirectory(newDir.getAbsolutePath());
 	    	feedDirectories();
 	    	feedMusics();
+	    }
+	    
+	    
+	    @FXML
+	    void deleteMusic(ActionEvent event) {
+	    	ArrayList<Music> selection = new ArrayList<Music>();
+	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
+	    	tabContentManager.removeAllSongs(selection);
+	    }
+	    
+	    @FXML
+	    void setPosition(ActionEvent event) {
+	    	//TODO!!!!!!!!!!!!!!!!!!!!
+	    }
+	    
+	    @FXML
+	    void setVolume(ActionEvent event) {
+	    	//TODO!!!!!!!!!!!!!!!!!!!!
+	    }
+
+	    @FXML
+	    void playMusic(ActionEvent event) {
+	    	//TODO!!!!!!!!!!!!!!!!!!!!
 	    }
 
 	}

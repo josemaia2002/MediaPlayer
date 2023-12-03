@@ -75,15 +75,19 @@ public class FileManagementService {
 	}
 	
 	// Operational Methods
-	public void addMusic(String path) { 
+	public void addSong(String path) { 
 		Music m = new Music(path);
-		musicDataAccess.addSong(m);
+		addSong(m);
 	}
 	
-	public void addMusic(Music song) { 
+	public void addSong(Music song) { 
 		musicDataAccess.addSong(song);
 	}
 	
+	public void removeAllSongs(ArrayList<Music> songs) 
+	{
+		musicDataAccess.removeAllSong(songs);
+	}
 	
 	
 	public void addDirectory(String path) { 
