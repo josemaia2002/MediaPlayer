@@ -467,7 +467,12 @@ public class PlayerController extends WindowController implements Initializable 
 	    	
 	    	feedQueue();
 	    }
-
+	    
+	    /**
+	     * Add the next song of the queue.
+	     *
+	     * @param event The ActionEvent triggered by the play music button.
+	     */
 	    @FXML
 	    void addNextSong(ActionEvent event) {
 	    	ArrayList<Music> selection = getSelectedMusics();
@@ -478,6 +483,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedQueue();
 	    }
 
+	    /**
+	     * Add a playlist to the queue.
+	     *
+	     * @param event The ActionEvent triggered by the play music button.
+	     */
 	    @FXML
 	    void addPlaylistToQueue(ActionEvent event) {
 	    	Playlist p = playlistTable.getSelectionModel().getSelectedItem();
@@ -486,6 +496,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedQueue();
 	    }
 	    
+	    /**
+	     * Method to remove a songs from the queue.
+	     *
+	     * @param event The ActionEvent triggered by the play music button.
+	     */
 	    @FXML
 	    public void removeSongFromQueue() 
 	    {
@@ -498,7 +513,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    
 	    @FXML
 	    void deleteDirectory(ActionEvent event) {
-	    	//TODO
+	    	// TODO
 	    }
 	    
 		/**
