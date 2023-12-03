@@ -137,15 +137,12 @@ public class MusicDao {
 		String[] slicedpath = path.split("\\\\");
 		Music song = new Music(path);
 		song.setTitle(slicedpath[slicedpath.length-1]);
-		System.out.println(song);
 		Media m ;
-		System.out.println(u);
 		m = new Media(u.toString());	
 		ObservableMap<String,Object> metaData = m.getMetadata();
 		
 		metaData.addListener( (Change<? extends String, ? extends Object> atributeChange) -> {
 	        if (atributeChange.wasAdded()) {
-	        	//System.out.println("atrchange on: " + u + ": " + atributeChange.getKey());
 	            if (atributeChange.getKey().equals("artist")) {
 	                song.setAuthor(atributeChange.getValueAdded().toString());
 	            } else if ("title".equals(atributeChange.getKey())) {
@@ -284,8 +281,36 @@ public class MusicDao {
 	 */
 	public boolean deleteSong(Music song)
 	{
-		//TODO
-		return false;
+		String s = "";
+		BufferedReader buffRead;
+		try {
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/songs.txt").getFile()));
+		
+			String line;
+			
+			while(true) 
+			{
+				line = buffRead.readLine();
+				if(line == null) break;
+				if(!line.equals(song.toString())) { s += line;}
+			}
+			buffRead.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		try {
+
+			FileWriter writer = new FileWriter(getClass().getResource("/resources/data/songs.txt").getFile(), false);
+	    
+			writer.append(s);
+			writer.close();
+		    
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	

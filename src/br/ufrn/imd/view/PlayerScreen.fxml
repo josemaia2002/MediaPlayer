@@ -44,9 +44,9 @@
                         <Insets />
                      </VBox.margin>
                      <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1199.0">
+                        <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1199.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <Button fx:id="leftButton" mnemonicParsing="false" styleClass="control-button" stylesheets="@../../../../resources/css/style.css">
+                              <Button fx:id="leftButton" mnemonicParsing="false" onAction="#prevMusic" styleClass="control-button" stylesheets="@../../../../resources/css/style.css">
                                  <graphic>
                                     <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="control-button">
                                        <image>
@@ -58,7 +58,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <ToggleButton fx:id="playButton" mnemonicParsing="false" styleClass="control-button" stylesheets="@../../../../resources/css/style.css">
+                              <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#playToggle" styleClass="control-button" stylesheets="@../../../../resources/css/style.css">
                                  <HBox.margin>
                                     <Insets left="20.0" right="20.0" />
                                  </HBox.margin>
@@ -73,7 +73,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <Button fx:id="rightButton" mnemonicParsing="false" styleClass="control-button" stylesheets="@../../../../resources/css/style.css">
+                              <Button fx:id="rightButton" mnemonicParsing="false" onAction="#nextMusic" styleClass="control-button" stylesheets="@../../../../resources/css/style.css">
                                  <graphic>
                                     <ImageView fitHeight="60.0" fitWidth="60.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" styleClass="control-button">
                                        <image>
@@ -146,7 +146,7 @@
                                                 </Stop>
                                                 <Stop offset="0.006711409395973154">
                                                    <color>
-                                                      <Color red="1.0" green="0.05092592537403107" blue="0.05092592537403107" />
+                                                      <Color red="1.0" green="0.05098039284348488" blue="0.05098039284348488" />
                                                    </color>
                                                 </Stop>
                                                 <Stop offset="1.0">
@@ -194,8 +194,8 @@
                               </HBox>
                            </children>
                         </AnchorPane>
-                        <ScrollBar fx:id="volumeSlider" layoutX="10.0" layoutY="10.0" onScroll="#setVolume" prefHeight="16.0" prefWidth="184.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="30.0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-fill: radial-gradient(focus-angle -10.01deg, focus-distance -42.5287% , center 74.5856% 32.9384%, radius 100.0%, #000000 0.0%, #ffffff 100.0%);" text="🔊" wrappingWidth="49.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="10.0">
+                        <ScrollBar fx:id="volumeSlider" layoutX="10.0" layoutY="10.0" onScroll="#setVolume" prefHeight="16.0" prefWidth="184.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="25.0" />
+                        <Text fx:id="muteBtn" onMouseClicked="#toggleMute" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-fill: radial-gradient(focus-angle -10.01deg, focus-distance -42.5287% , center 74.5856% 32.9384%, radius 100.0%, #000000 0.0%, #ffffff 100.0%);" text="🔊" wrappingWidth="49.0" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="5.0">
                            <fill>
                               <RadialGradient centerX="0.7458563535911602" centerY="0.3293838862559242" focusAngle="-10.01" focusDistance="-0.4252873563218391" radius="1.0">
                                  <stops>
@@ -226,9 +226,6 @@
                </children>
             </VBox>
          </bottom>
-         <center>
-            <Pane fx:id="videoPane" prefHeight="386.0" prefWidth="1080.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER" />
-         </center>
          <top>
             <Pane prefHeight="108.0" prefWidth="1199.0" BorderPane.alignment="CENTER" />
          </top>
@@ -236,19 +233,19 @@
             <Pane prefHeight="386.0" prefWidth="70.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <TabPane prefHeight="447.0" prefWidth="300.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane prefHeight="442.0" prefWidth="259.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab text="Musics">
                      <content>
                         <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to right, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                            <children>
-                              <TableView fx:id="musicTable" layoutX="36.0" layoutY="29.0" prefHeight="411.0" prefWidth="302.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="musicTable" layoutX="21.0" layoutY="29.0" prefHeight="411.0" prefWidth="277.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <contextMenu>
                                     <ContextMenu fx:id="musicContextMenu">
                                       <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#playMusic" text="Play Song" />
-                                          <MenuItem mnemonicParsing="false" onAction="#deleteMusic" text="Delete song" />
-                                          <SeparatorMenuItem mnemonicParsing="false" />
+                                          <MenuItem mnemonicParsing="false" onAction="#addCurrentSong" text="Play now" />
+                                        <MenuItem mnemonicParsing="false" onAction="#addNextSong" text="Play next" />
+                                          <MenuItem mnemonicParsing="false" onAction="#addLastSong" text="Add to queue" />
                                           <Menu fx:id="AddPlaylistContextMenu" mnemonicParsing="false" text="Add To Playlist">
                                             <items>
                                               <MenuItem mnemonicParsing="false" onAction="#createNewPlaylist" text="New Playlist" />
@@ -266,7 +263,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="playlistTab" text="Add To ">
+                  <Tab fx:id="playlistTab" text="Playlists">
                      <content>
                         <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to bottom, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
                            <children>
@@ -274,6 +271,14 @@
                                  <columns>
                                     <TableColumn fx:id="playlistsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="302.0" prefWidth="302.0" />
                                  </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                      <items>
+                                          <MenuItem mnemonicParsing="false" onAction="#addPlaylistToQueue" text="Add to Queue" />
+                                        <MenuItem mnemonicParsing="false" onAction="#deletePlaylist" text="Delete Playlist" />
+                                      </items>
+                                    </ContextMenu>
+                                 </contextMenu>
                               </TableView>
                            </children>
                         </AnchorPane>
@@ -287,6 +292,13 @@
                                  <columns>
                                     <TableColumn fx:id="directoriesColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="302.0" prefWidth="302.0" />
                                  </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" onAction="#deleteDirectory" text="Delete Directory" />
+                                      </items>
+                                    </ContextMenu>
+                                 </contextMenu>
                               </TableView>
                            </children>
                         </AnchorPane>
@@ -298,6 +310,72 @@
                </BorderPane.margin>
             </TabPane>
          </right>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <right>
+                  <TabPane prefHeight="442.0" prefWidth="222.0" style="-fx-background-color: transparent;" stylesheets="@../../../../resources/css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                     <tabs>
+                        <Tab text="Queue">
+                           <content>
+                              <AnchorPane prefHeight="371.0" prefWidth="238.0" style="-fx-background-color: linear-gradient(to right, #FA1E38, #0000bb44);" styleClass="back-table-pane2" stylesheets="@../../../../resources/css/style.css">
+                                 <children>
+                                    <TableView fx:id="queueTable" layoutX="-2.0" layoutY="29.0" prefHeight="379.0" prefWidth="222.0" stylesheets="@../../../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <contextMenu>
+                                          <ContextMenu fx:id="musicContextMenu1">
+                                             <items>
+                                                <MenuItem mnemonicParsing="false" onAction="#removeSongFromQueue" text="Remove from Queue" />
+                                                <SeparatorMenuItem mnemonicParsing="false" />
+                                                <Menu fx:id="AddPlaylistContextMenu1" mnemonicParsing="false" text="Add To Playlist">
+                                                   <items>
+                                                      <MenuItem mnemonicParsing="false" onAction="#createNewPlaylist" text="New Playlist" />
+                                                      <SeparatorMenuItem mnemonicParsing="false" />
+                                                   </items>
+                                                </Menu>
+                                             </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                       <columns>
+                                          <TableColumn fx:id="musicColumn1" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="302.0" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+               </right>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </BorderPane.margin>
+               <top>
+                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" text="Now Playing:" BorderPane.alignment="CENTER">
+                     <fill>
+                        <RadialGradient centerX="0.5165745856353592" centerY="0.542654028436019" focusAngle="-136.69" focusDistance="1.0" radius="0.7758620689655172">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.05098039284348488" blue="0.05098039284348488" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.7176470756530762" green="0.11764705926179886" blue="0.8666666746139526" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                     <effect>
+                        <Glow />
+                     </effect>
+                     <font>
+                        <Font name="Microsoft PhagsPa" size="25.0" />
+                     </font>
+                  </Text>
+               </top>
+            </BorderPane>
+         </center>
       </BorderPane>
       <Button id="exit-button" fx:id="exitButton" mnemonicParsing="false" onAction="#closeWindow" pickOnBounds="false" style="-fx-background-color: transparent;" styleClass="clickable-button2" stylesheets="@../../../../resources/css/style.css" text="x" textAlignment="RIGHT" textFill="#7c6a6e" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <effect>

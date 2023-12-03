@@ -60,7 +60,7 @@ public class LoginController extends WindowController implements Initializable{
 			public void run() 
 			{
 				try {
-					TimeUnit.MILLISECONDS.sleep(1000);
+					TimeUnit.MILLISECONDS.sleep(600);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -95,8 +95,8 @@ public class LoginController extends WindowController implements Initializable{
     // Cosmetic methods
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// playBackgroundAnimation();
-		// playLogoAnimation();
+		playBackgroundAnimation();
+		playLogoAnimation();
 		
 		service = new AuthService();
 	}

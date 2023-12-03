@@ -75,7 +75,7 @@ public class SignupController extends WindowController implements Initializable{
 			public void run() 
 			{
 				try {
-					TimeUnit.MILLISECONDS.sleep(1000);
+					TimeUnit.MILLISECONDS.sleep(750);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
