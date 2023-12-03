@@ -25,6 +25,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+/**
+ * The SignupController class manages the logic and interactions for the signup scene.
+ * It extends WindowController and implements Initializable for JavaFX initialization.
+ * This controller handles user signup, input validation, and navigation to the login scene upon successful signup.
+ * The class includes methods for handling user input, signup attempts, and cosmetic animations.
+ *
+ * Additionally, the class uses JavaFX components such as ImageView, TextField, PasswordField,
+ * RadioButton, Text, and Buttons for user interaction.
+ * 
+ * @author Davi Matias
+ * @author Jose Maia
+ * @version 1.0
+ * @since 3/12/2023
+ */
 public class SignupController extends WindowController implements Initializable{
 	
     @FXML
@@ -56,6 +70,12 @@ public class SignupController extends WindowController implements Initializable{
     
     private AuthService service;
     
+    /**
+     * Handles the event when the VIP radio button is selected or deselected.
+     * Updates the display text based on the selection.
+     *
+     * @param event The ActionEvent triggered by selecting/deselecting the VIP radio button.
+     */
     @FXML
     void selectVip(ActionEvent event) {
     	if(userTypeRadio.isSelected())
@@ -68,6 +88,13 @@ public class SignupController extends WindowController implements Initializable{
     	
     }
     
+    /**
+     * Attempts to sign up the user based on the provided credentials.
+     * If successful, initiates a signup animation and navigates to the login scene.
+     * If unsuccessful, plays an animation indicating signup error.
+     *
+     * @param event The ActionEvent triggered by the signup button.
+     */
     @FXML
     void trySignup(ActionEvent event) {
     	class LoginThread implements Runnable
@@ -111,14 +138,23 @@ public class SignupController extends WindowController implements Initializable{
     	playSignupErrorAnimation();
     }
 
-    
+    /**
+     * Initializes the SignupController by setting up the AuthService and playing background animations.
+     *
+     * @param arg0 URL location not used in this implementation.
+     * @param arg1 ResourceBundle not used in this implementation.
+     */
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		playBackgroundAnimation();
 		service = new AuthService();
 	}
-	
+    
     //Cosmetic Methods
+    
+    /**
+     * Plays the signup error animation, indicating an issue with the signup attempt.
+     */
 	private void playSignupErrorAnimation() 
 	{
 		RotateTransition rotate = new RotateTransition();
@@ -144,6 +180,9 @@ public class SignupController extends WindowController implements Initializable{
 		straighten.play();
 	}
 	
+	/**
+     * Plays the background animation for the signup scene.
+     */
 	private void playBackgroundAnimation() 
 	{
 		Duration duration = Duration.millis(6000);
