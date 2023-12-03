@@ -88,6 +88,8 @@ public class Music extends Observable {
 
 	/**
 	 * Method that sets the song's path.
+	 * 
+	 * @param path The path to be assigned to the song.
 	 */
 	public void setPath(String path) {
 		this.path = path;
@@ -104,6 +106,8 @@ public class Music extends Observable {
 	
 	/**
 	 * Method that sets the song's title.
+	 * 
+	 * @param name The name to be assigned to the song.
 	 */
 	public void setTitle(String name) {
 		this.title = name;
@@ -122,6 +126,8 @@ public class Music extends Observable {
 	
 	/**
 	 * Method that sets the song's duration.
+	 * 
+	 * @param duration The duration to be assigned to the song.
 	 */
 	public void setDuration(double duration) {
 		this.duration = duration;
@@ -140,6 +146,8 @@ public class Music extends Observable {
 	
 	/**
 	 * Method that sets the song's author.
+	 * 
+	 * @param author The author to be assigned to the song.
 	 */
 	public void setAuthor(String author) {
 		this.author = author;
@@ -158,6 +166,8 @@ public class Music extends Observable {
 	
 	/**
 	 * Method that sets the song's genre.
+	 * 
+	 * @param genre The genre to be assigned to the song.
 	 */
 	public void setGenre(String genre) {
 		this.genre = genre;
@@ -176,6 +186,8 @@ public class Music extends Observable {
 	
 	/**
 	 * Method that sets the song's album.
+	 * 
+	 * @param album The album to be assigned to the song.
 	 */
 	public void setAlbum(String album) {
 		this.album = album;
