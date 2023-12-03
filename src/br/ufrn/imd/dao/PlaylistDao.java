@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import br.ufrn.imd.dao.MusicDao;
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
-import br.ufrn.imd.model.UserVip;
+import br.ufrn.imd.model.User;
 
 public class PlaylistDao {
 	private ArrayList<Playlist> playlists;
@@ -44,21 +44,20 @@ public class PlaylistDao {
 		}
 	}
 	
-	public Playlist createPlaylist(UserVip owner, String playlistName, ArrayList<Music> songs) 
+	public Playlist createPlaylist(User owner, String playlistName, ArrayList<Music> songs) 
 	{
 		String path = getClass().getResource("/resources/data/playlists/").getPath();
 		File dir = new File(path);
 		Playlist p = new Playlist(dir.list().length, playlistName, songs);
 		p.setOwnerID(owner.getId());
-		p.setName(owner.getUsername());
+		p.setOwnerName(owner.getUsername());
 		
 		File playlistFile = new File(path + p.getId() + ".txt");
 		try {
 			playlistFile.createNewFile();
+			System.out.println(p);
+			FileWriter writer = new FileWriter(playlistFile, false);
 			
-			BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource(path + p.getId() + ".txt").getFile(), true));
-		    
-			writer.append('\n');
 		    writer.append(p.toString());
 		    
 		    writer.close();
@@ -93,30 +92,25 @@ public class PlaylistDao {
 	
 	public void removeMusicsFromPlaylist(Playlist p, ArrayList<Music> songs) 
 	{
-		String path = getClass().getResource("/resources/data/playlists/").getPath();
-		File playlistFile = new File(path + p.getId() + ".txt");
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource(path + p.getId() + ".txt").getFile(), true));
-			for(Music m : songs) 
-			{
-				writer.append('\n');
-				writer.append(m.getPath());
-			}
+		p.removeAllSongs(songs);
+			
+		try {			
+			FileWriter writer = new FileWriter(getClass().getResource("/resources/data/playlists/playlist" + p.getId() + ".txt").getFile(), false);
+		    
+			writer.append(p.toString());
 		    
 		    writer.close();
-		    
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		playlists.add(p);
+
 	}
 	
 	public Playlist loadPlaylist(int id) {
 		BufferedReader buffRead;
 		Playlist p = new Playlist(id);
 		try {
-			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlists/playlist" + id + ".txt").getFile()));
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/playlists/" + id + ".txt").getFile()));
 			String line = buffRead.readLine();
 			
 			if(line == null) 
@@ -165,6 +159,30 @@ public class PlaylistDao {
 		
 		return playlists;
 		
+	}
+
+	public ArrayList<Playlist> loadPlaylistsOfUser(User user) {
+		ArrayList<Playlist> playlists = new ArrayList<Playlist>();
+		int id = user.getId();
+		
+		for(Playlist p : loadAllPlaylists()) 
+		{
+			if(p.getOwnerID() == user.getId()) playlists.add(p);
+		}
+		
+		return playlists;
+	}
+
+	private ArrayList<Playlist> loadAllPlaylists() {
+		ArrayList<Playlist> playlists = new ArrayList<Playlist>();
+		
+		int size = (new File(getClass().getResource("/resources/data/playlists/").getPath())).list().length;
+		for(int i = 0; i < size; i++) 
+		{
+			playlists.add(loadPlaylist(i));
+		}
+		return playlists;
+
 	}
 	
 	

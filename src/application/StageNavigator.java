@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import br.ufrn.imd.control.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,49 +31,60 @@ public class StageNavigator {
 		return instance;
 	}
 	
-	public void loadPlayerScreen(ActionEvent event)
+	public PlayerController loadPlayerScreen(ActionEvent event)
 	{
 		Stage prevStage = (Stage) ((Node)(event.getSource())).getScene().getWindow();
 		Stage stage = new Stage();
-		stage.setX(prevStage.getX());
-        stage.setY(prevStage.getY());
         stage.setResizable(true);
-		loadStage(stage, "PlayerScreen");
+        PlayerController controller =(PlayerController) loadStage(stage, "PlayerScreen");
 		prevStage.close();
+		return controller;
 	}
 	
-	public void loadLoginScreen(ActionEvent event)
+	public NewPlaylistController loadNewPlaylistScreen(ActionEvent event) {
+		Stage stage = new Stage();
+        stage.setResizable(false);
+		return (NewPlaylistController) loadStage(stage, "NewPlaylistScreen");
+	}
+	
+	public LoginController loadLoginScreen(ActionEvent event)
 	{
 		Stage prevStage = (Stage) ((Node)(event.getSource())).getScene().getWindow();
 		Stage stage = new Stage();
 		stage.setX(prevStage.getX());
         stage.setY(prevStage.getY());
         stage.setResizable(false);
-		loadStage(stage, "LoginScreen");
+        LoginController controller = (LoginController) loadStage(stage, "LoginScreen");
 		prevStage.close();
+		
+		return controller;
 	}
 	
-	public void loadSignupScreen(ActionEvent event)
+	public SignupController loadSignupScreen(ActionEvent event)
 	{
 		Stage prevStage = (Stage) ((Node)(event.getSource())).getScene().getWindow();
 		Stage stage = new Stage();
 		stage.setX(prevStage.getX());
         stage.setY(prevStage.getY());
         stage.setResizable(false);
-		loadStage(stage, "SignupScreen");
+        SignupController controller = (SignupController) loadStage(stage, "SignupScreen");
 		prevStage.close();
+		return controller;
+		
 	}
 	
-	public void loadStage(Stage primaryStage, String ScreenName)
+	public WindowController loadStage(Stage primaryStage, String ScreenName)
 	{
 		xOffset = 0;
 		yOffset = 0;
 		Parent root;
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/br/ufrn/imd/view/"+ScreenName+".fxml"));
 		try {
-			root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/view/"+ScreenName+".fxml"));
+			root = fxmlLoader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
-			return;
+			return null;
 		}
 
 		root.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -99,5 +111,9 @@ public class StageNavigator {
 		scene.setFill(Color.TRANSPARENT);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		return (WindowController) fxmlLoader.getController();
 	}
+
+	
 }

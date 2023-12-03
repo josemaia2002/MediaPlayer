@@ -2,16 +2,12 @@ package br.ufrn.imd.dao;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.User;
-import br.ufrn.imd.model.UserVip;
 
 public class UserDao {
 	public ArrayList<User> findAllUsers()
@@ -26,21 +22,7 @@ public class UserDao {
 			while (true) {
 				if (line != null) {
 					String[] credentials = line.split("\t");
-					User u = new User(Integer.parseInt(credentials[0]), credentials[2], credentials[3], credentials[4]);
-					if(credentials[1].equals("vipUser")) 
-					{
-						line = buffRead.readLine();
-						ArrayList<Integer> playlistsFound = new ArrayList<Integer>();
-						if(line != null) {
-							if(!line.equals("")) {
-								for(String p : line.split("\t")) 
-								{
-									playlistsFound.add(Integer.parseInt(p));
-								}
-							}
-						}
-						u = (User) new UserVip(u, playlistsFound);
-					}
+					User u = new User(Integer.parseInt(credentials[0]), credentials[1], credentials[2], credentials[3], credentials[4]);
 					users.add(u);
 					line = buffRead.readLine();
 				}
@@ -101,6 +83,10 @@ public class UserDao {
 		}
 		return true;
 	}
-
-
+	
+	public boolean saveUser(User user) {
+		return saveUser(user.getUsername(), user.getUserType(), user.getEmail(), user.getPassword());
+		
+	}
+	
 }

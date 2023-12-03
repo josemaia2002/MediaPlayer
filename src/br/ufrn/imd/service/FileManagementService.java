@@ -1,21 +1,16 @@
 package br.ufrn.imd.service;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import br.ufrn.imd.dao.MusicDao;
 import br.ufrn.imd.dao.PlaylistDao;
 import br.ufrn.imd.model.DirectoryDTO;
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
-import br.ufrn.imd.model.UserVip;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
+import br.ufrn.imd.model.User;
 
 public class FileManagementService {
 	
@@ -28,8 +23,8 @@ public class FileManagementService {
 	
 	public void createPlaylist(String playlistName, ArrayList<Music> songs)
 	{
-		UserVip owner = (UserVip) AuthService.getCurrentUser();
-		owner.addPlaylist(playlistDataAccess.createPlaylist(owner, playlistName, songs).getId());
+		User owner = AuthService.getCurrentUser();
+		playlistDataAccess.createPlaylist(owner, playlistName, songs).getId();
 	}
 	
 	public void addMusicsToPlaylist(Playlist playlist, ArrayList<Music> songs) 
@@ -54,15 +49,8 @@ public class FileManagementService {
      * @param user the user whose playlists will be loaded.
      * @return An ArrayList with the loaded playlists.
      */
-	public ArrayList<Playlist> loadPlaylists(UserVip user) { 
-		ArrayList<Playlist> playlists = new ArrayList<Playlist>(); 
-				
-		for(Integer id : user.getPlaylistsIDs())
-		{
-			Playlist p = playlistDataAccess.loadPlaylist(id);
-			if( p!= null ) playlists.add(p);
-		}
-		return playlists;
+	public ArrayList<Playlist> loadPlaylists(User user) { 
+		return playlistDataAccess.loadPlaylistsOfUser(AuthService.getCurrentUser());
 	}
 	
 	

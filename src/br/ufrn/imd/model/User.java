@@ -1,24 +1,22 @@
 package br.ufrn.imd.model;
 
 public class User {
-	protected String username;
-	protected String email;
-	protected String password;
-	protected int id;
+	private String username;
+	private String userType;
+	private String email;
+	private String password;
 	
-	public User(int id, String username, String email, String password) {
+	private int id;
+	
+	public User(int id, String userType, String username, String email, String password) {
 		super();
 		this.id = id;
 		this.username = username;
+		this.userType = userType;
 		this.email = email;
 		this.password = password;
 		
 	}
-	
-	public User() {
-		// super();
-	}
-
 	public String getUsername() {
 		return username;
 	}
@@ -50,11 +48,18 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	
 	@Override
 	public String toString() {
 		String s = id + "\t"
-				+ "defaultUser\t"
+				+ userType + "\t"
 				+ username + "\t"
 				+ email + "\t"
 				+ password + "\t";

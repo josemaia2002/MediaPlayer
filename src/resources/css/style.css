@@ -16,6 +16,12 @@
 	-fx-border-width: 1 0 1 0;
 }
 
+.default-button
+{
+	-fx-background-color: radial-gradient(focus-angle 235deg , focus-distance 72% , center 50% 50% , radius 75% , #312171aa, #aa00bb21);
+	-fx-text-fill: radial-gradient(focus-angle -10.01deg, focus-distance -42.5287% , center 74.5856% 32.9384%, radius 100.0%, #ff0d0d 0.0%, #ff0d0d 0.6711%, #b71edd 100.0%);
+}
+
 .clickable-button {
   	-fx-text-fill: -fx-punk-pink;
 }
@@ -100,19 +106,20 @@
 }
 
 
-.controll-button
+
+.control-button
 {
 	-fx-background-color: transparent;
 }
 
-.controll-button:hover
+.control-button:hover
 {
 	-fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-scale-z: 1.1;
 }
 
-.controll-button:pressed
+.control-button:pressed
 {
 	-fx-scale-x: 0.9;
     -fx-scale-y: 0.9;

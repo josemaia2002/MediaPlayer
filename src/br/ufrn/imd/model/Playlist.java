@@ -84,7 +84,7 @@ public class Playlist {
 		{
 			s += m.getPath() + "\n";
 		}
-		return super.toString();
+		return s;
 	}
 	
 	
