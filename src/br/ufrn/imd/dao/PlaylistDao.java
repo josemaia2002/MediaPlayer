@@ -26,34 +26,50 @@ import br.ufrn.imd.model.User;
 public class PlaylistDao {
 	private ArrayList<Playlist> playlists;
 	
+	
+	/**
+	 * Consctructs a new instance of the PlaylistDao Class.
+	 */
 	public PlaylistDao() {
 		this.playlists = new ArrayList<Playlist>();
 	}
-
+	
+	/**
+     * Method that adds a specific playlist.
+     * 
+     * @param p The playlist to be added.
+     */
 	public void addPlaylist(Playlist p) {
 		playlists.add(p);
 	}
 	
+	/**
+     * Method that removes a specific playlist.
+     * 
+     * @param p The playlist to be removed.
+     */
 	public void removePlaylist(Playlist p) {
 		playlists.remove(p);
 		p.getId();
 	}
 	
+	/**
+	 * Method that lists all the playlists.
+	 * 
+	 * @return An ArrayList with all the playlists.
+	 */
 	public ArrayList<Playlist> listPlaylists() {
 		return playlists;
 	}
-	
-	public void printPlaylists() {
-		for(Playlist p : playlists) {
-			System.out.println(p.getId());
-			System.out.println(p.getName());
-			
-			for(Music m : p.getSongs()) {
-				System.out.println(m);
-			}
-		}
-	}
-	
+
+	/**
+	 * Method that lists all the playlists.
+	 * 
+	 * @param owner The vip user that owns the playlist.
+	 * @param playlistName The name of the playlist to be created.
+	 * @param songs An ArrayList with the playlist's songs. 
+	 * @return The Playlist that was created.
+	 */
 	public Playlist createPlaylist(User owner, String playlistName, ArrayList<Music> songs) 
 	{
 		String path = getClass().getResource("/resources/data/playlists/").getPath();
@@ -79,6 +95,13 @@ public class PlaylistDao {
 		return p;
 	}
 	
+	
+	/**
+	 * Method that adds specific songs to a playlist.
+	 * 
+	 * @param p The playlist where the songs will be added.
+	 * @param songs An ArrayList with the songs to be added.
+	 */
 	public void addMusicsToPlaylist(Playlist p, ArrayList<Music> songs) 
 	{
 		String path = getClass().getResource("/resources/data/playlists/").getPath();
@@ -99,6 +122,12 @@ public class PlaylistDao {
 		}
 	}
 	
+	/**
+	 * Method that removes specific songs from a playlist.
+	 * 
+	 * @param p The playlist where the songs will be removed.
+	 * @param songs An ArrayList with the songs to be removed.
+	 */
 	public void removeMusicsFromPlaylist(Playlist p, ArrayList<Music> songs) 
 	{
 		p.removeAllSongs(songs);
@@ -115,6 +144,12 @@ public class PlaylistDao {
 
 	}
 	
+	/**
+	 * Method that loads a specific playlist.
+	 * 
+	 * @param id The playlist's id.
+	 * @return The loaded playlist.
+	 */
 	public Playlist loadPlaylist(int id) {
 		BufferedReader buffRead;
 		Playlist p = new Playlist(id);
@@ -150,6 +185,12 @@ public class PlaylistDao {
 		return p;
 	}
 	
+	/**
+	 * Method that reads playlists from a file line.
+	 * 
+	 * @param readingPoint The point to be readed in the file.
+	 * @return An ArrayList with the playlists.
+	 */
 	public ArrayList<Playlist> readPlaylistsFromLine(BufferedReader readingPoint)
 	{
 		String[] playlistsIDs = null;
@@ -169,7 +210,13 @@ public class PlaylistDao {
 		return playlists;
 		
 	}
-
+	
+	/**
+	 * Method that loads the playlists of a vip user.
+	 * 
+	 * @param user The vip user that owns the playlists to be loaded.
+	 * @return An ArrayList with the loaded playlists.
+	 */
 	public ArrayList<Playlist> loadPlaylistsOfUser(User user) {
 		ArrayList<Playlist> playlists = new ArrayList<Playlist>();
 		int id = user.getId();
@@ -182,6 +229,11 @@ public class PlaylistDao {
 		return playlists;
 	}
 
+	/**
+	 * Method that loads all playlists.
+	 * 
+	 * @return An ArrayList with the loaded playlists.
+	 */
 	private ArrayList<Playlist> loadAllPlaylists() {
 		ArrayList<Playlist> playlists = new ArrayList<Playlist>();
 		
@@ -193,8 +245,4 @@ public class PlaylistDao {
 		return playlists;
 
 	}
-	
-	
-	
-	
 }
