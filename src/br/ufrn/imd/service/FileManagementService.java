@@ -12,33 +12,75 @@ import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
 import br.ufrn.imd.model.User;
 
+/**
+ * Class that handles file management playing operations.
+ * 
+ * @author Davi Matias
+ * @author Jose Maia
+ * @version 1.0
+ * @since 3/12/2023
+ */
 public class FileManagementService {
 	
+	/**
+	 * An object that allows the manipulation of the songs.
+	 */
 	private MusicDao musicDataAccess;
+	
+	/**
+	 * An object that allows the manipulation of the playlist.
+	 */
 	private PlaylistDao playlistDataAccess;
 	
+	/**
+	 * Consctructs a new instance of the FileManagementService Class.
+	 * 
+	 */
 	public FileManagementService() {
 		musicDataAccess = new MusicDao();
 		playlistDataAccess = new PlaylistDao();	}
 	
+	/**
+	 * Method that creates a playlist with the name and the given songs.
+	 * 
+	 * @param playlistName The name of the playlist to be created.
+	 * @param songs An ArrayList with the playlist's songs. 
+	 */
 	public void createPlaylist(String playlistName, ArrayList<Music> songs)
 	{
 		User owner = AuthService.getCurrentUser();
 		playlistDataAccess.createPlaylist(owner, playlistName, songs).getId();
 	}
 	
+	/**
+	 * Method that adds specific songs to a playlist.
+	 * 
+	 * @param playlist The playlist where the songs will be added.
+	 * @param songs An ArrayList with the songs to be added.
+	 */
 	public void addMusicsToPlaylist(Playlist playlist, ArrayList<Music> songs) 
 	{ 
 		playlist.addAllSongs(songs);
 		playlistDataAccess.addMusicsToPlaylist(playlist, songs);
 	}
 	
+	/**
+	 * Method that removes specific songs from a playlist.
+	 * 
+	 * @param playlist The playlist where the songs will be removed.
+	 * @param songs An ArrayList with the songs to be removed.
+	 */
 	public void removeMusicsFromPlaylist(Playlist playlist, ArrayList<Music> songs) 
 	{	
 		playlistDataAccess.removeMusicsFromPlaylist(playlist, songs);
 		playlist.removeAllSongs(songs);
 	}
 	
+	/**
+	 * Method that removes a playlist.
+	 * 
+	 * @param playlist The playlist to be removed.
+	 */
 	public void removePlaylist(Playlist playlist) 
 	{
 		playlistDataAccess.removePlaylist(playlist);
@@ -46,6 +88,7 @@ public class FileManagementService {
 
 	/**
      * Method that manages the playlists initialization.
+     * 
      * @return An ArrayList with the loaded playlists.
      */
 	public ArrayList<Playlist> loadCurrentUserPlaylists() { 
@@ -55,6 +98,7 @@ public class FileManagementService {
 	
 	/**
      * Method that manages the songs initialization.
+     * 
      * @return An ArrayList with the loaded songs.
      */
 	public ArrayList<Music> loadMusics() {
@@ -63,6 +107,7 @@ public class FileManagementService {
 	
 	/**
      * Method that manages the directories initialization.
+     * 
      * @return An ArrayList with the loaded directories.
      */
 	public ArrayList<DirectoryDTO> listDirectoriesDTO() {
@@ -75,25 +120,50 @@ public class FileManagementService {
 	}
 	
 	// Operational Methods
+	
+	/**
+     * Method that adds a song based on its path.
+     * 
+     * @param path The song's path.
+     */
 	public void addSong(String path) { 
 		Music m = new Music(path);
 		addSong(m);
 	}
 	
+	/**
+     * Method that adds a song.
+     * 
+     * @param songs The song to be added.
+     */
 	public void addSong(Music song) { 
 		musicDataAccess.addSong(song);
 	}
 	
+	/**
+     * Method that removes all the given songs.
+     * 
+     * @param songs The song to be removed.
+     */
 	public void removeAllSongs(ArrayList<Music> songs) 
 	{
 		musicDataAccess.removeAllSong(songs);
 	}
 	
-	
+	/**
+     * Method that adds a directory.
+     * 
+     * @param path The directory's path.
+     */
 	public void addDirectory(String path) { 
 		musicDataAccess.addDirectory(path);
 	}
 	
+	/**
+     * Method that removes a given directory.
+     * 
+     * @param path The directory's path.
+     */
 	public void removeDirectory(String path) { 
 		BufferedReader buffRead;
 		try {
