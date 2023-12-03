@@ -85,6 +85,18 @@ public class FileManagementService {
 	{
 		playlistDataAccess.removePlaylist(playlist);
 	}
+	
+	/**
+     * Method that removes all the given playlists.
+     * 
+     * @param playlists The playlists to be removed.
+     */
+	public void removeAllPlaylists(ArrayList<Playlist> playlists) 
+	{
+		for(Playlist p : playlists) {
+			playlistDataAccess.removePlaylist(p);
+		}
+	}
 
 	/**
      * Method that manages the playlists initialization.

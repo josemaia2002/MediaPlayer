@@ -425,7 +425,6 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(selection.size()> 0 && mediaPlayerManager == null) mediaPlayerManager = new PlayerService(selection.get(0));
 	    	return selection;
 	    }
-	    
 
 	    /**
 	     * Sets the playback position of the currently playing music.
@@ -513,9 +512,12 @@ public class PlayerController extends WindowController implements Initializable 
 	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
 	    	tabContentManager.removeAllSongs(selection);
 	    }
+	    
 	    @FXML
 	    void deletePlaylist(ActionEvent event) {
-	    	//TODO
+	    	ArrayList<Playlist> selection = new ArrayList<Playlist>();
+	    	selection.addAll(playlistTable.getSelectionModel().getSelectedItems());
+	    	tabContentManager.removeAllPlaylists(selection);
 	    }
 
 	    @FXML

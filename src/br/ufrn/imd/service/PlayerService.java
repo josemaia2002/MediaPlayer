@@ -182,11 +182,21 @@ public class PlayerService {
         return mediaPlayer.getTotalDuration();
     }
     
+    /**
+     * Retrieves whether the media is muted or not.
+     *
+     * @return True if the media is muted, false otherwise.
+     */
     public boolean isMuted() 
     {
     	return mediaPlayer.isMute();
     }
     
+    /**
+     * Leave the media muted.
+     *
+     * @param mute Whether the media must be muted or not.
+     */
     public void setMute(boolean mute) 
     {
     	mediaPlayer.setMute(mute);
