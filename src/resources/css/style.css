@@ -22,6 +22,12 @@
 	-fx-text-fill: radial-gradient(focus-angle -10.01deg, focus-distance -42.5287% , center 74.5856% 32.9384%, radius 100.0%, #ff0d0d 0.0%, #ff0d0d 0.6711%, #b71edd 100.0%);
 }
 
+.default-button:hover
+{
+	-fx-background-color: white;
+	-fx-text-fill: red;
+}
+
 .clickable-button {
   	-fx-text-fill: -fx-punk-pink;
 }
