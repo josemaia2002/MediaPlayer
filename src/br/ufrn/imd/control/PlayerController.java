@@ -488,7 +488,6 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(selection.size()> 0 && mediaPlayerManager == null) mediaPlayerManager = new PlayerService(selection.get(0));
 	    	return selection;
 	    }
-	    
 
 	    /**
 	     * Sets the playback position of the currently playing music.
@@ -531,7 +530,12 @@ public class PlayerController extends WindowController implements Initializable 
 	    	
 	    	feedQueue();
 	    }
-
+	    
+	    /**
+	     * Add the next song of the queue.
+	     *
+	     * @param event The ActionEvent triggered by the play music button.
+	     */
 	    @FXML
 	    void addNextSong(ActionEvent event) {
 	    	ArrayList<Music> selection = getSelectedMusics();
@@ -542,6 +546,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedQueue();
 	    }
 
+	    /**
+	     * Add a playlist to the queue.
+	     *
+	     * @param event The ActionEvent triggered by the play music button.
+	     */
 	    @FXML
 	    void addPlaylistToQueue(ActionEvent event) {
 	    	Playlist p = playlistTable.getSelectionModel().getSelectedItem();
@@ -550,6 +559,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedQueue();
 	    }
 	    
+	    /**
+	     * Method to remove a songs from the queue.
+	     *
+	     * @param event The ActionEvent triggered by the play music button.
+	     */
 	    @FXML
 	    public void removeSongFromQueue() 
 	    {
@@ -564,7 +578,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    
 	    @FXML
 	    void deleteDirectory(ActionEvent event) {
-	    	//TODO
+	    	// TODO
 	    }
 	    
 		/**
@@ -578,9 +592,17 @@ public class PlayerController extends WindowController implements Initializable 
 	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
 	    	tabContentManager.removeAllSongs(selection);
 	    }
+	    
+	    /**
+	     * Deletes selected playlist from the application.
+	     *
+	     * @param event The ActionEvent triggered by the delete playlist button.
+	     */
 	    @FXML
 	    void deletePlaylist(ActionEvent event) {
-	    	//TODO
+	    	ArrayList<Playlist> selection = new ArrayList<Playlist>();
+	    	selection.addAll(playlistTable.getSelectionModel().getSelectedItems());
+	    	tabContentManager.removeAllPlaylists(selection);
 	    }
 
 	    @FXML
@@ -599,6 +621,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	}
 	    }
 	    
+	    /**
+	     * Method to skip to the next song.
+	     *
+	     * @param event The ActionEvent triggered by the next music button.
+	     */
 	    @FXML
 	    void nextMusic(ActionEvent event) {
 	    	if(mediaPlayerManager == null) return;
@@ -606,6 +633,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedQueue();
 	    }
 	    
+	    /**
+	     * Method to go back to the previous song.
+	     *
+	     * @param event The ActionEvent triggered by the previous music button.
+	     */
 	    @FXML
 	    void prevMusic(ActionEvent event) {
 	    	if(mediaPlayerManager == null) return;
@@ -613,7 +645,12 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedQueue();
 	    }
 	    
-	    
+	    /**
+	     * Method to mute the media player or unmute it if it's
+	     * already muted.
+	     *
+	     * @param event The ActionEvent triggered by the toggle mute button.
+	     */
 	    @FXML
 	    void toggleMute(MouseEvent event) {
 	    	if(mediaPlayerManager == null) return;

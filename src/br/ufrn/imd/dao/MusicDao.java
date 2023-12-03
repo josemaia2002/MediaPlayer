@@ -343,5 +343,13 @@ public class MusicDao {
 		return false;
 	}
 	
+	/**
+	 * A method that removes a specific song.
+	 * 
+	 * @param song The song to be removed.
+	 */
+	public void removeDirectory(String path) {
+		directories.remove(path);
+	}
 	
 }
