@@ -511,9 +511,21 @@ public class PlayerController extends WindowController implements Initializable 
 	    	for(Music m : selection) mediaPlayerManager.removeSong(m);
 	    }
 	    
+	    /**
+	     * Deletes selected directory from the application.
+	     *
+	     * @param event The ActionEvent triggered by the delete directory button.
+	     */
 	    @FXML
 	    void deleteDirectory(ActionEvent event) {
-	    	// TODO
+	    	ArrayList<DirectoryDTO> selection = new ArrayList<DirectoryDTO>();
+	    	selection.addAll(directoryTable.getSelectionModel().getSelectedItems());
+	    	
+	    	for(DirectoryDTO d : selection) {
+	    		tabContentManager.removeDirectory(d.getPath());
+	    	}
+	    	
+	    	
 	    }
 	    
 		/**
