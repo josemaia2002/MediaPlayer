@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -26,21 +29,28 @@ public class PlayerService {
 	private Music currentSong;
 	
     private MediaPlayer mediaPlayer;
+    
+    private ScrollBar progressBar;
+    
+    private InvalidationListener currentTimeListener;
+    
 
     /**
      * Initializes the MediaPlayer with the provided song.
      *
      * @param Song the music to play
      */
-    public PlayerService(Music song) {
+    public PlayerService(Music song, ScrollBar pb) {
         //Media media = new Media("file:///" + FilePath.replace("\\", "/"));
         mediaPlayer = new MediaPlayer(new Media((new File(song.getPath())).toURI().toString()));
+        this.progressBar = pb;
         songQueue = new ArrayList<Music>();
         songQueue.add(song);
         currentSong = song;
         mediaPlayer.setVolume(1.0);
         play();
     }
+    
     
     
     
@@ -110,6 +120,7 @@ public class PlayerService {
     	if (song.equals(currentSong)){nextSong();}
     	songQueue.remove(song);
     	if(song.equals(currentSong)) {stop();}
+    	currentSong = null;
     }
     
     /**
@@ -121,6 +132,7 @@ public class PlayerService {
     {
     	MediaPlayer.Status previousStatus = mediaPlayer.getStatus();
     	double volume = mediaPlayer.getVolume();
+    	mediaPlayer.stop();
     	mediaPlayer.dispose();
     	mediaPlayer = new MediaPlayer(new Media((new File(song.getPath())).toURI().toString()));
     	setVolume(volume);
@@ -139,6 +151,19 @@ public class PlayerService {
      * Starts playing the file.
      */
     public void play() {
+    	currentTimeListener = new InvalidationListener() 
+        {
+
+    		@Override
+    		public void invalidated(Observable observable) {
+    			if(isPlaying()) 
+    			{
+    				progressBar.setValue(100*mediaPlayer.currentTimeProperty().get().toSeconds()/mediaPlayer.getMedia().getDuration().toSeconds());
+    			}
+    			
+    		}
+        };
+    	mediaPlayer.currentTimeProperty().addListener(currentTimeListener);
         mediaPlayer.play();
     }
 
@@ -146,6 +171,8 @@ public class PlayerService {
      * Pauses the currently playing file.
      */
     public void pause() {
+
+    	mediaPlayer.currentTimeProperty().removeListener(currentTimeListener);
         mediaPlayer.pause();
     }
 
@@ -153,6 +180,7 @@ public class PlayerService {
      * Stops the currently playing file.
      */
     public void stop() {
+    	mediaPlayer.currentTimeProperty().removeListener(currentTimeListener);
         mediaPlayer.stop();
     }
 

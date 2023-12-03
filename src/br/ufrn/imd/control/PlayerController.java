@@ -160,16 +160,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	});
 	    	
 	    	progressBar.setValue(0);
-	    	progressBar.valueProperty().addListener(new InvalidationListener()
-	    	{
-				@Override
-				public void invalidated(javafx.beans.Observable arg0) {
-					if(mediaPlayerManager == null) return;
-					mediaPlayerManager.seek(progressBar.getValue()/100);
-					
-				}
-	    		
-	    	});
+	    	
 	    	
 	    	tabContentManager = new FileManagementService();
 			if(!(AuthService.getCurrentUser().getUserType().contentEquals("vipUser"))) {
@@ -231,53 +222,50 @@ public class PlayerController extends WindowController implements Initializable 
 		
 			directoryTable.setOnDragDropped(new EventHandler<DragEvent>() {
 
-            @Override
-            public void handle(DragEvent event) {
-                if (event.getDragboard().hasFiles()) {
-                	for(File f : event.getDragboard().getFiles()) 
-        			{
-        				tabContentManager.addDirectory(f.getAbsolutePath());
-        			}
-                	feedDirectories();
-                	feedMusics();
-                }
-                event.consume();
-            }
-        });
+	            @Override
+	            public void handle(DragEvent event) {
+	                if (event.getDragboard().hasFiles()) {
+	                	for(File f : event.getDragboard().getFiles()) 
+	        			{
+	        				tabContentManager.addDirectory(f.getAbsolutePath());
+	        			}
+	                	feedDirectories();
+	                	feedMusics();
+	                }
+	                event.consume();
+	            }
+	        });
 			
-			
-			progressBar.setOnScrollStarted(new EventHandler<ScrollEvent>() 
+			InvalidationListener inv = new InvalidationListener() 
 			{
-
 				@Override
-				public void handle(ScrollEvent arg0) {
-					if(mediaPlayerManager == null) 
-					{
-						progressBar.setValue(progressBar.getMin());
-						return;
-					}
+				public void invalidated(javafx.beans.Observable arg0) {
+					if(mediaPlayerManager==null) return;
 					
+					
+				}
+			};
+			
+			progressBar.setOnDragDetected(new EventHandler<MouseEvent>()
+	    	{
+				@Override
+				public void handle(MouseEvent arg0) {
+					if(mediaPlayerManager == null)  return;
+					System.out.println("AAAAAAAAAAAAAAAAAAAAAAA");
 					mediaPlayerManager.pause();
 				}
-				
-			});
-
-			progressBar.setOnScrollFinished(new EventHandler<ScrollEvent>() 
-			{
-
+	    	});
+			
+			progressBar.setOnMouseReleased(new EventHandler<MouseEvent>()
+	    	{
 				@Override
-				public void handle(ScrollEvent arg0) {
-					if(mediaPlayerManager == null) 
-					{
-						progressBar.setValue(progressBar.getMin());
-						return;
-					}
-					double total = progressBar.getMax() - progressBar.getMin();
-			    	mediaPlayerManager.seek(progressBar.getValue()/total);
+				public void handle(MouseEvent arg0) {
+					if(mediaPlayerManager == null)  return;
+					System.out.println("BBBBBBBBBBBBBBBBBBBBBBBB");
+					mediaPlayerManager.seek(progressBar.getValue()/100);
 					mediaPlayerManager.play();
 				}
-				
-			});
+	    	});
 			
 		}
 	    
@@ -385,7 +373,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(mediaPlayerManager == null)  return;
 	    
     		ObservableList<Music> queue = FXCollections.observableArrayList(mediaPlayerManager.getSongQueue());
-		    System.out.println(queueColumn == null);
+
 	    	queueColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
 	    	
 	    	queueTable.setItems(queue);
@@ -485,7 +473,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    {
 	    	ArrayList<Music> selection = new ArrayList<Music>();
 	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
-	    	if(selection.size()> 0 && mediaPlayerManager == null) mediaPlayerManager = new PlayerService(selection.get(0));
+	    	if(selection.size()> 0 && mediaPlayerManager == null) mediaPlayerManager = new PlayerService(selection.get(0), progressBar);
 	    	return selection;
 	    }
 
@@ -570,10 +558,12 @@ public class PlayerController extends WindowController implements Initializable 
 	    	ArrayList<Music> selection = new ArrayList<Music>();
 	    	selection.addAll(queueTable.getSelectionModel().getSelectedItems());
 	    	if(selection.size() == 0) return;
-	    	if(mediaPlayerManager == null) mediaPlayerManager = new PlayerService(selection.get(0));
+	    	if(mediaPlayerManager == null) mediaPlayerManager = new PlayerService(selection.get(0), progressBar);
 	    	for(Music m : selection) mediaPlayerManager.removeSong(m);
 	    	
 	    	feedQueue();
+	    	
+	    	updatePlayButton();
 	    }
 	    
 	    /**
@@ -624,11 +614,23 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(mediaPlayerManager.isPlaying()) 
 	    	{ 
 	    		mediaPlayerManager.pause(); 
-	    		playButtonImage.setImage(new Image(getClass().getResource("/resources/images/play.png").toString()));
 	    	}
 	    	else 
 	    	{
 	    		mediaPlayerManager.play(); 
+	    	}
+	    	updatePlayButton();
+	    }
+	    
+	    void updatePlayButton() {
+	    	if(mediaPlayerManager == null) return;
+	    	
+	    	if(mediaPlayerManager.isPlaying()) 
+	    	{ 
+	    		playButtonImage.setImage(new Image(getClass().getResource("/resources/images/play.png").toString()));
+	    	}
+	    	else 
+	    	{
 	    		playButtonImage.setImage(new Image(getClass().getResource("/resources/images/pause.png").toString()));
 	    	}
 	    }
