@@ -26,9 +26,16 @@ import javafx.scene.media.Media;
  * @since 3/12/2023
  */
 public class MusicDao {
-	private ArrayList<Music> songs;
-	private ArrayList<String> directories;
 	
+	/**
+	 * This ArrayList represents a collection of songs.
+	 */
+	private ArrayList<Music> songs;
+	
+	/**
+	 * This ArrayList represents a collection of directories.
+	 */
+	private ArrayList<String> directories;
 	
 	/**
 	 * Consctructs a new instance of the MusicDao Class.

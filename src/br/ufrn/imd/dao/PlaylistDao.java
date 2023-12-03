@@ -24,8 +24,11 @@ import br.ufrn.imd.model.User;
  * @since 3/12/2023
  */
 public class PlaylistDao {
-	private ArrayList<Playlist> playlists;
 	
+	/**
+	 * This ArrayList represents a collection of playlists.
+	 */
+	private ArrayList<Playlist> playlists;
 	
 	/**
 	 * Consctructs a new instance of the PlaylistDao Class.

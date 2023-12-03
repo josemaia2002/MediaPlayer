@@ -12,11 +12,34 @@ import java.util.Observable;
  */
 public class Music extends Observable {
 	
+	/**
+	 * The song's title.
+	 */
 	private String title;
+	
+	/**
+	 * The song's duration.
+	 */
 	private double duration;
+	
+	/**
+	 * The song's author.
+	 */
 	private String author;
+	
+	/**
+	 * The song's genre.
+	 */
 	private String genre;
+	
+	/**
+	 * The song's album.
+	 */
 	private String album;
+	
+	/**
+	 * The song's path.
+	 */
 	private String path;
 	
 	/**
