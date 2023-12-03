@@ -509,7 +509,9 @@ public class PlayerController extends WindowController implements Initializable 
 	     */
 	    @FXML
 	    void deleteMusic(ActionEvent event) {
-	    	//TODO
+	    	ArrayList<Music> selection = new ArrayList<Music>();
+	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
+	    	tabContentManager.removeAllSongs(selection);
 	    }
 	    @FXML
 	    void deletePlaylist(ActionEvent event) {
