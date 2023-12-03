@@ -40,6 +40,21 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+/**
+ * The PlayerController class manages the main functionality of the music player application.
+ * It extends WindowController and implements Initializable for JavaFX initialization.
+ * This controller handles various actions related to playlists, music, and directories,
+ * as well as interactions with the FileManagementService for data management.
+ * The class includes methods for feeding data to tables, adding new music, creating playlists,
+ * adding directories, and handling player controls.
+ *
+ * Additionally, the class uses JavaFX components such as TableView, Menu, and Button for user interaction.
+ * 
+ * @author Davi Matias
+ * @author Jose Maia
+ * @version 1.0
+ * @since 3/12/2023
+ */
 public class PlayerController extends WindowController implements Initializable  {
 		
 		@FXML
@@ -98,6 +113,13 @@ public class PlayerController extends WindowController implements Initializable 
 	    
 	    private FileManagementService tabContentManager;
 	    
+	    /**
+	     * Initializes the PlayerController by setting up the FileManagementService and JavaFX components.
+	     * It also customizes the user interface based on the user's type (e.g., vipUser).
+	     *
+	     * @param arg0 URL location not used in this implementation.
+	     * @param arg1 ResourceBundle not used in this implementation.
+	     */
 	    @Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 	    	tabContentManager = new FileManagementService();
@@ -133,7 +155,9 @@ public class PlayerController extends WindowController implements Initializable 
 			
 		}
 	    
-	    
+	    /**
+	     * Feeds the playlist data into the playlist table, allowing users to interact with playlists.
+	     */
 	    public void feedPlaylist()
 	    {
 	    	ObservableList<Playlist> playlists = FXCollections.observableArrayList(tabContentManager.loadCurrentUserPlaylists());
@@ -171,6 +195,9 @@ public class PlayerController extends WindowController implements Initializable 
 	    	playlistTable.setItems(playlists);
 		}
 	    	
+	    /**
+	     * Feeds the music data into the music table, displaying available songs to the user.
+	     */
 	    public void feedMusics()
 	    {
 	    	
@@ -182,6 +209,9 @@ public class PlayerController extends WindowController implements Initializable 
 	    
 	    }
 	    
+	    /**
+	     * Feeds the directory data into the directory table, showing directories containing music files.
+	     */
 	    public void feedDirectories()
 	    {
 	    	ObservableList<DirectoryDTO> directories = FXCollections.observableArrayList(tabContentManager.listDirectoriesDTO());
@@ -192,6 +222,11 @@ public class PlayerController extends WindowController implements Initializable 
 	 
 	    }
 	    
+	    /**
+	     * Adds a new music file to the application based on user selection.
+	     *
+	     * @param event The ActionEvent triggered by the add music button.
+	     */
 	    public void addMusic(ActionEvent event) 
 	    {
 	    	FileChooser musicChooser = new FileChooser();
@@ -207,6 +242,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedMusics();
 	    }
 	    
+	    /**
+	     * Adds selected music to a specified playlist.
+	     *
+	     * @param p The playlist to which the selected music should be added.
+	     */
 	    public void addMusicsToPlayList(Playlist p) 
 	    {
 	    	ArrayList<Music> selection = new ArrayList<Music>();
@@ -214,6 +254,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	tabContentManager.addMusicsToPlaylist(p, selection);
 	    }
 	    
+	    /**
+	     * Initiates the process of creating a new playlist, allowing the user to name and customize it.
+	     *
+	     * @param event The ActionEvent triggered by the new playlist button.
+	     */
 	    public void createNewPlaylist(ActionEvent event) 
 	    {
 	    	
@@ -244,6 +289,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	AddPlaylistContextMenu.setDisable(false);
 	    }
 	    
+	    /**
+	     * Adds a directory containing music files to the application.
+	     *
+	     * @param event The ActionEvent triggered by the add directory button.
+	     */
 	    public void AddDirectory(ActionEvent event) 
 	    {
 	    	DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -256,7 +306,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedMusics();
 	    }
 	    
-	    
+	    /**
+	     * Deletes selected music from the application.
+	     *
+	     * @param event The ActionEvent triggered by the delete music button.
+	     */
 	    @FXML
 	    void deleteMusic(ActionEvent event) {
 	    	ArrayList<Music> selection = new ArrayList<Music>();
@@ -264,16 +318,31 @@ public class PlayerController extends WindowController implements Initializable 
 	    	tabContentManager.removeAllSongs(selection);
 	    }
 	    
+	    /**
+	     * Sets the playback position of the currently playing music.
+	     *
+	     * @param event The ActionEvent triggered by the set position button.
+	     */
 	    @FXML
 	    void setPosition(ActionEvent event) {
 	    	//TODO!!!!!!!!!!!!!!!!!!!!
 	    }
 	    
+	    /**
+	     * Sets the volume of the music player.
+	     *
+	     * @param event The ActionEvent triggered by the set volume button.
+	     */
 	    @FXML
 	    void setVolume(ActionEvent event) {
 	    	//TODO!!!!!!!!!!!!!!!!!!!!
 	    }
 
+	    /**
+	     * Initiates the playback of selected music.
+	     *
+	     * @param event The ActionEvent triggered by the play music button.
+	     */
 	    @FXML
 	    void playMusic(ActionEvent event) {
 	    	//TODO!!!!!!!!!!!!!!!!!!!!
