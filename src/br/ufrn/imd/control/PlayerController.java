@@ -14,6 +14,7 @@ import br.ufrn.imd.service.AuthService;
 import br.ufrn.imd.service.FileManagementService;
 import br.ufrn.imd.service.PlayerService;
 import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -144,6 +145,17 @@ public class PlayerController extends WindowController implements Initializable 
 	     */
 	    @Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
+	    	
+	    	progressBar.valueProperty().addListener(new InvalidationListener() {
+
+				@Override
+				public void invalidated(Observable arg0) {
+					if(mediaPlayerManager == null) return;
+					if(progressBar.getValue() > 99.9) nextMusic(new ActionEvent());
+				}
+	    		
+	    	});
+	    	
 	    	volumeSlider.setValue(100);
 	    	volumeSlider.valueProperty().addListener(new InvalidationListener()
 	    	{

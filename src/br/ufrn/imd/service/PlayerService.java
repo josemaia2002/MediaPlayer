@@ -167,6 +167,7 @@ public class PlayerService {
     	mediaPlayer.stop();
     	mediaPlayer.dispose();
     	mediaPlayer = new MediaPlayer(new Media((new File(song.getPath())).toURI().toString()));
+    	mediaPlayer.setAutoPlay(true);
     	setVolume(volume);
     	if(previousStatus.equals(MediaPlayer.Status.PLAYING)) play();
     }
@@ -176,7 +177,7 @@ public class PlayerService {
      */
     public void play() {
     	
-    	mediaPlayer.setOnEndOfMedia(new Runnable() {
+    	mediaPlayer.setOnRepeat(new Runnable() {
 
 			@Override
 			public void run() {
