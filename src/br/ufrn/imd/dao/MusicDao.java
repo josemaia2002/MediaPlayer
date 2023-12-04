@@ -348,6 +348,7 @@ public class MusicDao {
 	 * A method that removes a specific directory.
 	 * 
 	 * @param path The path of the directory to be removed.
+	 * @return boolean true if the directory has been removed correctly, false otherwise.
 	 */
 	public boolean removeDirectory(String path) {
 		directories.remove(path);

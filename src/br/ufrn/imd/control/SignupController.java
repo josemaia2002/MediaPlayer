@@ -122,6 +122,7 @@ public class SignupController extends WindowController implements Initializable{
     	String p1 = passwordInput.getText();
     	String p2 = confirmPasswordInput.getText();
     	String userType = userTypeRadio.isSelected() ? "vipUser" : "defaultUser";
+    	
     	String response = service.signupCredentials(username, userType, email, p1, p2);
     	credentialResponse.setText(response);
     	if(response.equals("Singed Up!")) 

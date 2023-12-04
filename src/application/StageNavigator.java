@@ -2,8 +2,11 @@ package application;
 
 import java.io.IOException;
 
-import br.ufrn.imd.control.*;
-import javafx.application.Platform;
+import br.ufrn.imd.control.LoginController;
+import br.ufrn.imd.control.NewPlaylistController;
+import br.ufrn.imd.control.PlayerController;
+import br.ufrn.imd.control.SignupController;
+import br.ufrn.imd.control.WindowController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -108,7 +111,7 @@ public class StageNavigator {
 		
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
-		primaryStage.getIcons().add(new Image(getClass().getResource("/resources/images/logo.png").toString()));
+		primaryStage.getIcons().add(new Image(getClass().getResource("/resources/images/icon.png").toString()));
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		scene.setFill(Color.TRANSPARENT);
 		primaryStage.setScene(scene);

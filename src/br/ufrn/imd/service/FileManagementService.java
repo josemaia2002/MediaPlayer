@@ -146,7 +146,7 @@ public class FileManagementService {
 	/**
      * Method that adds a song.
      * 
-     * @param songs The song to be added.
+     * @param song The song to be added.
      */
 	public void addSong(Music song) { 
 		musicDataAccess.addSong(song);
@@ -181,6 +181,11 @@ public class FileManagementService {
 		musicDataAccess.removeDirectory(path);
 	}
 	
+	/**
+     * Method that removes all the given directories.
+     * 
+     * @param directories A list with the directories to remove.
+     */
 	public void removeAllDirectories(ArrayList<String> directories) 
 	{
 		musicDataAccess.removeAllDirectories(directories);

@@ -355,7 +355,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #50005055;" BorderPane.alignment="CENTER">
                      <children>
-                        <Text fx:id="textView" fontSmoothingType="LCD" layoutX="8.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" wrappingWidth="448.4814453125" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+                        <Text fx:id="textView" boundsType="VISUAL" layoutX="8.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" wrappingWidth="448.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
                            <fill>
                               <RadialGradient centerX="0.5165745856353592" centerY="0.542654028436019" focusAngle="-136.69" focusDistance="1.0" radius="0.7758620689655172">
                                  <stops>

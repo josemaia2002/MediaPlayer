@@ -100,16 +100,36 @@ public class UserDao {
 	 * @return True if the operation was successfull, and false otherswise.
 	 */
 	public boolean saveUser(String username, String userType, String email, String password) {
-
+		int id = 1;
+		BufferedReader buffRead;
 		try {
-			String str = findAllUsers().size() + "\t"
+			
+			buffRead = new BufferedReader(new FileReader(getClass().getResource("/resources/data/users.txt").getFile()));
+		
+			String line = buffRead.readLine();
+			while (line != null) {
+				System.out.println(line);
+				if(!line.equals("")) 
+				{
+					id++;
+					line = buffRead.readLine();
+				}
+				else break;
+			}
+			buffRead.close();
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+		System.out.println("done p1");
+		try {
+			String str = id + "\t"
 					+ userType + "\t"
 					+ username + "\t"
 					+ email + "\t"
 					+ password + "\t";
-		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/usuarios.txt").getFile(), true));
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/resources/data/users.txt").getFile(), true));
 	    
-			writer.append('\n');
+			if(id != 1) writer.append('\n');
 		    writer.append(str);
 		    writer.close();
 		    

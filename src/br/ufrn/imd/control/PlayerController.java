@@ -4,8 +4,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import application.StageNavigator;
@@ -27,7 +25,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,7 +34,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -146,7 +142,6 @@ public class PlayerController extends WindowController implements Initializable 
 	     * @param arg0 URL location not used in this implementation.
 	     * @param arg1 ResourceBundle not used in this implementation.
 	     */
-
 	    @Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 	    	volumeSlider.setValue(100);
@@ -239,16 +234,6 @@ public class PlayerController extends WindowController implements Initializable 
 	            }
 	        });
 			
-			InvalidationListener inv = new InvalidationListener() 
-			{
-				@Override
-				public void invalidated(javafx.beans.Observable arg0) {
-					if(mediaPlayerManager==null) return;
-					
-					
-				}
-			};
-			
 			progressBar.setOnDragDetected(new EventHandler<MouseEvent>()
 	    	{
 				@Override
@@ -271,7 +256,7 @@ public class PlayerController extends WindowController implements Initializable 
 		}
 	    
 	    /**
-	     * Feeds the playlist data into the playlist table, allowing users to interact with playlists.
+	     * Feeds the playlist data into the playlist table and updates context menus, allowing users to interact with playlists.
 	     */
 	    public void feedPlaylist()
 	    {
@@ -474,6 +459,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	feedMusics();
 	    }
 	    
+	    /**
+	     * Gets the musics selected by the user at the music table.
+	     *
+	     * @return ArrayList<Music> The selected musics.
+	     */
 	    private ArrayList<Music> getSelectedMusics() 
 	    {
 	    	ArrayList<Music> selection = new ArrayList<Music>();
@@ -495,11 +485,11 @@ public class PlayerController extends WindowController implements Initializable 
 	    	mediaPlayerManager.addCurrentSong(selection.get(0));
 	    	selection.remove(0);
 	    	for(Music m : selection) mediaPlayerManager.addNextSong(m);
-	    	
+	    	mediaPlayerManager.play();
 	    	feedQueue();
 	    	updatePlayButton();
+	    	updateSong();
 	    	
-	    	mediaPlayerManager.play();
 	    }
 
 	    /**
@@ -526,10 +516,9 @@ public class PlayerController extends WindowController implements Initializable 
 	    void addNextSong(ActionEvent event) {
 	    	ArrayList<Music> selection = getSelectedMusics();
 	    	if(selection.size() == 0) return;
-	    	
 	    	for(Music m : selection) mediaPlayerManager.addNextSong(m);
-	    	
 	    	feedQueue();
+	    	updatePlayButton();
 	    }
 
 	    /**
@@ -538,17 +527,17 @@ public class PlayerController extends WindowController implements Initializable 
 	     * @param event The ActionEvent triggered by the play music button.
 	     */
 	    @FXML
-	    void addPlaylistToQueue(ActionEvent event) {
+	    public void addPlaylistToQueue(ActionEvent event) {
 	    	Playlist p = playlistTable.getSelectionModel().getSelectedItem();
 	    	if(p == null) return;
-	    	mediaPlayerManager.setPlaylist(p);
+	    	mediaPlayerManager.addPlaylistToQueue(p);
 	    	feedQueue();
+	    	updatePlayButton();
+	    	updateSong();
 	    }
 	    
 	    /**
 	     * Method to remove a songs from the queue.
-	     *
-	     * @param event The ActionEvent triggered by the play music button.
 	     */
 	    @FXML
 	    public void removeSongFromQueue() 
@@ -560,7 +549,6 @@ public class PlayerController extends WindowController implements Initializable 
 	    	for(Music m : selection) mediaPlayerManager.removeSong(m);
 	    	
 	    	feedQueue();
-	    	
 	    	updatePlayButton();
 	    }
 	    
@@ -570,7 +558,7 @@ public class PlayerController extends WindowController implements Initializable 
 	     * @param event The ActionEvent triggered by the delete directory button.
 	     */
 	    @FXML
-	    void deleteDirectory(ActionEvent event) {
+	    public void deleteDirectory(ActionEvent event) {
 	    	ArrayList<DirectoryDTO> selection = new ArrayList<DirectoryDTO>();
 	    	selection.addAll(directoryTable.getSelectionModel().getSelectedItems());
 	    	
@@ -588,7 +576,7 @@ public class PlayerController extends WindowController implements Initializable 
 	     * @param event The ActionEvent triggered by the delete music button.
 	     */
 	    @FXML
-	    void deleteMusic(ActionEvent event) {
+	    public void deleteMusic(ActionEvent event) {
 	    	ArrayList<Music> selection = new ArrayList<Music>();
 	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
 	    	tabContentManager.removeAllSongs(selection);
@@ -601,15 +589,20 @@ public class PlayerController extends WindowController implements Initializable 
 	     * @param event The ActionEvent triggered by the delete playlist button.
 	     */
 	    @FXML
-	    void deletePlaylist(ActionEvent event) {
+	    public void deletePlaylist(ActionEvent event) {
 	    	ArrayList<Playlist> selection = new ArrayList<Playlist>();
 	    	selection.addAll(playlistTable.getSelectionModel().getSelectedItems());
 	    	tabContentManager.removeAllPlaylists(selection);
 	    	feedPlaylist();
 	    }
 
+	    /**
+	     * Toggle the state of the mediaPlayerManager at the press of the play/pause button.
+	     *
+	     * @param event The ActionEvent triggered by the button.
+	     */
 	    @FXML
-	    void playToggle(ActionEvent event) {
+	    public void playToggle(ActionEvent event) {
 	    	if(mediaPlayerManager == null) return;
 	    	
 	    	if(mediaPlayerManager.isPlaying()) 
@@ -619,12 +612,17 @@ public class PlayerController extends WindowController implements Initializable 
 	    	else 
 	    	{
 	    		mediaPlayerManager.play();
-	    		updateSong();
+	    		
 	    	}
+	    	updateSong();
 	    	updatePlayButton();
 	    }
 	    
-	    void updatePlayButton() {
+	    
+	    /**
+	     * Toggles the image of the play/pause button based on the media player status.
+	     */
+	    private void updatePlayButton() {
 	    	if(mediaPlayerManager == null) return;
 	    	
 	    	if(mediaPlayerManager.isPlaying()) 
@@ -643,10 +641,11 @@ public class PlayerController extends WindowController implements Initializable 
 	     * @param event The ActionEvent triggered by the next music button.
 	     */
 	    @FXML
-	    void nextMusic(ActionEvent event) {
+	    private void nextMusic(ActionEvent event) {
 	    	if(mediaPlayerManager == null) return;
 	    	mediaPlayerManager.nextSong();
 	    	feedQueue();
+	    	updateSong();
 	    }
 	    
 	    /**
@@ -655,10 +654,11 @@ public class PlayerController extends WindowController implements Initializable 
 	     * @param event The ActionEvent triggered by the previous music button.
 	     */
 	    @FXML
-	    void prevMusic(ActionEvent event) {
+	    private void prevMusic(ActionEvent event) {
 	    	if(mediaPlayerManager == null) return;
 	    	mediaPlayerManager.prevSong();
 	    	feedQueue();
+	    	updateSong();
 	    }
 	    
 	    /**
@@ -668,13 +668,16 @@ public class PlayerController extends WindowController implements Initializable 
 	     * @param event The ActionEvent triggered by the toggle mute button.
 	     */
 	    @FXML
-	    void toggleMute(MouseEvent event) {
+	    private void toggleMute(MouseEvent event) {
 	    	if(mediaPlayerManager == null) return;
 	    	if(mediaPlayerManager.isMuted()) { mediaPlayerManager.setMute(false); muteBtn.setText("🔊"); }
 	    	else {mediaPlayerManager.setMute(true); muteBtn.setText("🔇");}
 	    }
 	    
-	    void updateSong() 
+	    /**
+	     * Method to update the texts fields that show the current song data.
+	     */
+	    private void updateSong() 
 	    {
 	    	Music m = mediaPlayerManager.getCurrentSong();
 	    	if(m == null) {textView.setText(""); artistView.setText(""); return;}

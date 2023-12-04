@@ -24,8 +24,6 @@ public class PlayerService {
 	
 	private ArrayList<Music> songQueue;
 	
-	private Playlist currentPlaylist;
-	
 	private Music currentSong;
 	
     private MediaPlayer mediaPlayer;
@@ -38,7 +36,8 @@ public class PlayerService {
     /**
      * Initializes the MediaPlayer with the provided song.
      *
-     * @param Song the music to play
+     * @param song the music to play
+     * @param pb A reference to the ScrollBar the PlayerService will update as a progress bar.
      */
     public PlayerService(Music song, ScrollBar pb) {
         //Media media = new Media("file:///" + FilePath.replace("\\", "/"));
@@ -51,12 +50,21 @@ public class PlayerService {
         play();
     }
     
-    
+    /**
+     * Getter method for the queue of songs.
+     * 
+     * @return the current song
+     */
     public Music getCurrentSong() 
     {
     	return currentSong;
     }
     
+    /**
+     * Setter method for the queue of songs.
+     * 
+     * @return a list with the queued songs.
+     */
     public ArrayList<Music> getSongQueue() {
 		return songQueue;
 	}
@@ -80,13 +88,13 @@ public class PlayerService {
     	Music currentSong = songQueue.get(songQueue.size()-1);
     	songQueue.remove(currentSong);
     	songQueue.add(0, currentSong);
-    }
-    
+    	changeMusic(currentSong);
+    }  
     
     /**
      * Adds a song to the queue to be played after the current song.
      * 
-     * @param Song the song to be added.
+     * @param song the song to be added.
      */
     public void addNextSong(Music song)
     {
@@ -98,7 +106,7 @@ public class PlayerService {
     /**
      * Adds a song to the end of the queue.
      * 
-     * @param Song the song to be added.
+     * @param song the song to be added.
      */
     public void addLastSong(Music song)
     {
@@ -110,7 +118,7 @@ public class PlayerService {
     /**
      * Adds a song to the queue and immediately plays it, skipping the current song.
      * 
-     * @param Song the song to be added.
+     * @param song the song to be added.
      */
     public void addCurrentSong(Music song)
     {
@@ -118,6 +126,11 @@ public class PlayerService {
     	nextSong();
     }
     
+    /**
+     * Removes a song from the queue, skipping it and stopping the play if that was the last one.
+     * 
+     * @param song the song to be remove.
+     */    
     public void removeSong(Music song) 
     {
     	if (song.equals(currentSong)){nextSong();}
@@ -131,9 +144,21 @@ public class PlayerService {
     }
     
     /**
+     * Stores the songs of a playlist on the queue
+     * 
+     * @param playlist the playlist to be played. 
+     */
+    public void addPlaylistToQueue(Playlist playlist) 
+    {
+    	songQueue = playlist.getSongs();
+    	currentSong = songQueue.get(0);
+    	changeMusic(currentSong);
+    }
+    
+    /**
      * Restarts the player in order to play a new song.
      * 
-     * @param Song the song to be played. 
+     * @param song the song to be played. 
      */
     public void changeMusic(Music song)
     {
@@ -144,14 +169,6 @@ public class PlayerService {
     	mediaPlayer = new MediaPlayer(new Media((new File(song.getPath())).toURI().toString()));
     	setVolume(volume);
     	if(previousStatus.equals(MediaPlayer.Status.PLAYING)) play();
-    }
-    
-    
-    public void setPlaylist(Playlist playlist) 
-    {
-    	currentPlaylist = playlist;
-    	songQueue = playlist.getSongs();
-    	changeMusic(songQueue.get(0));
     }
 
     /**
@@ -249,6 +266,11 @@ public class PlayerService {
     	mediaPlayer.setMute(mute);
     }
     
+    /**
+     * Gets if the mediaPlayer is currently playing.
+     * 
+     * @return true if the state of the media playing is "playing", false otherwise.
+     */
     public boolean isPlaying() 
     {
     	return mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);

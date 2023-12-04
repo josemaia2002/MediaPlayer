@@ -37,6 +37,7 @@ public class AuthService {
 	 * 
 	 * @param username The user's username.
 	 * @param password The user's password. 
+	 * @return boolean true if the login has succeded, false otherwise.
 	 */
 	public boolean loginCredentials(String username, String password) 
 	{
@@ -60,6 +61,7 @@ public class AuthService {
 	 * @param email The user's email.  
 	 * @param p1 The user's password first insertion.
 	 * @param p2 The user's password second insertion, must match the first. 
+	 * @return a string with the response to the Sign up try.
 	 */
 	public String signupCredentials(String username, String userType, String email, String p1, String p2) 
 	{
@@ -70,7 +72,7 @@ public class AuthService {
 		if(u != null) return "This username is already taken!";
 		u = userDAO.findUserByEmail(email);
 		if(u != null) return "This e-mail address is already being used!";
-		
+		System.out.println(username + userType +  email + p1);
 		userDAO.saveUser(username, userType, email, p1);
 		return "Singed Up!";
 	}
