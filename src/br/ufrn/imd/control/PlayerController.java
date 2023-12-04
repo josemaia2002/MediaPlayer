@@ -472,7 +472,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    }
 	    
 	    /**
-	     * Gets the musics selected by the user at the music table.
+	     * Gets the musics selected by  the user at the music table.
 	     *
 	     * @return ArrayList<Music> The selected musics.
 	     */
