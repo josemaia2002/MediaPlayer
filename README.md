@@ -8,7 +8,7 @@
 
 ## Implementação de um Media Player
 
-﻿## Media Player installation instructions 
+## Media Player installation instructions 
 
 
 

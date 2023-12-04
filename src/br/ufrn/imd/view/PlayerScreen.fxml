@@ -379,7 +379,7 @@
                               <Font name="Microsoft PhagsPa" size="44.0" />
                            </font>
                         </Text>
-                        <Text fx:id="artistView" fontSmoothingType="LCD" layoutX="6.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" textAlignment="RIGHT" wrappingWidth="464.529296875" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0">
+                        <Text fx:id="artistView" fontSmoothingType="LCD" layoutX="6.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="default-button" textAlignment="RIGHT" wrappingWidth="464.529296875" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <fill>
                               <RadialGradient centerX="0.5165745856353592" centerY="0.542654028436019" focusAngle="-136.69" focusDistance="1.0" radius="0.7758620689655172">
                                  <stops>
