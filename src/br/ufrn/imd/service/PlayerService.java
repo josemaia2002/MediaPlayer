@@ -7,9 +7,12 @@ import br.ufrn.imd.model.Music;
 import br.ufrn.imd.model.Playlist;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
 
 /**
@@ -30,6 +33,8 @@ public class PlayerService {
     
     private ScrollBar progressBar;
     
+    private SimpleObjectProperty<MediaPlayer.Status> statusProperty;
+    
     private InvalidationListener currentTimeListener;
     
 
@@ -46,8 +51,25 @@ public class PlayerService {
         songQueue = new ArrayList<Music>();
         songQueue.add(song);
         currentSong = song;
-        mediaPlayer.setVolume(1.0);        
+        statusProperty = new SimpleObjectProperty<Status>();
+        mediaPlayer.setVolume(1.0);
+        setupStatusListening();
         play();
+    }
+    
+    /**
+     * A method that adds a listener to status changes on the media player.
+     */
+    private void setupStatusListening() 
+    {
+    	mediaPlayer.setOnReady(new Runnable()
+        {
+			@Override
+			public void run() {
+				mediaPlayer.statusProperty().addListener(v -> {   statusProperty.setValue(mediaPlayer.getStatus());   });
+			}
+        	
+        });
     }
     
     /**
@@ -61,12 +83,22 @@ public class PlayerService {
     }
     
     /**
-     * Setter method for the queue of songs.
+     * Getter method for the queue of songs.
      * 
      * @return a list with the queued songs.
      */
     public ArrayList<Music> getSongQueue() {
 		return songQueue;
+	}
+
+    
+    /**
+     * Getter method for the queue of songs.
+     * 
+     * @return the current status of the media player.
+     */
+	public ObjectProperty<MediaPlayer.Status> getStatusProperty() {
+		return statusProperty;
 	}
 
 	/**
@@ -168,7 +200,9 @@ public class PlayerService {
     	mediaPlayer.dispose();
     	mediaPlayer = new MediaPlayer(new Media((new File(song.getPath())).toURI().toString()));
     	mediaPlayer.setAutoPlay(true);
+    	progressBar.setValue(0);
     	setVolume(volume);
+    	setupStatusListening();
     	if(previousStatus.equals(MediaPlayer.Status.PLAYING)) play();
     }
 

@@ -37,6 +37,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -145,7 +146,6 @@ public class PlayerController extends WindowController implements Initializable 
 	     */
 	    @Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
-	    	
 	    	progressBar.valueProperty().addListener(new InvalidationListener() {
 
 				@Override
@@ -481,6 +481,14 @@ public class PlayerController extends WindowController implements Initializable 
 	    	ArrayList<Music> selection = new ArrayList<Music>();
 	    	selection.addAll(musicTable.getSelectionModel().getSelectedItems());
 	    	if(selection.size()> 0 && mediaPlayerManager == null) mediaPlayerManager = new PlayerService(selection.get(0), progressBar);
+	    	mediaPlayerManager.getStatusProperty().addListener(new InvalidationListener()
+	    	{
+				@Override
+				public void invalidated(Observable observable) {		
+					updatePlayButton(mediaPlayerManager.getStatusProperty().getValue());
+				}
+				
+	    	});
 	    	return selection;
 	    }
 
@@ -499,7 +507,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	for(Music m : selection) mediaPlayerManager.addNextSong(m);
 	    	mediaPlayerManager.play();
 	    	feedQueue();
-	    	updatePlayButton();
+	    	
 	    	updateSong();
 	    	
 	    }
@@ -530,7 +538,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(selection.size() == 0) return;
 	    	for(Music m : selection) mediaPlayerManager.addNextSong(m);
 	    	feedQueue();
-	    	updatePlayButton();
+	    	
 	    }
 
 	    /**
@@ -544,7 +552,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	if(p == null) return;
 	    	mediaPlayerManager.addPlaylistToQueue(p);
 	    	feedQueue();
-	    	updatePlayButton();
+	    	
 	    	updateSong();
 	    }
 	    
@@ -561,7 +569,7 @@ public class PlayerController extends WindowController implements Initializable 
 	    	for(Music m : selection) mediaPlayerManager.removeSong(m);
 	    	
 	    	feedQueue();
-	    	updatePlayButton();
+	    	
 	    }
 	    
 	    /**
@@ -627,24 +635,16 @@ public class PlayerController extends WindowController implements Initializable 
 	    		
 	    	}
 	    	updateSong();
-	    	updatePlayButton();
+	    	
 	    }
 	    
 	    
 	    /**
 	     * Toggles the image of the play/pause button based on the media player status.
 	     */
-	    private void updatePlayButton() {
-	    	if(mediaPlayerManager == null) return;
-	    	
-	    	if(mediaPlayerManager.isPlaying()) 
-	    	{ 
-	    		playButtonImage.setImage(new Image(getClass().getResource("/resources/images/play.png").toString()));
-	    	}
-	    	else 
-	    	{
-	    		playButtonImage.setImage(new Image(getClass().getResource("/resources/images/pause.png").toString()));
-	    	}
+	    private void updatePlayButton(Status s) {
+	    	boolean isPlaying = mediaPlayerManager.getStatusProperty().getValue().equals(Status.PLAYING);
+	    	playButtonImage.setImage(new Image(getClass().getResource("/resources/images/" + (isPlaying?"pause":"play") + ".png").toString()));
 	    }
 	    
 	    /**
